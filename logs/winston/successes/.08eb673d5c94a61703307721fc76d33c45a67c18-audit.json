@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\PROJECTS\\Personal Projects\\Youtube-Cutter-Shortener\\backend\\logs\\winston\\successes\\.08eb673d5c94a61703307721fc76d33c45a67c18-audit.json",
+    "files": [
+        {
+            "date": 1748104811469,
+            "name": "D:\\PROJECTS\\Personal Projects\\Youtube-Cutter-Shortener\\backend\\logs\\winston\\successes\\YTMP3-2025-24-05-22-success.log",
+            "hash": "a6a92f08d95479da05c08c40dbdafa09a1499801debd6316d19aac277949dde8"
+        },
+        {
+            "date": 1748140800996,
+            "name": "D:\\PROJECTS\\Personal Projects\\Youtube-Cutter-Shortener\\backend\\logs\\winston\\successes\\YTMP3-2025-25-05-08-success.log",
+            "hash": "bcc6f1740c8cbd6414337657d3bd60a16d05b6c0941f30d68f6c86c096427b39"
+        },
+        {
+            "date": 1748748924578,
+            "name": "D:\\PROJECTS\\Personal Projects\\Youtube-Cutter-Shortener\\backend\\logs\\winston\\successes\\YTMP3-2025-01-06-09-success.log",
+            "hash": "7c2b688ec84197b26400fad5cc1da3172b67329a88acbc1a6be139acda6449f8"
+        },
+        {
+            "date": 1749099643339,
+            "name": "D:\\PROJECTS\\Personal Projects\\Youtube-Cutter-Shortener\\backend\\logs\\winston\\successes\\YTMP3-2025-05-06-11-success.log",
+            "hash": "69b09cf02efd9139729652bc94d3e69d6d630dea759d29bb72e24f3dfe5fc81c"
+        }
+    ],
+    "hashType": "sha256"
+}

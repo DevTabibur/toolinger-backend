@@ -1,0 +1,130 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\.423f6ca79a2735ed8a0fa43c36b9b1221d9a5e8c-audit.json",
+    "files": [
+        {
+            "date": 1752287484418,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-08-success.log",
+            "hash": "47173bb22a099c6fa3d15976b5decc0ffb5d2ad1ea4bfabff4ce84e4b1eafc52"
+        },
+        {
+            "date": 1752290572898,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-09-success.log",
+            "hash": "35e64e1bb83873057a21b382d0444700e6e77014a34e394ed15700f8db6a74ea"
+        },
+        {
+            "date": 1752293921445,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-10-success.log",
+            "hash": "6de8914b7b63ea7ef1c44c1a6e7bed4e01abd598c4fd9b8ce32401e9c4d626b9"
+        },
+        {
+            "date": 1752297456801,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-11-success.log",
+            "hash": "8670f5a826f65e85c8dfc0c459aa940d4e38139ebb2a55cf952780f24bbcd086"
+        },
+        {
+            "date": 1752300019089,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-12-success.log",
+            "hash": "1ab34a72bddeab796d464114a6bae6db15f90c325d1bad5be93a59052c6d8405"
+        },
+        {
+            "date": 1752303834601,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-13-success.log",
+            "hash": "689e575b42ddce8c7f8ce563ec5bbb4be7b171d2881ea137c4caffea07ce1c45"
+        },
+        {
+            "date": 1752307201262,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-14-success.log",
+            "hash": "b6301fa83994607eea808bac39caacfcb8b6f47fca1c7f27dc9eb84602bd470c"
+        },
+        {
+            "date": 1752317529164,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-16-success.log",
+            "hash": "a1522906051d1c958fc6bea9abebdfde806cdcabd0b7343effee36e3d24e1032"
+        },
+        {
+            "date": 1752318777127,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-17-success.log",
+            "hash": "083e95b17d6b461ad6172b75db2e12f48eae866b4d7c15e2ab6ad779358c4a64"
+        },
+        {
+            "date": 1752321601307,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-18-success.log",
+            "hash": "a8a9143115bfc5af16218c5aab06b4b4a52811189f8a4bf19db7d1381522d0a8"
+        },
+        {
+            "date": 1752326836130,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-19-success.log",
+            "hash": "becb262d2fd5d808cb42ba02bdb5c8d42a3fad1e7d43d7cebea5a0512f789688"
+        },
+        {
+            "date": 1752329048569,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-20-success.log",
+            "hash": "f1a74b950c26f31611ee687f8694ccfc4c6560f23ad3576b9111bb9f2cbcfe83"
+        },
+        {
+            "date": 1752332497067,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-21-success.log",
+            "hash": "1e3bfc2559c792518cceefd4acc2179e73a46980f5e56be0050503f10de12d2f"
+        },
+        {
+            "date": 1752336242510,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-12-07-22-success.log",
+            "hash": "68ab47860fc44bfbd7620f8ce17fd6fb753215493ad30877e1e201214b055b72"
+        },
+        {
+            "date": 1752376823569,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-13-07-09-success.log",
+            "hash": "88d90d26c3d4e61a9d88faac52679c1b3807c4b92e6ad3ecf517d50dff6c1af6"
+        },
+        {
+            "date": 1752384250940,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-13-07-11-success.log",
+            "hash": "c7d60f1e5f74000bc57db5d22e48c1acb92727803768d7926e894f769530acf6"
+        },
+        {
+            "date": 1752412881443,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-13-07-19-success.log",
+            "hash": "d7398a66ccdd26fe22c4e21a1a7ff218e91836a89cfa4c40b1bf1bb252e05a3b"
+        },
+        {
+            "date": 1752416268601,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-13-07-20-success.log",
+            "hash": "dbbb55c6a431158cd31f559b208e33fda9acabdd055312ded44fcfe9f7a8e535"
+        },
+        {
+            "date": 1752420907203,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-13-07-21-success.log",
+            "hash": "4b807cee55d3fc79285502869bf6033fd71cd00dd4b463f122af1e742e4f32b9"
+        },
+        {
+            "date": 1752424744890,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-13-07-22-success.log",
+            "hash": "4100dcb0490514370f4189a5a47801d18245f87fb4bd70f9742c18d07475a8ab"
+        },
+        {
+            "date": 1752499822222,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-14-07-19-success.log",
+            "hash": "aa550284ad34a3dcb51023b5f5fe8f6d301767ef46d601f5d67376f435b872df"
+        },
+        {
+            "date": 1752543616618,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-15-07-07-success.log",
+            "hash": "169d847d7797ade2b7729a0d5c28816b6ea9abaae7825d233ddb0163c4e5b9da"
+        },
+        {
+            "date": 1752554694749,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-15-07-10-success.log",
+            "hash": "b759a0d80adb41e663e19e860880ca8d44908a9cefa56b40e188d508c96e8e38"
+        },
+        {
+            "date": 1752672839662,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\successes\\Tools-X-2025-16-07-19-success.log",
+            "hash": "d76f3b2865c1ac295f05afb4ff41387b40f925e9431a5eee39fa7f5b72493299"
+        }
+    ],
+    "hashType": "sha256"
+}

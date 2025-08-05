@@ -1,0 +1,130 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\.5054a714541b8dfaa3cfc3a8f0ee4d73e505991e-audit.json",
+    "files": [
+        {
+            "date": 1752287484421,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-08-error.log",
+            "hash": "9848645890b1a1f736e68e26ed63a4cee86676edbdbbb80aaabaadb0332c907c"
+        },
+        {
+            "date": 1752290572901,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-09-error.log",
+            "hash": "1542f3c55a914ca3ba05fab4d40cb3c2fd164ef3b4ef42176ab80a84e9066397"
+        },
+        {
+            "date": 1752293921447,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-10-error.log",
+            "hash": "6487e1b5afa5e201dab36ad3fc6d766f1c5d5769c499740ec146c1638721dc54"
+        },
+        {
+            "date": 1752297456804,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-11-error.log",
+            "hash": "1cc32c3ada4ade9ed8d093d53737a8ba731d987b6d2c33cc05d77c5aa3d047f4"
+        },
+        {
+            "date": 1752300019091,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-12-error.log",
+            "hash": "5793d5900cd00e246e280badd762477443963c316ffb5bfc9e8dc4882a08cc2e"
+        },
+        {
+            "date": 1752303834604,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-13-error.log",
+            "hash": "3df16072002b3a52a1b0c482efe5d17a396f47500473824e588985397c1f8498"
+        },
+        {
+            "date": 1752307201265,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-14-error.log",
+            "hash": "0d2b4ecc01040df854271bab5455377a997f0c4b65522ede67e67a863c4fe525"
+        },
+        {
+            "date": 1752317526811,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-16-error.log",
+            "hash": "cf3ac5d3ebccce13262bc3c5dba09a77111ae650903018c93389d715dd8ccf4c"
+        },
+        {
+            "date": 1752318777129,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-17-error.log",
+            "hash": "ca2d37f2322d2ebd98d0c3883adb29ec2684aa3384ee321bb245008fd005bbb2"
+        },
+        {
+            "date": 1752321601310,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-18-error.log",
+            "hash": "1716cfc52ea42f2942eec16e16c6c1376d45855b780bbd8963279de2cd0027b2"
+        },
+        {
+            "date": 1752326836118,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-19-error.log",
+            "hash": "20a3521a440a09ea06a2d19332088c8b3ffb381edd762900055a26d9d560d1b7"
+        },
+        {
+            "date": 1752329048572,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-20-error.log",
+            "hash": "e506a7c14dd9a7bf5fd80089b457d88307f4297ab04ab17762749c2e23aa7ee5"
+        },
+        {
+            "date": 1752332497070,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-21-error.log",
+            "hash": "7601293e6159f1b251e564f239cf931a0a39a06d663ec8cf2ca3bc34e7224fae"
+        },
+        {
+            "date": 1752336242512,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-07-22-error.log",
+            "hash": "fb6f8214241e2e1ce51298b404eafea90056c522d1c584bf2a208964a7589b4b"
+        },
+        {
+            "date": 1752376823572,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-07-09-error.log",
+            "hash": "0150869b779fc615dae5a2faf97b1d2aa35fbb5c225c8a32ead3f85180af99b5"
+        },
+        {
+            "date": 1752384238872,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-07-11-error.log",
+            "hash": "9ea4323a443e5af4688bf58c4ce029ebb9f6f97a3fdd3616254ad3a37f79a6b9"
+        },
+        {
+            "date": 1752412878867,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-07-19-error.log",
+            "hash": "fef0798894dc077c3e669f3968960a0df734a661199067305250590b096e92cb"
+        },
+        {
+            "date": 1752416268603,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-07-20-error.log",
+            "hash": "baf892e87b44eaacce042afc290e00a55f64e1e250164dac3b8f1d42e980c54f"
+        },
+        {
+            "date": 1752420901688,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-07-21-error.log",
+            "hash": "8d6bb580e03c47c4ed9550ed21399043c09c530b6bfde4b8533bf26d983bb42a"
+        },
+        {
+            "date": 1752424744893,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-07-22-error.log",
+            "hash": "bdf6e1851933f19427339e1b625f9703bb178549800f6d804805ac2ce9bfbdd0"
+        },
+        {
+            "date": 1752499822225,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-14-07-19-error.log",
+            "hash": "ae3105253c0b948e725d5e07c56ad98a91d99f41b20196c14b1da9abd9d04e8e"
+        },
+        {
+            "date": 1752543616622,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-15-07-07-error.log",
+            "hash": "819e7bd3c0fad66207088bbbff051d2326bdc6c23a35160b4ad49cd6afa3dba3"
+        },
+        {
+            "date": 1752554694733,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-15-07-10-error.log",
+            "hash": "740d90aa706b0e561270555b4e4c9f25c92a1939a584d468d31e2b0a8a594b86"
+        },
+        {
+            "date": 1752672839665,
+            "name": "D:\\PROJECTS\\Personal Projects\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-16-07-19-error.log",
+            "hash": "3e6c2851e85eb435c71056c133f067a454e5bfe517bec7c34b2e6ce0c3be6c70"
+        }
+    ],
+    "hashType": "sha256"
+}
