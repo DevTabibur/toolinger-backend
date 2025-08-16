@@ -11,9 +11,9 @@ import { AnalyticsRoute } from "../modules/analytics/analytics.routes";
 import { SEORoute } from "../modules/seo/seo.routes";
 import { ToolsRoute } from "../modules/tools/tools.routes";
 import { WebsiteManagementRoute } from "../modules/website-management/website-management.routes";
-import { MoreToolsRoute } from "../modules/more-tools/more-tools.routes";
 import { DomainToolsRoute } from "../modules/domain-tools/domain-tools.routes";
 import { AdvancedToolsRoute } from "../modules/advanced-tools/advanced-tools.routes";
+import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
 
 const router = express.Router();
 
@@ -74,13 +74,13 @@ const allRoutes = [
   },
   // Domain realted tools
   {
-    path: '/domain-tools',
-    route: DomainToolsRoute
+    path: "/domain-tools",
+    route: DomainToolsRoute,
   },
   {
-    path: '/advanced-tools',
-    route: AdvancedToolsRoute
-  }
+    path: "/advanced-tools",
+    route: AdvancedToolsRoute,
+  },
   // {
   //   path: "/url-encoder-decoder",
   //   route: URLEncoderDecoderRoute,

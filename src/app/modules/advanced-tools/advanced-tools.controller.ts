@@ -37,7 +37,7 @@ const checkGrammar = catchAsync(async (req: Request, res: Response) => {
 // Paraphraser Tools
 const paraphraseText = catchAsync(async (req: Request, res: Response) => {
   // const result = await AdvancedToolsService.paraphraseText(req.body);
-  const result = "dummy"
+  const result = "dummy";
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
     message: "Text paraphrased successfully",
@@ -74,8 +74,6 @@ const convertPDF = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-
-
 
 // Calculator
 const calculate = catchAsync(async (req: Request, res: Response) => {
@@ -130,7 +128,7 @@ const calculateInterest = catchAsync(async (req: Request, res: Response) => {
 // Unite Rupontarkari (Currency Converter)
 const convertCurrency = catchAsync(async (req: Request, res: Response) => {
   // const result = await AdvancedToolsService.convertCurrency(req.body);
-  const result = "dummy"
+  const result = "dummy";
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
     message: "Currency converted successfully",
@@ -169,16 +167,17 @@ const scheduleSocialMedia = catchAsync(async (req: Request, res: Response) => {
 });
 
 // Email Template Generator
-const generateEmailTemplate = catchAsync(async (req: Request, res: Response) => {
-  // const result = await AdvancedToolsService.generateEmailTemplate(req.body);
-  const result = "dummy"
-  sendSuccessResponse(res, {
-    statusCode: httpStatus.OK,
-    message: "Email template generated successfully",
-    data: result,
-  });
-});
-
+const generateEmailTemplate = catchAsync(
+  async (req: Request, res: Response) => {
+    // const result = await AdvancedToolsService.generateEmailTemplate(req.body);
+    const result = "dummy";
+    sendSuccessResponse(res, {
+      statusCode: httpStatus.OK,
+      message: "Email template generated successfully",
+      data: result,
+    });
+  },
+);
 
 // Detect CMS Tool
 const detectCMS = catchAsync(async (req: Request, res: Response) => {
@@ -189,7 +188,6 @@ const detectCMS = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-
 
 export const AdvancedToolsController = {
   resizeImage,
@@ -209,5 +207,5 @@ export const AdvancedToolsController = {
   migrateWebsite,
   scheduleSocialMedia,
   generateEmailTemplate,
-  detectCMS
-}; 
+  detectCMS,
+};

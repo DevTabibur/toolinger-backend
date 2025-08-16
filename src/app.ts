@@ -5,7 +5,7 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import status from "http-status";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import routes from "./app/routes";
-import httpStatus from "http-status"
+import httpStatus from "http-status";
 import cookieParser from "cookie-parser";
 import ApiError from "./errors/ApiError";
 import ShortenedURLModel from "./app/modules/shortener/shortener.model";
@@ -14,19 +14,12 @@ const app: Application = express();
 app.use(compression());
 app.use(
   cors({
-    // origin: IS_MODE_PROD ? ALLOWED_ORIGIN.PROD : ALLOWED_ORIGIN.DEV,
-    origin: "*",
+    origin: ["https://toolinger.com", "https://www.toolinger.com"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    // allowedHeaders: [
-    //   'Accept-Version',
-    //   'Authorization',
-    //   'Credentials',
-    //   'Content-Type',
-    // ],
-    maxAge: 86400, // 24 hours (60 seconds * 60 minutes * 24 hours)
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    maxAge: 86400, // 24 hours
     optionsSuccessStatus: 200,
-    // preflightContinue: true,
   }),
 );
 
@@ -43,7 +36,7 @@ app.use(
 app.use(express.json({ limit: "50mb" })); // to handle too many request entity
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static('./upload')) // Serve uploaded files
+app.use(express.static("./upload")); // Serve uploaded files
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views")); // Adjust path as needed
 
@@ -54,23 +47,23 @@ app.get("/", (req: Request, res: Response) => {
 // ** all routes
 app.use("/api/v1", routes);
 
-
-
 // Route for redirecting short URLs with correct type annotations
-app.get('/:shortUrl', async (req: Request, res: Response): Promise<any> => {  
-  const { shortUrl } = req.params; 
+app.get("/:shortUrl", async (req: Request, res: Response): Promise<any> => {
+  const { shortUrl } = req.params;
   try {
     const originalUrl = await redirectUrl(shortUrl);
 
     if (!originalUrl) {
-      throw new ApiError(httpStatus.BAD_REQUEST, "URL not found")
+      throw new ApiError(httpStatus.BAD_REQUEST, "URL not found");
     }
 
     // Perform the redirect to the original URL
     res.redirect(originalUrl);
   } catch (error) {
     // Handle any errors here (optional)
-    return res.status(500).send("An error occurred while processing the request.");
+    return res
+      .status(500)
+      .send("An error occurred while processing the request.");
   }
 });
 

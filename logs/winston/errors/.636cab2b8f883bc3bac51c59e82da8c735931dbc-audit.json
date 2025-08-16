@@ -6,126 +6,6 @@
     "auditLog": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\.636cab2b8f883bc3bac51c59e82da8c735931dbc-audit.json",
     "files": [
         {
-            "date": 1753190051088,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-22-07-19-error.log",
-            "hash": "b70be29bb382d07eecaa6f764a3a7d6e64716e9b56874739a368b0643d012f57"
-        },
-        {
-            "date": 1753199380157,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-22-07-21-error.log",
-            "hash": "d3c259fc0489be03ab5a3a358516586237e3d68268d874adb6994897b4cb98c4"
-        },
-        {
-            "date": 1753200005317,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-22-07-22-error.log",
-            "hash": "c83f495d89162e6db12e8a578260742a8b10d73532842e3d45808727801388e1"
-        },
-        {
-            "date": 1753204249767,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-22-07-23-error.log",
-            "hash": "588b730794cc8651ddba2dc73ef34e35d5092be0e2613a259c2c2a5b24276bb9"
-        },
-        {
-            "date": 1753207283376,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-23-07-00-error.log",
-            "hash": "b89cfa397977460c480f403a38bdcbed5d7dfd6c7823c2ef606659e6879e5610"
-        },
-        {
-            "date": 1753211037735,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-23-07-01-error.log",
-            "hash": "2d58ded6961dd26f716ed852c26b4def0fd35515736f36d7b16e07bedd300e47"
-        },
-        {
-            "date": 1753214496120,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-23-07-02-error.log",
-            "hash": "58006db74077b7264e727eaa15614243fa378063ab4004fed37631be2a71f74b"
-        },
-        {
-            "date": 1753218001761,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-23-07-03-error.log",
-            "hash": "f0dbde16ebad3ac0da813ea943175a61bf9aea4ee14ac1b8793efb22353bb7b5"
-        },
-        {
-            "date": 1753625129816,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-27-07-20-error.log",
-            "hash": "d122557b59d8299b249b95c6f4ec3a3c660f2adceb591fd206be2a88e546412a"
-        },
-        {
-            "date": 1753661162796,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-28-07-06-error.log",
-            "hash": "2bdde1829639ec39f959b17450bd103390d01bd69ed2885b653974aab50e26d4"
-        },
-        {
-            "date": 1753664402246,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-28-07-07-error.log",
-            "hash": "41a35d4845be574e8bfe56ca5f43cd05aafb672d1255ed953fe8e3649b6ecdc4"
-        },
-        {
-            "date": 1753674847215,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-28-07-09-error.log",
-            "hash": "2e6002718f6ba59923ea8674f6c4476fe8a193b856a82a912acf6e2afcc53a60"
-        },
-        {
-            "date": 1753675284916,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-28-07-10-error.log",
-            "hash": "628f195fd9b8563a9f5f9567b7104271819f11132290943fedbdb7b5b2010801"
-        },
-        {
-            "date": 1753704622480,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-28-07-18-error.log",
-            "hash": "5fed48851711e921ffa791cd4b673f085f52a58c73abe5d603b805082d30382c"
-        },
-        {
-            "date": 1753759190047,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-09-error.log",
-            "hash": "1494919b87f0988d1500f4e4c0d762a241f648b6ce878be68930264a3a158195"
-        },
-        {
-            "date": 1753764798697,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-10-error.log",
-            "hash": "7308a8057ec78bde0bb67144e666922c8da303ed1793c24f7ad15c1718f087fc"
-        },
-        {
-            "date": 1753765250621,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-11-error.log",
-            "hash": "4c770a5c6ab04542dce29edcac86ba22a033196dd1657307cba57fb31118c53a"
-        },
-        {
-            "date": 1753768801571,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-12-error.log",
-            "hash": "c9e5a49942a74f2481776c6a15cefa11132eb703629aea7a42e0e99538596124"
-        },
-        {
-            "date": 1753783684953,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-16-error.log",
-            "hash": "328c9539ad5c1c8e8c0b3bb8917e97127dd1708167b3ca7d34e8b8de3a6f8b7c"
-        },
-        {
-            "date": 1753786812034,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-17-error.log",
-            "hash": "38854bcd926fa16502ceb32652f48373ff94cb64495af54c89e71bb12e721e6c"
-        },
-        {
-            "date": 1753797506640,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-19-error.log",
-            "hash": "0b44f55c45b7d65e634e4a59fcf3102e15b3a150f61362acd922d293c425816e"
-        },
-        {
-            "date": 1753804046813,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-21-error.log",
-            "hash": "fa9089dc7335b3917b433cdb0d6c329f1c1a5ae49e37f9b7cf92c186bf6b4217"
-        },
-        {
-            "date": 1753805846424,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-22-error.log",
-            "hash": "97c88e1fa3f958f88b801e9702e6160b5a5ddc9304b056583f39013915900207"
-        },
-        {
-            "date": 1753808639352,
-            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-29-07-23-error.log",
-            "hash": "d468151651a17c6f46a819b0e18c18eafd6c34cddec2a9c6499fde9340738f07"
-        },
-        {
             "date": 1754135697810,
             "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-02-08-17-error.log",
             "hash": "760b8aeba63b73441a1d4448962a0bb30d737dd1e5456b99bc20d1afd3b0298b"
@@ -189,6 +69,206 @@
             "date": 1754352777151,
             "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-05-08-06-error.log",
             "hash": "87075c57e08ed29c351e4735cb8a7a6637f0473c46050f80d001a253e2ac98d7"
+        },
+        {
+            "date": 1754357905829,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-05-08-07-error.log",
+            "hash": "fcd9e96813ca8c89fefcb41864c65c52daf6ab76e279767683ec7ccd8268f737"
+        },
+        {
+            "date": 1754361606314,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-05-08-08-error.log",
+            "hash": "ca266e35cd47a71204971c5ec83b8b9cd6f4ef9fef31edd9b05fde064b1e4030"
+        },
+        {
+            "date": 1754365648646,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-05-08-09-error.log",
+            "hash": "341122123cda6981b6fabc99fe8edee4192fae9013afd63a2aebe35f86566a69"
+        },
+        {
+            "date": 1754526642749,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-06-error.log",
+            "hash": "0d6ff4d252204cf72a9825e39ec2b881acc9d9b534017292d49bf771de768ee9"
+        },
+        {
+            "date": 1754531719958,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-07-error.log",
+            "hash": "48ef86eaea3da8a38228347d3397441be737bfe61e38b7ff648155e675529ba9"
+        },
+        {
+            "date": 1754534319547,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-08-error.log",
+            "hash": "b64eb2d123deef697a4f1a15cc9dabaa87ff718b6d647924d0a604ece56b1d00"
+        },
+        {
+            "date": 1754541456565,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-10-error.log",
+            "hash": "9dc208fce88c9d32e33dfc827c2072d051c50f5421a420fb044a766eb765b6b3"
+        },
+        {
+            "date": 1754543110576,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-11-error.log",
+            "hash": "af910472f0ee81d9c527a2586e508519b8d6681e369db4b4f0a4238babeea34e"
+        },
+        {
+            "date": 1754548475636,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-12-error.log",
+            "hash": "6149feddb46cc2149f9d8f87825c9414f616f1c5ab3d22155cd694f74d82033d"
+        },
+        {
+            "date": 1754551138538,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-13-error.log",
+            "hash": "5942d7d05fc5b6f8395ce6767204181d7b1ce4d9b2430f3aeee4715870ccad7d"
+        },
+        {
+            "date": 1754563424289,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-16-error.log",
+            "hash": "844b546c63dcbdd09f04f6a99d2415d95f8d78e05a2bf37c48d657103b13758d"
+        },
+        {
+            "date": 1754572030583,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-07-08-19-error.log",
+            "hash": "a35f7e8461f5ee0f3147a7d76637bcc2f7e5aab8cc008d71f6c7198a84ba6008"
+        },
+        {
+            "date": 1754699363344,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-06-error.log",
+            "hash": "83e075f2f85ce2d3d0a4ebd660109f8bca2a5802f8ffb5a0025b5e564b386cbc"
+        },
+        {
+            "date": 1754706862141,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-08-error.log",
+            "hash": "05e991a6e09edf9e6687778bbc2a01ca17c18b5c16cf62014ddcc4d222522703"
+        },
+        {
+            "date": 1754708621313,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-09-error.log",
+            "hash": "58f752412a20307741046678c0a63c0727771b7d37072d53e7292b6970dbf47c"
+        },
+        {
+            "date": 1754712819374,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-10-error.log",
+            "hash": "7b1479985b6b72f62b268cc826d1ff7029323556e41bc22bc3e846b9be7e038d"
+        },
+        {
+            "date": 1754715897810,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-11-error.log",
+            "hash": "3e79e29dcfe9c4659ec2d828f7ea971190eb4edfcbcbc38aae9a73fe660e6bd3"
+        },
+        {
+            "date": 1754719419229,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-12-error.log",
+            "hash": "c07c31f26562da0f4584fcf311ca905410179276f7a8e1f52fce5af4eb17c438"
+        },
+        {
+            "date": 1754731897576,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-15-error.log",
+            "hash": "5a5a029c331bd866cd87f3cef9f65028e0164cafa83a7ae8bc9908947a95622a"
+        },
+        {
+            "date": 1754735584506,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-16-error.log",
+            "hash": "a57fbf408b79ac100d6039b0fc96ffef5842ca4738436f13da1720e6aa5788c1"
+        },
+        {
+            "date": 1754737713635,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-17-error.log",
+            "hash": "4453a767247381e2e3d5a59254a5a375f2c36be6b1762f9f8fb663a60de7dca3"
+        },
+        {
+            "date": 1754755218381,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-22-error.log",
+            "hash": "1b17bd521120e7606cf45e32a0d055b1fb426fd4e7e923fa15b002a75e368478"
+        },
+        {
+            "date": 1754761578183,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-09-08-23-error.log",
+            "hash": "1f1e649806144c0c9902bba96fd63bbaad21f3978d67ab737bc4c49054d29b86"
+        },
+        {
+            "date": 1754795678076,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-10-08-09-error.log",
+            "hash": "36b7ec28eff066bb2ba678c1691993dc76dd60443d598eb9722595ac686ba54e"
+        },
+        {
+            "date": 1754800774000,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-10-08-10-error.log",
+            "hash": "25af8921728d6bcd4f6c6090603e146457db69529846c20fa59b1c9e8ee8f92f"
+        },
+        {
+            "date": 1754803702649,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-10-08-11-error.log",
+            "hash": "a7706bef64c50332293f2d76559cb32547137ec869b52dd661a1e05e19cb7d8d"
+        },
+        {
+            "date": 1754806249491,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-10-08-12-error.log",
+            "hash": "6b57f0dcde8fdba875281bc46275073c046e715654f277c51788a34950357380"
+        },
+        {
+            "date": 1754818870832,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-10-08-15-error.log",
+            "hash": "dfaaa64e8796f618f9502a32d48686ae1378e5026990b85cb52420a3d12b2cbc"
+        },
+        {
+            "date": 1754839308649,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-10-08-21-error.log",
+            "hash": "b80cc34c056f596228ac72b2e75a71c8554f00a41b8ff6b2b74c8fa58b02bfa4"
+        },
+        {
+            "date": 1754887422858,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-11-08-10-error.log",
+            "hash": "3c6d63c5ddccd759d2953be99463531174376836c6d1f74fcfe0e0397585a3d7"
+        },
+        {
+            "date": 1754888549127,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-11-08-11-error.log",
+            "hash": "2b5eb8b09736f877654a2f67cedcbfec6b8613179df2ea4e2b7bfdfaeef7c217"
+        },
+        {
+            "date": 1754911971244,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-11-08-17-error.log",
+            "hash": "d58e17c9b0c5907f758a9e2eaed015ae4f340390f080734e7fe71c8c8ed43bd0"
+        },
+        {
+            "date": 1754920378415,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-11-08-19-error.log",
+            "hash": "5b5ed3976a37d8d62b4863d168bfd69c727bdfca85b7aee4fd83115feec0ffb7"
+        },
+        {
+            "date": 1754933595140,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-11-08-23-error.log",
+            "hash": "37d778ccab8ade423afe6af451cd50b7783971512b8a5640aa345654c84c3842"
+        },
+        {
+            "date": 1754968079282,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-08-09-error.log",
+            "hash": "16f431ba2e531c36ccfc1d1d29409e1525e7e62a83d6e0894792a4533ce8ae91"
+        },
+        {
+            "date": 1754972234197,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-12-08-10-error.log",
+            "hash": "e4ae5502fdbe116176d9e35f871057fa19c07c8d883b41661fff3dd4a1ac7809"
+        },
+        {
+            "date": 1755049371064,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-13-08-07-error.log",
+            "hash": "be8123a8ebf9824293c59f317c0e4dc0e56d2b2d48398530da84689e447e353e"
+        },
+        {
+            "date": 1755269847045,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-15-08-20-error.log",
+            "hash": "397134c4589706221d9805e0a333d74e374491af255a798be2f4803b19b5ef7d"
+        },
+        {
+            "date": 1755270007622,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-15-08-21-error.log",
+            "hash": "31556f621013dd77bd6eee23dfad519d04122904a86b22c6b17c2cd8dc7d4da2"
+        },
+        {
+            "date": 1755311146263,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\tool-X\\backend\\logs\\winston\\errors\\Tools-X-2025-16-08-08-error.log",
+            "hash": "9a0de00f08a4c9ea9a5c89a18af4b058aed9db08381d585d5a49ebae0ad453a3"
         }
     ],
     "hashType": "sha256"
