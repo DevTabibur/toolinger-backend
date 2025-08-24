@@ -1,6 +1,5 @@
 import express from "express";
 import { AuthRoute } from "../modules/auth/auth.routes";
-import { CategoryRoute } from "../modules/category/category.routes";
 import { BlogRoute } from "../modules/blog/blog.routes";
 import { ShortenerRoute } from "../modules/shortener/shortener.routes";
 import { ConverterRoute } from "../modules/converter/converter.routes";
@@ -14,6 +13,7 @@ import { WebsiteManagementRoute } from "../modules/website-management/website-ma
 import { DomainToolsRoute } from "../modules/domain-tools/domain-tools.routes";
 import { AdvancedToolsRoute } from "../modules/advanced-tools/advanced-tools.routes";
 import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
+import { CategoryRoute } from "../modules/category/category.routes";
 
 const router = express.Router();
 
@@ -23,7 +23,7 @@ const allRoutes = [
     route: AuthRoute,
   },
   {
-    path: "/category",
+    path: "/blog-category",
     route: CategoryRoute,
   },
   {

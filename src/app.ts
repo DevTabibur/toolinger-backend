@@ -10,11 +10,26 @@ import cookieParser from "cookie-parser";
 import ApiError from "./errors/ApiError";
 import ShortenedURLModel from "./app/modules/shortener/shortener.model";
 import { redirectUrl } from "./app/modules/shortener/shortener.utils";
+import config, { IS_MODE_PROD } from "./config";
+
 const app: Application = express();
 app.use(compression());
 app.use(
   cors({
-    origin: ["https://toolinger.com", "https://www.toolinger.com"],
+    origin: IS_MODE_PROD
+      ? ["https://toolinger.com", "https://www.toolinger.com"]
+      : [
+          "https://toolinger.com",
+          "https://www.toolinger.com",
+          "http://localhost:3000",
+          "http://localhost:3001",
+          "http://localhost:5173",
+          "http://localhost:4173",
+          "http://127.0.0.1:3000",
+          "http://127.0.0.1:3001",
+          "http://127.0.0.1:5173",
+          "http://127.0.0.1:4173",
+        ],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],

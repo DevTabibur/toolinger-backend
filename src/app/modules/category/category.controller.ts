@@ -1,52 +1,76 @@
-import { Request, Response } from "express"
-import catchAsync from "../../../shared/catchAsync"
-import { sendSuccessResponse } from "../../../shared/sendSuccessResponse"
-import httpStatus from 'http-status'
-import { categoryService } from "./category.service"
-import pick from "../../../shared/pick"
-import { IPaginationOption } from "../../../interfaces/sharedInterface"
-import { paginationFields } from "../../../constants/shared.constant"
-import { CATEGORY_FILTER_FIELDS } from "./category.constant"
-
-
-
-const getAllCategory = catchAsync(async (req: Request, res: Response) => {
-    const filters = pick(req.query, ['searchTerm', ...CATEGORY_FILTER_FIELDS])
-    const paginationOption: IPaginationOption = pick(req.query, paginationFields)
-    const result = await categoryService.getAllCategory(filters, paginationOption)
-    sendSuccessResponse(res, {
-        statusCode: httpStatus.OK,
-        message: 'Car Owner list fetched successfully',
-        data: result,
-    })
-})
+import { Request, Response } from "express";
+import catchAsync from "../../../shared/catchAsync";
+import { CategoryService } from "./category.service";
+import { sendSuccessResponse } from "../../../shared/sendSuccessResponse";
+import httpStatus from "http-status";
 
 const createCategory = catchAsync(async (req: Request, res: Response) => {
-    const result = await categoryService.createCategory(req.body)
-    sendSuccessResponse(res, {
-        statusCode: httpStatus.OK,
-        message: "Category Created",
-        data: result
-    })
-})
+  const result = await CategoryService.createCategory(req.body);
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Category Created Successfully",
+    data: result,
+  });
+});
 
-const getSingleCategory = catchAsync(async (req: Request, res: Response) => {
-    const { userId } = req.params
-    const result = await categoryService.getSingleCategory(userId)
-    sendSuccessResponse(res, {
-        statusCode: httpStatus.OK,
-        message: "Category Fetched",
-        data: result
-    })
-})
+const getCategoryDetails = catchAsync(async (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+  const result = await CategoryService.getCategoryDetails(categoryId);
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Category Details Fetched Successfully",
+    data: result,
+  });
+});
 
+const getAllCategories = catchAsync(async (req: Request, res: Response) => {
+  const result = await CategoryService.getAllCategories();
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Categories Fetched Successfully",
+    data: result,
+  });
+});
 
+const deleteCategory = catchAsync(async (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+  const result = await CategoryService.deleteCategory(categoryId);
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Category Deleted Successfully",
+    data: result,
+  });
+});
 
+const getCategoryBySlug = catchAsync(async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  console.log("slug", slug);
+  const result = await CategoryService.getCategoryBySlug(slug);
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Category Fetched Successfully by Slug",
+    data: result,
+  });
+});
 
+const updateCategory = catchAsync(async (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+  const updateData = req.body; // Fields to update
 
+  const result = await CategoryService.updateCategory(categoryId, updateData);
 
-export const categoryController = {
-    getAllCategory,
-    createCategory,
-    getSingleCategory
-}
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Category Updated Successfully",
+    data: result,
+  });
+});
+
+export const CategoryController = {
+  createCategory,
+  getCategoryDetails,
+  getAllCategories,
+  deleteCategory,
+  getCategoryBySlug,
+  updateCategory,
+};

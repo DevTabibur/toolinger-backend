@@ -1,34 +1,38 @@
-import { Schema, model } from 'mongoose';
-import { ICategory } from './category.interface';
+import { model, Schema } from "mongoose";
+import { ICategory, CategoryStatus } from "./category.interface";
 
-const categorySchema = new Schema<ICategory>(
-    {
-        userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-          },
-        manufacture: {
-            type: String,
-            required: true,
-        },
-        carModel: {
-            type: String,
-        },
-        year: {
-            type: String
-        },
-        skills: {
-            type: String,
-        },
-        experience: {
-            type: String,
-        },
+// Only include fields defined in ICategory interface
+const CategorySchema = new Schema<ICategory>(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
     },
-    {
-        timestamps: true,
-    }
+    slug: {
+      type: String,
+      required: true,
+      lowercase: true,
+      trim: true,
+      unique: true,
+    },
+    description: {
+      type: String,
+    },
+    status: {
+      type: String,
+      enum: Object.values(CategoryStatus),
+      required: true,
+      default: CategoryStatus.ACTIVE,
+    },
+  },
+  {
+    timestamps: true, // Automatically manages createdAt and updatedAt
+  },
 );
 
-const CategoryModel = model<ICategory>('Category', categorySchema);
+// Create the model
+const CategoryModel = model<ICategory>("Category", CategorySchema);
+
 export default CategoryModel;

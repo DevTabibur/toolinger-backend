@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\toolinger\\backend\\logs\\winston\\successes\\.5b572df80b3e46ebb1a46e0b2dde6d3ba494eb64-audit.json",
+    "files": [
+        {
+            "date": 1755945953424,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\toolinger\\backend\\logs\\winston\\successes\\Tools-X-2025-23-08-16-success.log",
+            "hash": "c698fceceb0f5ca3299193bbd20c31d35457fb237860390c7b89b23c0d178cc9"
+        },
+        {
+            "date": 1755965689574,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\toolinger\\backend\\logs\\winston\\successes\\Tools-X-2025-23-08-22-success.log",
+            "hash": "e409aa2268b2de8e67cea588ce1aec372be1de874129962008c49797ab3a416f"
+        },
+        {
+            "date": 1756007357658,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\toolinger\\backend\\logs\\winston\\successes\\Tools-X-2025-24-08-09-success.log",
+            "hash": "f7f34e595f91bea93ce53e7dfa406d4b1f57a6204ea0e5bdb11e51b3a63ad3e5"
+        },
+        {
+            "date": 1756008210942,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\toolinger\\backend\\logs\\winston\\successes\\Tools-X-2025-24-08-10-success.log",
+            "hash": "24a7d466147ee7425dd2970b7aaf2866f749fc09d7a365e28063c1b2766b2abe"
+        },
+        {
+            "date": 1756016668327,
+            "name": "E:\\PROJECTS\\Woptio By Imran Vai Kolaroa\\toolinger\\backend\\logs\\winston\\successes\\Tools-X-2025-24-08-12-success.log",
+            "hash": "db331ced88d17f13c89f58eda5e3febbab51fe14a1ce0b26a4e2ef706f6aa267"
+        }
+    ],
+    "hashType": "sha256"
+}
