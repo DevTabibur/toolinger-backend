@@ -4,10 +4,7 @@ import { AuthController } from "./auth.controller";
 const router = Router();
 
 //! Register New User
-// router.post(
-//     '/register',
-//     AuthController.registerNewUser,
-// )
+router.post("/register", AuthController.registerNewUser);
 
 //! Login Existing User
 router.post("/login", AuthController.loginExistingUser);

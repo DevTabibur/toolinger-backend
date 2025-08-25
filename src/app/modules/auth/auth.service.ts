@@ -41,35 +41,14 @@ const loginExistingUser = async (
   loginData: ILoginUser,
 ): Promise<IUserResponse> => {
   const { email, password } = loginData;
-
-  // Check if database is empty
-  const isDatabaseEmpty = (await UserModel.countDocuments({})) === 0;
-
-  // If database is empty, create first user with hashed password
-  if (isDatabaseEmpty) {
-    // Create a new user instance to trigger the pre-save hook
-    const newUser = new UserModel(loginData);
-    await newUser.save(); // This will trigger the pre-save hook to hash the password
-
-    const accessToken = jwtHelpers.createToken(
-      { userId: newUser._id, userEmail: newUser.email },
-      config.jwt.accessToken as Secret,
-      config.jwt.accessToken_expires_in as string,
-    );
-
-    return { accessToken };
-  }
-
-  // For non-empty database - normal login flow
-  const user = await UserModel.findOne({ email }).select("+password");
-  if (!user) {
+  const isUserExist = await UserModel.findOne({ email });
+  if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, "User is not found");
   }
 
-  // Use the model's static method for password comparison
   const isPasswordMatched = await UserModel.isPasswordMatched(
     password,
-    user.password,
+    isUserExist.password,
   );
 
   if (!isPasswordMatched) {
@@ -77,13 +56,14 @@ const loginExistingUser = async (
   }
 
   const accessToken = jwtHelpers.createToken(
-    { userId: user._id, userEmail: user.email },
+    { userId: isUserExist._id, userEmail: isUserExist.email },
     config.jwt.accessToken as Secret,
     config.jwt.accessToken_expires_in as string,
   );
 
   return { accessToken };
 };
+
 const ChangePassword = async (
   userId: string,
   oldPassword: string,

@@ -14,6 +14,7 @@ import { DomainToolsRoute } from "../modules/domain-tools/domain-tools.routes";
 import { AdvancedToolsRoute } from "../modules/advanced-tools/advanced-tools.routes";
 import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
 import { CategoryRoute } from "../modules/category/category.routes";
+import { PageSEORoute } from "../modules/page-seo/page-seo.routes";
 
 const router = express.Router();
 
@@ -85,6 +86,10 @@ const allRoutes = [
   //   path: "/url-encoder-decoder",
   //   route: URLEncoderDecoderRoute,
   // },
+  {
+    path: "/page-seo",
+    route: PageSEORoute,
+  },
 ];
 
 allRoutes.forEach((route) => router.use(route.path, route.route));

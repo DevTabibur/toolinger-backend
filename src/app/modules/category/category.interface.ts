@@ -1,6 +1,6 @@
 export enum CategoryStatus {
   ACTIVE = "active",
-  PAUSED = "paused",
+  INACTIVE = "inactive",
 }
 
 export interface ICategory {
