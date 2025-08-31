@@ -9,9 +9,9 @@ import {
   IGenericDataWithMeta,
   IPaginationOption,
 } from "../../../interfaces/sharedInterface";
-import paginationHelper from "../../helpers/paginationHelper";
-import { DYNAMIC_PAGES_ARTICLE_AND_SEO_SEARCH_FIELDS } from "./pages-management.constant";
+import { PAGE_MANAGEMENT_SEO_SEARCH__FIELDS } from "./pages-management.constant";
 import PageManagementModel from "./pages-management.model";
+import paginationHelper from "../../helpers/paginationHelper";
 
 // Create a new dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = async (
@@ -34,54 +34,55 @@ const createDynamicPagesArticleAndSeo = async (
 
 // Get all dynamic pages articles with SEO
 const getAllDynamicPagesArticleAndSeo = async (
-  filters?: IPageManagementFilters,
-  paginationOptions?: IPaginationOption,
-): Promise<IGenericDataWithMeta<IPageManagementFilters[]>> => {
-  const result = await PageManagementModel.find();
-  return result;
-  // const { searchTerm, ...filtersData } = filters;
-  // const andConditions = [];
+  filters: IPageManagementFilters,
+  paginationOption: IPaginationOption,
+): Promise<IGenericDataWithMeta<IPageManagement[]>> => {
+  const { searchTerm, ...filtersFields } = filters;
 
-  // if (searchTerm) {
-  //   andConditions.push({
-  //     $or: DYNAMIC_PAGES_ARTICLE_AND_SEO_SEARCH_FIELDS.map((field) => ({
-  //       [field]: {
-  //         $regex: searchTerm,
-  //         $options: "i",
-  //       },
-  //     })),
-  //   });
-  // }
+  const andConditions = [];
 
-  // if (Object.keys(filtersData).length) {
-  //   andConditions.push({
-  //     $and: Object.entries(filtersData).map(([field, value]) => ({
-  //       [field]: value,
-  //     })),
-  //   });
-  // }
+  if (searchTerm) {
+    andConditions.push({
+      $or: PAGE_MANAGEMENT_SEO_SEARCH__FIELDS.map((field) => ({
+        [field]: new RegExp(searchTerm, "i"),
+      })),
+    });
+  }
 
-  // const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
-  // const { page, limit, skip, sortBy, sortOrder } = paginationHelper.calculatePagination(paginationOptions);
+  if (Object.keys(filtersFields).length) {
+    const fieldConditions = Object.entries(filtersFields).map(
+      ([key, value]) => ({
+        [key]: value,
+      }),
+    );
+    andConditions.push({ $and: fieldConditions });
+  }
 
-  // const sortConditions: { [key: string]: SortOrder } = {};
-  // if (sortBy && sortOrder) {
-  //   sortConditions[sortBy] = sortOrder;
-  // } else {
-  //   sortConditions["createdAt"] = "desc";
-  // }
+  const whereCondition = andConditions.length ? { $and: andConditions } : {};
 
-  // const result = await DynamicPagesArticleAndSeoModel.find(whereConditions)
-  //   .sort(sortConditions)
-  //   .skip(skip)
-  //   .limit(limit);
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelper(paginationOption);
 
-  // const total = await DynamicPagesArticleAndSeoModel.countDocuments(whereConditions);
+  const sortCondition: { [key: string]: SortOrder } = {};
+  if (sortBy && sortOrder) {
+    sortCondition[sortBy] = sortOrder;
+  }
 
-  // return {
-  //   meta: { page, limit, total },
-  //   data: result,
-  // };
+  const result = await PageManagementModel.find(whereCondition)
+    .sort(sortCondition)
+    .skip(skip)
+    .limit(limit as number);
+
+  const total = await PageManagementModel.countDocuments(whereCondition);
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 
 // Get dynamic page article by ID

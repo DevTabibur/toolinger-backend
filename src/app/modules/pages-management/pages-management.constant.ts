@@ -1,3 +1,20 @@
+export const PAGE_MANAGEMENT_FILTER_FIELDS = [
+  "slug",
+  "metaTitle",
+  "metaDescription",
+  "createdAt",
+];
+export const PAGE_MANAGEMENT_SEO_SEARCH__FIELDS = [
+  "slug",
+  "metaTitle",
+  "metaDescription",
+  "createdAt",
+];
+
+export type IPageManagementFilters = {
+  searchTerm?: string;
+};
+
 export const DYNAMIC_PAGES_ARTICLE_AND_SEO_SEARCH_FIELDS = [
   "title",
   "content",

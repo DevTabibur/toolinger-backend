@@ -3,6 +3,10 @@ import catchAsync from "../../../shared/catchAsync";
 import { DynamicPagesArticleAndSeoService } from "./pages-management.service";
 import { sendSuccessResponse } from "../../../shared/sendSuccessResponse";
 import httpStatus from "http-status";
+import pick from "../../../shared/pick";
+import { paginationFields } from "../../../constants/shared.constant";
+import { IPaginationOption } from "../../../interfaces/sharedInterface";
+import { PAGE_MANAGEMENT_FILTER_FIELDS } from "./pages-management.constant";
 
 // Create a new dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = catchAsync(
@@ -22,25 +26,25 @@ const createDynamicPagesArticleAndSeo = catchAsync(
 // Get all dynamic pages articles with SEO
 const getAllDynamicPagesArticleAndSeo = catchAsync(
   async (req: Request, res: Response) => {
-    const filters = req.query;
-    const paginationOptions = {
-      page: Number(req.query.page) || 1,
-      limit: Number(req.query.limit) || 10,
-      sortBy: req.query.sortBy as string,
-      sortOrder: req.query.sortOrder as string,
-    };
+    const filters = pick(req.query, [
+      "searchTerm",
+      ...PAGE_MANAGEMENT_FILTER_FIELDS,
+    ]);
+    const paginationOptions: IPaginationOption = pick(
+      req.query,
+      paginationFields,
+    );
 
-    const result = await DynamicPagesArticleAndSeoService
-      .getAllDynamicPagesArticleAndSeo
-      // filters,
-      // paginationOptions
-      ();
+    const result =
+      await DynamicPagesArticleAndSeoService.getAllDynamicPagesArticleAndSeo(
+        filters,
+        paginationOptions,
+      );
 
     sendSuccessResponse(res, {
       statusCode: httpStatus.OK,
       message: "Dynamic pages articles with SEO fetched successfully",
-      data: result.data,
-      meta: result.meta,
+      data: result,
     });
   },
 );
