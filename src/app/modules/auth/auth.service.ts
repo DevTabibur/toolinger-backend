@@ -94,17 +94,30 @@ const ChangePassword = async (
   await isUserExist.save();
 };
 
+const logOutUser = async (token: any) => {
+  const { userId } = token;
+  if (!userId) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+  }
+  const result = await UserModel.findByIdAndUpdate(
+    userId,
+    { status: "inactive" },
+    { new: true, select: "-password" }, // Exclude the password field
+  );
+  return result;
+};
+
+const getMe = async (token: any) => {
+  const { userId } = token;
+  if (!userId) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+  }
+  // Find user by id and exclude password field
+  const user = await UserModel.findById(userId).select("-password");
+  return user;
+};
+
 //** DO NOT DELETE IT */
-
-// const logOutUser = async (userId: string) => {
-//     const result = await UserModel.findByIdAndUpdate(
-//       userId,
-//       { status: 'inactive' },
-//       { new: true, select: '-password' }, // Exclude the password field
-//     )
-//     return result
-//   }
-
 //   //****************************************************************** */
 //   const forgotPassword = async (email: string) => {
 //     // ! 1. check if user is existed on our db or not check it with email
@@ -182,4 +195,6 @@ export const AuthService = {
   ChangePassword,
   registerNewUser,
   loginExistingUser,
+  logOutUser,
+  getMe,
 };

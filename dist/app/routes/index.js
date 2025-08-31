@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const auth_routes_1 = require("../modules/auth/auth.routes");
-const category_routes_1 = require("../modules/category/category.routes");
 const blog_routes_1 = require("../modules/blog/blog.routes");
 const shortener_routes_1 = require("../modules/shortener/shortener.routes");
 const converter_routes_1 = require("../modules/converter/converter.routes");
@@ -16,9 +15,11 @@ const analytics_routes_1 = require("../modules/analytics/analytics.routes");
 const seo_routes_1 = require("../modules/seo/seo.routes");
 const tools_routes_1 = require("../modules/tools/tools.routes");
 const website_management_routes_1 = require("../modules/website-management/website-management.routes");
-const more_tools_routes_1 = require("../modules/more-tools/more-tools.routes");
 const domain_tools_routes_1 = require("../modules/domain-tools/domain-tools.routes");
 const advanced_tools_routes_1 = require("../modules/advanced-tools/advanced-tools.routes");
+const more_tools_routes_1 = require("../modules/calculators-tools/more-tools.routes");
+const category_routes_1 = require("../modules/category/category.routes");
+const page_seo_routes_1 = require("../modules/page-seo/page-seo.routes");
 const router = express_1.default.Router();
 const allRoutes = [
     {
@@ -26,7 +27,7 @@ const allRoutes = [
         route: auth_routes_1.AuthRoute,
     },
     {
-        path: "/category",
+        path: "/blog-category",
         route: category_routes_1.CategoryRoute,
     },
     {
@@ -77,17 +78,21 @@ const allRoutes = [
     },
     // Domain realted tools
     {
-        path: '/domain-tools',
-        route: domain_tools_routes_1.DomainToolsRoute
+        path: "/domain-tools",
+        route: domain_tools_routes_1.DomainToolsRoute,
     },
     {
-        path: '/advanced-tools',
-        route: advanced_tools_routes_1.AdvancedToolsRoute
-    }
+        path: "/advanced-tools",
+        route: advanced_tools_routes_1.AdvancedToolsRoute,
+    },
     // {
     //   path: "/url-encoder-decoder",
     //   route: URLEncoderDecoderRoute,
     // },
+    {
+        path: "/page-seo",
+        route: page_seo_routes_1.PageSEORoute,
+    },
 ];
 allRoutes.forEach((route) => router.use(route.path, route.route));
 exports.default = router;

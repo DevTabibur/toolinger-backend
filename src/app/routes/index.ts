@@ -7,14 +7,13 @@ import { CutterRoute } from "../modules/cutter/cutter.routes";
 import { ContactRoute } from "../modules/contact/contact.routes";
 import { UserRoute } from "../modules/user/user.routes";
 import { AnalyticsRoute } from "../modules/analytics/analytics.routes";
-import { SEORoute } from "../modules/seo/seo.routes";
 import { ToolsRoute } from "../modules/tools/tools.routes";
 import { WebsiteManagementRoute } from "../modules/website-management/website-management.routes";
 import { DomainToolsRoute } from "../modules/domain-tools/domain-tools.routes";
 import { AdvancedToolsRoute } from "../modules/advanced-tools/advanced-tools.routes";
 import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
 import { CategoryRoute } from "../modules/category/category.routes";
-import { PageSEORoute } from "../modules/page-seo/page-seo.routes";
+import { DynamicPagesArticleAndSeoRoute } from "../modules/pages-management/pages-management.routes";
 
 const router = express.Router();
 
@@ -55,10 +54,7 @@ const allRoutes = [
     path: "/analytics",
     route: AnalyticsRoute,
   },
-  {
-    path: "/seo",
-    route: SEORoute,
-  },
+
   {
     path: "/tools",
     route: ToolsRoute,
@@ -86,9 +82,10 @@ const allRoutes = [
   //   path: "/url-encoder-decoder",
   //   route: URLEncoderDecoderRoute,
   // },
+
   {
-    path: "/page-seo",
-    route: PageSEORoute,
+    path: "/pages-article-and-seo",
+    route: DynamicPagesArticleAndSeoRoute,
   },
 ];
 

@@ -632,7 +632,6 @@ const CodeToCheckTextRatio = (input) => __awaiter(void 0, void 0, void 0, functi
     if (urlList.length === 0 || urlList.length > 20) {
         throw new Error("You must provide 1 to 20 URLs.");
     }
-    console.log('hello ')
     // Process all URLs in parallel
     const results = yield Promise.all(urlList.map((url) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -646,7 +645,6 @@ const CodeToCheckTextRatio = (input) => __awaiter(void 0, void 0, void 0, functi
             const textKB = formatKB(textSize);
             // Calculate ratio as integer percent (like "5%")
             const ratio = totalHtmlSize > 0 ? Math.round((textSize / totalHtmlSize) * 100) : 0;
-            console.log('1')
             return {
                 url,
                 code: codeKB,

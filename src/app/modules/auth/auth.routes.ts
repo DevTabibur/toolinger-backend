@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
+import authGuard from "../../middlewares/authGuard";
 
 const router = Router();
 
@@ -12,8 +13,11 @@ router.post("/login", AuthController.loginExistingUser);
 // ** Change password
 router.post("/change-password", AuthController.ChangePassword);
 
-// //! log out user
-// router.post('/log-out/:userId', AuthController.logOutUser)
+//! log out user
+router.post("/logout", authGuard(), AuthController.logOutUser);
+
+// get-me
+router.get("/get-me", authGuard(), AuthController.getMe);
 
 // //!  forgot password
 // router.post('/forgot-password', AuthController.forgotPassword)

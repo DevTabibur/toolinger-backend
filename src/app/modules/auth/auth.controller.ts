@@ -80,19 +80,30 @@ const ChangePassword = catchAsync(async (req: Request, res: Response) => {
   }
 });
 
+//!===========================================================>>>
+const logOutUser = catchAsync(async (req: Request, res: Response) => {
+  const token = req.user;
+
+  const result = await AuthService.logOutUser(token);
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Log out successful",
+    data: result,
+  });
+});
+
+const getMe = catchAsync(async (req: Request, res: Response) => {
+  const token = req.user;
+
+  const result = await AuthService.getMe(token);
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message: "Get Me  successful",
+    data: result,
+  });
+});
+
 ///** DO NOT DELETE IT */
-
-//   //!===========================================================>>>
-// const logOutUser = catchAsync(async (req: Request, res: Response) => {
-//     const { userId } = req.params
-
-//     const result = await AuthService.logOutUser(userId)
-//     sendSuccessResponse(res, {
-//       statusCode: httpStatus.OK,
-//       message: 'Log out successful',
-//       data: result,
-//     })
-//   })
 
 //   //!==========================================================>>>
 //   const forgotPassword = catchAsync(async (req: Request, res: Response) => {
@@ -125,4 +136,6 @@ export const AuthController = {
   ChangePassword,
   registerNewUser,
   loginExistingUser,
+  logOutUser,
+  getMe,
 };

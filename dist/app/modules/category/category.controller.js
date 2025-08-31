@@ -12,43 +12,70 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.categoryController = void 0;
+exports.CategoryController = void 0;
 const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
+const category_service_1 = require("./category.service");
 const sendSuccessResponse_1 = require("../../../shared/sendSuccessResponse");
 const http_status_1 = __importDefault(require("http-status"));
-const category_service_1 = require("./category.service");
-const pick_1 = __importDefault(require("../../../shared/pick"));
-const shared_constant_1 = require("../../../constants/shared.constant");
-const category_constant_1 = require("./category.constant");
-const getAllCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filters = (0, pick_1.default)(req.query, ['searchTerm', ...category_constant_1.CATEGORY_FILTER_FIELDS]);
-    const paginationOption = (0, pick_1.default)(req.query, shared_constant_1.paginationFields);
-    const result = yield category_service_1.categoryService.getAllCategory(filters, paginationOption);
+const createCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield category_service_1.CategoryService.createCategory(req.body);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
-        message: 'Car Owner list fetched successfully',
+        message: "Category Created Successfully",
         data: result,
     });
 }));
-const createCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield category_service_1.categoryService.createCategory(req.body);
+const getCategoryDetails = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { categoryId } = req.params;
+    const result = yield category_service_1.CategoryService.getCategoryDetails(categoryId);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
-        message: "Category Created",
-        data: result
+        message: "Category Details Fetched Successfully",
+        data: result,
     });
 }));
-const getSingleCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId } = req.params;
-    const result = yield category_service_1.categoryService.getSingleCategory(userId);
+const getAllCategories = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield category_service_1.CategoryService.getAllCategories();
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
-        message: "Category Fetched",
-        data: result
+        message: "Categories Fetched Successfully",
+        data: result,
     });
 }));
-exports.categoryController = {
-    getAllCategory,
+const deleteCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { categoryId } = req.params;
+    const result = yield category_service_1.CategoryService.deleteCategory(categoryId);
+    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        message: "Category Deleted Successfully",
+        data: result,
+    });
+}));
+const getCategoryBySlug = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { slug } = req.params;
+    console.log("slug", slug);
+    const result = yield category_service_1.CategoryService.getCategoryBySlug(slug);
+    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        message: "Category Fetched Successfully by Slug",
+        data: result,
+    });
+}));
+const updateCategory = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { categoryId } = req.params;
+    const updateData = req.body; // Fields to update
+    const result = yield category_service_1.CategoryService.updateCategory(categoryId, updateData);
+    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        message: "Category Updated Successfully",
+        data: result,
+    });
+}));
+exports.CategoryController = {
     createCategory,
-    getSingleCategory
+    getCategoryDetails,
+    getAllCategories,
+    deleteCategory,
+    getCategoryBySlug,
+    updateCategory,
 };

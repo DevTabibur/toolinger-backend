@@ -5,10 +5,7 @@ const express_1 = require("express");
 const auth_controller_1 = require("./auth.controller");
 const router = (0, express_1.Router)();
 //! Register New User
-// router.post(
-//     '/register',
-//     AuthController.registerNewUser,
-// )
+router.post("/register", auth_controller_1.AuthController.registerNewUser);
 //! Login Existing User
 router.post("/login", auth_controller_1.AuthController.loginExistingUser);
 // ** Change password

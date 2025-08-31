@@ -35,27 +35,15 @@ const registerNewUser = (userData) => __awaiter(void 0, void 0, void 0, function
 });
 const loginExistingUser = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = loginData;
-    // Check if database is empty
-    const isDatabaseEmpty = (yield user_model_1.default.countDocuments({})) === 0;
-    // If database is empty, create first user with hashed password
-    if (isDatabaseEmpty) {
-        // Create a new user instance to trigger the pre-save hook
-        const newUser = new user_model_1.default(loginData);
-        yield newUser.save(); // This will trigger the pre-save hook to hash the password
-        const accessToken = jwtHelpers_1.jwtHelpers.createToken({ userId: newUser._id, userEmail: newUser.email }, config_1.default.jwt.accessToken, config_1.default.jwt.accessToken_expires_in);
-        return { accessToken };
-    }
-    // For non-empty database - normal login flow
-    const user = yield user_model_1.default.findOne({ email }).select("+password");
-    if (!user) {
+    const isUserExist = yield user_model_1.default.findOne({ email });
+    if (!isUserExist) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User is not found");
     }
-    // Use the model's static method for password comparison
-    const isPasswordMatched = yield user_model_1.default.isPasswordMatched(password, user.password);
+    const isPasswordMatched = yield user_model_1.default.isPasswordMatched(password, isUserExist.password);
     if (!isPasswordMatched) {
         throw new ApiError_1.default(http_status_1.default.UNAUTHORIZED, "Password is incorrect");
     }
-    const accessToken = jwtHelpers_1.jwtHelpers.createToken({ userId: user._id, userEmail: user.email }, config_1.default.jwt.accessToken, config_1.default.jwt.accessToken_expires_in);
+    const accessToken = jwtHelpers_1.jwtHelpers.createToken({ userId: isUserExist._id, userEmail: isUserExist.email }, config_1.default.jwt.accessToken, config_1.default.jwt.accessToken_expires_in);
     return { accessToken };
 });
 const ChangePassword = (userId, oldPassword, newPassword) => __awaiter(void 0, void 0, void 0, function* () {

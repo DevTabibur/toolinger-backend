@@ -200,5 +200,5 @@ exports.AdvancedToolsController = {
     migrateWebsite,
     scheduleSocialMedia,
     generateEmailTemplate,
-    detectCMS
+    detectCMS,
 };

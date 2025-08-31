@@ -31,6 +31,25 @@ const userSchema = new Schema<IUser>(
       minlength: 6,
       // select: 0,
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      default: "user",
+    },
+    status: {
+      type: String,
+      default: "active",
+    },
+    avatar: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -23,22 +23,29 @@ const http_status_2 = __importDefault(require("http-status"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const ApiError_1 = __importDefault(require("./errors/ApiError"));
 const shortener_utils_1 = require("./app/modules/shortener/shortener.utils");
+const config_1 = require("./config");
 const app = (0, express_1.default)();
 app.use((0, compression_1.default)());
 app.use((0, cors_1.default)({
-    // origin: IS_MODE_PROD ? ALLOWED_ORIGIN.PROD : ALLOWED_ORIGIN.DEV,
-    origin: "*",
+    origin: config_1.IS_MODE_PROD
+        ? ["https://toolinger.com", "https://www.toolinger.com"]
+        : [
+            "https://toolinger.com",
+            "https://www.toolinger.com",
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "http://localhost:5173",
+            "http://localhost:4173",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:3001",
+            "http://127.0.0.1:5173",
+            "http://127.0.0.1:4173",
+        ],
     allowedHeaders: ["Content-Type", "Authorization"],
-    // allowedHeaders: [
-    //   'Accept-Version',
-    //   'Authorization',
-    //   'Credentials',
-    //   'Content-Type',
-    // ],
-    maxAge: 86400, // 24 hours (60 seconds * 60 minutes * 24 hours)
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    maxAge: 86400, // 24 hours
     optionsSuccessStatus: 200,
-    // preflightContinue: true,
 }));
 // // Enable CORS
 // app.use(
@@ -52,7 +59,7 @@ app.use((0, cors_1.default)({
 app.use(express_1.default.json({ limit: "50mb" })); // to handle too many request entity
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
-app.use(express_1.default.static('./upload')); // Serve uploaded files
+app.use(express_1.default.static("./upload")); // Serve uploaded files
 app.set("view engine", "ejs");
 app.set("views", path_1.default.join(__dirname, "views")); // Adjust path as needed
 app.get("/", (req, res) => {
@@ -61,7 +68,7 @@ app.get("/", (req, res) => {
 // ** all routes
 app.use("/api/v1", routes_1.default);
 // Route for redirecting short URLs with correct type annotations
-app.get('/:shortUrl', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/:shortUrl", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { shortUrl } = req.params;
     try {
         const originalUrl = yield (0, shortener_utils_1.redirectUrl)(shortUrl);
@@ -73,7 +80,9 @@ app.get('/:shortUrl', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         // Handle any errors here (optional)
-        return res.status(500).send("An error occurred while processing the request.");
+        return res
+            .status(500)
+            .send("An error occurred while processing the request.");
     }
 }));
 // console.log("env development =>>>", app.get("env"));
