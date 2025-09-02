@@ -12,14 +12,13 @@ const cutter_routes_1 = require("../modules/cutter/cutter.routes");
 const contact_routes_1 = require("../modules/contact/contact.routes");
 const user_routes_1 = require("../modules/user/user.routes");
 const analytics_routes_1 = require("../modules/analytics/analytics.routes");
-const seo_routes_1 = require("../modules/seo/seo.routes");
 const tools_routes_1 = require("../modules/tools/tools.routes");
 const website_management_routes_1 = require("../modules/website-management/website-management.routes");
 const domain_tools_routes_1 = require("../modules/domain-tools/domain-tools.routes");
 const advanced_tools_routes_1 = require("../modules/advanced-tools/advanced-tools.routes");
 const more_tools_routes_1 = require("../modules/calculators-tools/more-tools.routes");
 const category_routes_1 = require("../modules/category/category.routes");
-const page_seo_routes_1 = require("../modules/page-seo/page-seo.routes");
+const pages_management_routes_1 = require("../modules/pages-management/pages-management.routes");
 const router = express_1.default.Router();
 const allRoutes = [
     {
@@ -59,10 +58,6 @@ const allRoutes = [
         route: analytics_routes_1.AnalyticsRoute,
     },
     {
-        path: "/seo",
-        route: seo_routes_1.SEORoute,
-    },
-    {
         path: "/tools",
         route: tools_routes_1.ToolsRoute,
     },
@@ -90,8 +85,8 @@ const allRoutes = [
     //   route: URLEncoderDecoderRoute,
     // },
     {
-        path: "/page-seo",
-        route: page_seo_routes_1.PageSEORoute,
+        path: "/pages-article-and-seo",
+        route: pages_management_routes_1.DynamicPagesArticleAndSeoRoute,
     },
 ];
 allRoutes.forEach((route) => router.use(route.path, route.route));

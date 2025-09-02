@@ -12,9 +12,12 @@ router.get(
   DynamicPagesArticleAndSeoController.getAllDynamicPagesArticleAndSeo,
 );
 
+// /seo or /article to fetch that realted data only.
+router.get("/:type", DynamicPagesArticleAndSeoController.GetAllSEOAndArticle);
+
 router.get(
   "/slug/:slug",
-  authGuard(),
+  // authGuard(),
   DynamicPagesArticleAndSeoController.getDynamicPagesArticleAndSeoBySlug,
 );
 
@@ -40,11 +43,11 @@ router.patch(
   DynamicPagesArticleAndSeoController.updateDynamicPagesArticleAndSeo,
 );
 
-// Delete dynamic pages article by ID
+// Delete dynamic pages data by type (SEO or Article) and Id
 router.delete(
-  "/:id",
+  "/:id/:type(seo|article)",
   authGuard(),
-  DynamicPagesArticleAndSeoController.deleteDynamicPagesArticleAndSeo,
+  DynamicPagesArticleAndSeoController.deleteDynamicPagesData,
 );
 
 export const DynamicPagesArticleAndSeoRoute = router;

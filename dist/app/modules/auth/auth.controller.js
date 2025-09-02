@@ -83,17 +83,26 @@ const ChangePassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
         console.error("Error in password change:", error); // Log error details.
     }
 }));
+//!===========================================================>>>
+const logOutUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = req.user;
+    const result = yield auth_service_1.AuthService.logOutUser(token);
+    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        message: "Log out successful",
+        data: result,
+    });
+}));
+const getMe = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const token = req.user;
+    const result = yield auth_service_1.AuthService.getMe(token);
+    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        message: "Get Me  successful",
+        data: result,
+    });
+}));
 ///** DO NOT DELETE IT */
-//   //!===========================================================>>>
-// const logOutUser = catchAsync(async (req: Request, res: Response) => {
-//     const { userId } = req.params
-//     const result = await AuthService.logOutUser(userId)
-//     sendSuccessResponse(res, {
-//       statusCode: httpStatus.OK,
-//       message: 'Log out successful',
-//       data: result,
-//     })
-//   })
 //   //!==========================================================>>>
 //   const forgotPassword = catchAsync(async (req: Request, res: Response) => {
 //     const { email } = req.body
@@ -121,4 +130,6 @@ exports.AuthController = {
     ChangePassword,
     registerNewUser,
     loginExistingUser,
+    logOutUser,
+    getMe,
 };

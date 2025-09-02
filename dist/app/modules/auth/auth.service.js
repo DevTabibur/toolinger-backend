@@ -61,15 +61,24 @@ const ChangePassword = (userId, oldPassword, newPassword) => __awaiter(void 0, v
     // Save the new password
     yield isUserExist.save();
 });
+const logOutUser = (token) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = token;
+    if (!userId) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "User not found");
+    }
+    const result = yield user_model_1.default.findByIdAndUpdate(userId, { status: "inactive" }, { new: true, select: "-password" });
+    return result;
+});
+const getMe = (token) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = token;
+    if (!userId) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "User not found");
+    }
+    // Find user by id and exclude password field
+    const user = yield user_model_1.default.findById(userId).select("-password");
+    return user;
+});
 //** DO NOT DELETE IT */
-// const logOutUser = async (userId: string) => {
-//     const result = await UserModel.findByIdAndUpdate(
-//       userId,
-//       { status: 'inactive' },
-//       { new: true, select: '-password' }, // Exclude the password field
-//     )
-//     return result
-//   }
 //   //****************************************************************** */
 //   const forgotPassword = async (email: string) => {
 //     // ! 1. check if user is existed on our db or not check it with email
@@ -137,4 +146,6 @@ exports.AuthService = {
     ChangePassword,
     registerNewUser,
     loginExistingUser,
+    logOutUser,
+    getMe,
 };

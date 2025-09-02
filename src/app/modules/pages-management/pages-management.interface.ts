@@ -43,7 +43,7 @@ export interface PageArticle {
 // Page management interface
 export interface IPageManagement {
   slug: string;
-  PageSEO: PageSEO; // SEO fields (required)
+  PageSEO?: PageSEO; // SEO fields (required)
   PageArticle?: PageArticle; // Article fields (content optional)
 }
 

@@ -102,21 +102,36 @@ const updateDynamicPagesArticleAndSeo = catchAsync(
 );
 
 // Delete dynamic page article by ID
-const deleteDynamicPagesArticleAndSeo = catchAsync(
+const deleteDynamicPagesData = catchAsync(
   async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { id, type } = req.params;
     const result =
-      await DynamicPagesArticleAndSeoService.deleteDynamicPagesArticleAndSeo(
-        id,
-      );
+      await DynamicPagesArticleAndSeoService.deleteDynamicPagesData(id, type);
 
     sendSuccessResponse(res, {
       statusCode: httpStatus.OK,
-      message: "Dynamic page article deleted successfully",
+      message: "Dynamic page SEO deleted successfully",
       data: result,
     });
   },
 );
+
+const GetAllSEOAndArticle = catchAsync(async (req: Request, res: Response) => {
+  const { id, type } = req.params;
+  const result =
+    await DynamicPagesArticleAndSeoService.GetAllSEOAndArticle(type);
+
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    message:
+      type === "seo"
+        ? "Dynamic page SEO fetched successfully"
+        : type === "article"
+          ? "Dynamic page article fetched successfully"
+          : "Dynamic page data fetched successfully",
+    data: result,
+  });
+});
 
 export const DynamicPagesArticleAndSeoController = {
   createDynamicPagesArticleAndSeo,
@@ -124,5 +139,6 @@ export const DynamicPagesArticleAndSeoController = {
   getDynamicPagesArticleAndSeoById,
   getDynamicPagesArticleAndSeoBySlug,
   updateDynamicPagesArticleAndSeo,
-  deleteDynamicPagesArticleAndSeo,
+  deleteDynamicPagesData,
+  GetAllSEOAndArticle,
 };
