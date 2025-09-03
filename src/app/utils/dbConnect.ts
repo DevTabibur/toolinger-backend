@@ -14,6 +14,7 @@ const dbConnect = async (): Promise<void> => {
       throw new Error("Database connection string is missing");
     }
 
+    console.log("URI", URI);
     await mongoose.connect(URI, {
       serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if MongoDB is unreachable
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
