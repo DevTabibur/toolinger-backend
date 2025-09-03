@@ -1,5 +1,5 @@
 {
-	"name": "YouTube-to-mp3-mp4-backend",
+	"name": "Toolinger-Backend",
 	"version": "1.0.0",
 	"description": "",
 	"main": "src/server.ts",
