@@ -47,6 +47,7 @@ const registerNewUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0
 }));
 //!================================================>>>
 const loginExistingUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("loginExistingUser", req.body);
     const _a = yield auth_service_1.AuthService.loginExistingUser(req.body), { accessToken } = _a, rest = __rest(_a, ["accessToken"]);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,

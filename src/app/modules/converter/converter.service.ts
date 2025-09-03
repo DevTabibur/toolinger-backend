@@ -94,7 +94,7 @@ const convertURLToMP3orMP4 = async (data: any): Promise<DownloadResponse> => {
       "https://zylalabs.com/api/3219/youtube+mp4+video+downloader+api/5880/get+mp4",
       {
         headers: {
-          Authorization: `Bearer ${config.youtube_mp3_or_mp4_downlaod}`,
+          // Authorization: `Bearer ${config.youtube_mp3_or_mp4_downlaod}`,
         },
         params: {
           id: videoId, // Send the extracted video ID
@@ -108,7 +108,7 @@ const convertURLToMP3orMP4 = async (data: any): Promise<DownloadResponse> => {
         "https://zylalabs.com/api/3219/youtube+mp4+video+downloader+api/6812/youtube+downloader",
         {
           headers: {
-            Authorization: `Bearer ${config.youtube_mp3_or_mp4_downlaod}`,
+            // Authorization: `Bearer ${config.youtube_mp3_or_mp4_downlaod}`,
           },
           params: {
             videoId: mp4Response?.data?.id, // Send the extracted video ID

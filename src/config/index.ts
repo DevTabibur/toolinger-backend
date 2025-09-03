@@ -22,10 +22,6 @@ export default {
   allowed_origin_dev: process.env.ALLOWED_ORIGIN_DEV,
   database_string: process.env.DATABASE_STRING,
   bcrypt_salt_round: process.env.BCRYPT_SALT_ROUND,
-  // email: process.env.NODEMAILER_EMAIL,
-  // app_pass: process.env.NODEMAILER_APP_PASS,
-  // youtube_mp3_or_mp4_downlaod:
-  //   process.env.YT_TO_MP3_OR_MP4_CONVERTER_AND_DOWNLOADER_PASS_KEY,
   jwt: {
     accessToken: process.env.ACCESS_TOKEN,
     accessToken_expires_in: process.env.ACCESS_TOKEN_EXPIRES_IN,

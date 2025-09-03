@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConvertService = void 0;
 const axios_1 = __importDefault(require("axios"));
 const validator_1 = __importDefault(require("validator"));
-const config_1 = __importDefault(require("../../../config"));
 const http_status_1 = __importDefault(require("http-status"));
 const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const analytics_model_1 = __importDefault(require("../analytics/analytics.model"));
@@ -62,7 +61,7 @@ const convertURLToMP3orMP4 = (data) => __awaiter(void 0, void 0, void 0, functio
         // Fetch MP4 metadata
         const mp4Response = yield axios_1.default.get("https://zylalabs.com/api/3219/youtube+mp4+video+downloader+api/5880/get+mp4", {
             headers: {
-                Authorization: `Bearer ${config_1.default.youtube_mp3_or_mp4_downlaod}`,
+            // Authorization: `Bearer ${config.youtube_mp3_or_mp4_downlaod}`,
             },
             params: {
                 id: videoId, // Send the extracted video ID
@@ -72,7 +71,7 @@ const convertURLToMP3orMP4 = (data) => __awaiter(void 0, void 0, void 0, functio
         if (mp4Response.data.id) {
             const download = yield axios_1.default.get("https://zylalabs.com/api/3219/youtube+mp4+video+downloader+api/6812/youtube+downloader", {
                 headers: {
-                    Authorization: `Bearer ${config_1.default.youtube_mp3_or_mp4_downlaod}`,
+                // Authorization: `Bearer ${config.youtube_mp3_or_mp4_downlaod}`,
                 },
                 params: {
                     videoId: (_a = mp4Response === null || mp4Response === void 0 ? void 0 : mp4Response.data) === null || _a === void 0 ? void 0 : _a.id, // Send the extracted video ID
