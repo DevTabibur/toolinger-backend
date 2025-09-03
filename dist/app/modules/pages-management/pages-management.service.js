@@ -44,7 +44,9 @@ const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, v
     // Logic 1: User wants to create PageArticle
     if (PageArticle && !PageSEO) {
         // If a page with this slug exists and already has PageArticle, throw error
-        if (existingPage && existingPage.PageArticle && existingPage.PageArticle.content) {
+        if (existingPage &&
+            existingPage.PageArticle &&
+            existingPage.PageArticle.content) {
             throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageArticle already exists for this slug. Please update it instead of creating.");
         }
         // If page exists but no PageArticle, update it with PageArticle
@@ -63,7 +65,9 @@ const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, v
     // Logic 2: User wants to create PageSEO
     if (PageSEO && !PageArticle) {
         // If a page with this slug exists and already has PageSEO, throw error
-        if (existingPage && existingPage.PageSEO && existingPage.PageSEO.metaTitle) {
+        if (existingPage &&
+            existingPage.PageSEO &&
+            existingPage.PageSEO.metaTitle) {
             throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageSEO already exists for this slug. Please update it instead of creating.");
         }
         // If page exists but no PageSEO, update it with PageSEO
@@ -84,8 +88,10 @@ const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, v
         // If a page with this slug exists, check for both
         if (existingPage) {
             // If both already exist, throw error
-            if (existingPage.PageArticle && existingPage.PageArticle.content &&
-                existingPage.PageSEO && existingPage.PageSEO.metaTitle) {
+            if (existingPage.PageArticle &&
+                existingPage.PageArticle.content &&
+                existingPage.PageSEO &&
+                existingPage.PageSEO.metaTitle) {
                 throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Both PageArticle and PageSEO already exist for this slug. Please update instead of creating.");
             }
             // If only one exists, update the missing one
@@ -191,7 +197,9 @@ const deleteDynamicPagesData = (id, type) => __awaiter(void 0, void 0, void 0, f
     else {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Invalid type provided");
     }
-    const result = yield pages_management_model_1.default.findByIdAndUpdate(id, { $unset: { [unsetField]: "" } });
+    const result = yield pages_management_model_1.default.findByIdAndUpdate(id, {
+        $unset: { [unsetField]: "" },
+    });
     return result;
 });
 const GetAllSEOAndArticle = (type) => __awaiter(void 0, void 0, void 0, function* () {
@@ -218,5 +226,5 @@ exports.DynamicPagesArticleAndSeoService = {
     getDynamicPagesArticleAndSeoBySlug,
     updateDynamicPagesArticleAndSeo,
     deleteDynamicPagesData,
-    GetAllSEOAndArticle
+    GetAllSEOAndArticle,
 };

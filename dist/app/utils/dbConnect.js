@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("../../config"));
 const logger_1 = require("../../shared/logger");
-const URI = config_1.default.database_string;
+const URI = config_1.default.database_string ||
+    `mongodb+srv://tobiburrohman2:8glzMKr2FeRk19ED@cluster0.styb5.mongodb.net/toolinger?retryWrites=true&w=majority&appName=Cluster0`;
 const dbConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!URI) {

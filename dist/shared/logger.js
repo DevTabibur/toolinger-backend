@@ -22,11 +22,11 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 // Success Logger
 const logger = (0, winston_1.createLogger)({
     level: "info",
-    format: combine(label({ label: "Tools-X" }), timestamp(), myFormat),
+    format: combine(label({ label: "Toolinger" }), timestamp(), myFormat),
     transports: [
         new winston_1.transports.Console(),
         new winston_daily_rotate_file_1.default({
-            filename: path_1.default.join(process.cwd(), "logs", "winston", "successes", "Tools-X-%DATE%-success.log"),
+            filename: path_1.default.join(process.cwd(), "logs", "winston", "successes", "Toolinger-%DATE%-success.log"),
             datePattern: "YYYY-DD-MM-HH",
             zippedArchive: true,
             maxSize: "20m",
@@ -38,11 +38,11 @@ exports.logger = logger;
 // Error Logger
 const errorLogger = (0, winston_1.createLogger)({
     level: "error",
-    format: combine(label({ label: "Tools-X" }), timestamp(), myFormat),
+    format: combine(label({ label: "Toolinger" }), timestamp(), myFormat),
     transports: [
         new winston_1.transports.Console(),
         new winston_daily_rotate_file_1.default({
-            filename: path_1.default.join(process.cwd(), "logs", "winston", "errors", "Tools-X-%DATE%-error.log"),
+            filename: path_1.default.join(process.cwd(), "logs", "winston", "errors", "Toolinger-%DATE%-error.log"),
             datePattern: "YYYY-DD-MM-HH",
             zippedArchive: true,
             maxSize: "20m",

@@ -103,5 +103,5 @@ exports.DynamicPagesArticleAndSeoController = {
     getDynamicPagesArticleAndSeoBySlug,
     updateDynamicPagesArticleAndSeo,
     deleteDynamicPagesData,
-    GetAllSEOAndArticle
+    GetAllSEOAndArticle,
 };
