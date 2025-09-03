@@ -27,6 +27,7 @@ const registerNewUser = catchAsync(async (req: Request, res: Response) => {
 
 //!================================================>>>
 const loginExistingUser = catchAsync(async (req: Request, res: Response) => {
+  console.log("loginExistingUser", req.body);
   const { accessToken, ...rest } = await AuthService.loginExistingUser(
     req.body,
   );
