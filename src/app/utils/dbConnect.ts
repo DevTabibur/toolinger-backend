@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 import config from "../../config";
 import { errorLogger, logger } from "../../shared/logger";
 
-const URI =
-  config.database_string ||
-  `mongodb+srv://tobiburrohman2:8glzMKr2FeRk19ED@cluster0.styb5.mongodb.net/toolinger?retryWrites=true&w=majority&appName=Cluster0`;
+const URI = config.database_string;
 
 const dbConnect = async (): Promise<void> => {
   try {
@@ -14,7 +12,6 @@ const dbConnect = async (): Promise<void> => {
       throw new Error("Database connection string is missing");
     }
 
-    console.log("URI", URI);
     await mongoose.connect(URI, {
       serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if MongoDB is unreachable
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
