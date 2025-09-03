@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\PROJECTS\\Woptio\\toolinger\\backend\\logs\\winston\\errors\\.6fc29b1ca5017d3e77e0aa25f063a99bbb614b68-audit.json",
+    "files": [
+        {
+            "date": 1756929137921,
+            "name": "E:\\PROJECTS\\Woptio\\toolinger\\backend\\logs\\winston\\errors\\Toolinger-2025-04-09-01-error.log",
+            "hash": "4f18e4a73a0056e77777d72b6d6e4d170ab8f4fbb66919ccf165bfaa33fafdf8"
+        }
+    ],
+    "hashType": "sha256"
+}

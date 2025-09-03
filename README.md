@@ -1,50 +1,113 @@
-# YouTube to MP3, MP4, URL Shortener & Audio Cutter Backend
+# Toolinger Backend
 
-#
+Welcome to the backend repository for **Toolinger** – a comprehensive suite of web utility tools including YouTube to MP3/MP4 conversion, URL shortener, audio cutter, plagiarism checker, and more.
 
-1. for plagiarism checker. the packages will be npm install axios cheerio proxy-agent
+---
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Setup & Installation](#setup--installation)
+- [Environment Variables](#environment-variables)
+- [Scripts](#scripts)
+- [API Integrations & Paid Services](#api-integrations--paid-services)
+- [Tool Status & Maintenance](#tool-status--maintenance)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## Project Overview
+
+Toolinger Backend provides RESTful APIs for a variety of web tools, supporting both free and paid features. The backend is built with Node.js, Express, and MongoDB, and is designed for scalability and maintainability.
+
+---
+
+## Features
+
+- YouTube to MP3/MP4 Converter
+- URL Shortener
+- Audio Cutter
+- Plagiarism Checker
+- Keyword Suggestion Tool
+- Google Page Speed Insights
+- Google Index Checker
+- Whois Lookup
+- Broken Link Finder
+- URL Encoder/Decoder
+- Meta Tag Generator & Analyzer
+- Online MD5 Generator
+- Browser Info Tool
+- Word Counter
+- Domain Age Checker
+- Backlink Maker
+- Online Ping Tool
+- Link Analyzer
+- Keyword Density Checker
+- Google Malware Checker
+- Domain to IP Converter
+- Server Status Checker
+- Webpage Screen Resolution Simulator
+- Page Size Checker
+- Blacklist Lookup
+- Suspicious Domain Checker
+- Link Price Calculator
+- Code to Text Ratio Checker
+- Website Links Count Checker
+- Email Privacy Checker
+- Robots.txt & XML Sitemap Generator
+- Search Engine Spider Simulator
+- Google Cache Checker
+- DNS Record Finder
+- Class C IP Checker
+- Get Source Code of Webpage
+
+---
+
+## Tech Stack
+
+- **Node.js** (v18+)
+- **Express.js**
+- **MongoDB** (Mongoose)
+- **TypeScript**
+- **Winston** (Logging)
+- **Axios, Cheerio, Proxy-Agent** (Web scraping)
+- **Jest** (Testing)
+
+---
+
+## Setup & Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-org/toolinger-backend.git
+   cd toolinger-backend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+   For plagiarism checker and web scraping tools, also install:
+   ```bash
+   npm install axios cheerio proxy-agent
    npm install --save-dev @types/cheerio
+   ```
 
-## API / PAID
+3. **Configure environment variables:**
+   - Copy `.env.example` to `.env` and fill in the required values.
 
-1. Keyword suggestion tool
-2. Google Page Speed Insight ==> [Google cloud console or google page ](https://developers.google.com/speed/docs/insights/v5/get-started), https://console.cloud.google.com/
-3. Google Index Checker ==> Google এর API এইরকম ডেটা বিনা খরচে দেয় না, তাই এখানে আমরা web scraping ব্যবহার করব cheerio + axios দিয়ে। এটা Educational/Research purpose-এর জন্য ভালো, তবে অনেক বেশি request করলে Google block করতে পারে।
-4.
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-## issues
+---
 
-1.  URL Rewrite tool is working perfectly
-2.  whois is not working
-3.  broken link finder is fully working
-4.  URL Encoder / Decoder is working from frontend
-5.  meta tag generator is working from frontend also
-6.  Online Md5 Generator is working
-7.  what is my browser is working
-8.  word counter is working from frontend also
-9.  domain age is not working
-10. backlink maker is not working
-11. online ping website tool is not working
-12. link analyzer is working from backend tools
-13. keyword density checker is working
-14. Google Malware Checker is working (Google Cloud Console theke API enable kora. google safe browsing API) ==> https://transparencyreport.google.com/safe-browsing/search?url=viserx.com&hl=en ei link thekeu check kora jai.
-15. Domain Into IP is working perfctly
-16. Server Status Checker is working perfectly
-17. Webpage Screen Resolution Simulator ==> eita frontend theke kora lagbe
-18. page size checker tools is not working
-19. Blacklist lookup is not working
-20. Suspicious domain checker is working
-21. Link price calculator is not done yet. API lagbe
-22. Code to Text Ratio Checker is working fully
-23. Website Links Count Checker is working perfectly
-24. Email Privacy Checker is working perfectly
-25. Meta Tags Analyzer is working perfectly
-26. Keywords Suggestion Tool ==> paid https://www.datamuse.com/api/ eita diye korte hobe
-27. Search Engine Spider Simulator is working perfectly
-28. Google Cache Checker is working perfectly
-29. Find DNS record is working perfectly
-30. Class C IP Checker is working perfectly
-31. Get Source Code of WebPage is working perfectly
-32. Robots.txt Generator (50% working, 50% paid API, Frontend e design kora lagbe extra)
-33. XML Sitemap Generator (50% working, 50% paid API, Frontend e design kora lagbe extra)
-34. Plagiarism Checker
+## Environment Variables
+
+Create a `.env` file in the root directory. Example variables:

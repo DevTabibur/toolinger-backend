@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 import config from "../../config";
 import { errorLogger, logger } from "../../shared/logger";
 
-const URI = config.database_string;
+const URI =
+  config.database_string ||
+  `mongodb+srv://tobiburrohman2:8glzMKr2FeRk19ED@cluster0.styb5.mongodb.net/toolinger?retryWrites=true&w=majority&appName=Cluster0`;
 
 const dbConnect = async (): Promise<void> => {
   try {

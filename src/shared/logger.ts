@@ -27,7 +27,7 @@ const myFormat = printf(
 // Success Logger
 const logger = createLogger({
   level: "info",
-  format: combine(label({ label: "Tools-X" }), timestamp(), myFormat),
+  format: combine(label({ label: "Toolinger" }), timestamp(), myFormat),
   transports: [
     new transports.Console(),
     new DailyRotateFile({
@@ -36,7 +36,7 @@ const logger = createLogger({
         "logs",
         "winston",
         "successes",
-        "Tools-X-%DATE%-success.log",
+        "Toolinger-%DATE%-success.log",
       ),
       datePattern: "YYYY-DD-MM-HH",
       zippedArchive: true,
@@ -49,7 +49,7 @@ const logger = createLogger({
 // Error Logger
 const errorLogger = createLogger({
   level: "error",
-  format: combine(label({ label: "Tools-X" }), timestamp(), myFormat),
+  format: combine(label({ label: "Toolinger" }), timestamp(), myFormat),
   transports: [
     new transports.Console(),
     new DailyRotateFile({
@@ -58,7 +58,7 @@ const errorLogger = createLogger({
         "logs",
         "winston",
         "errors",
-        "Tools-X-%DATE%-error.log",
+        "Toolinger-%DATE%-error.log",
       ),
       datePattern: "YYYY-DD-MM-HH",
       zippedArchive: true,
