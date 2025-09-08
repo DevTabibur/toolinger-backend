@@ -133,9 +133,6 @@ const updateBlogPost = async (
     throw new ApiError(httpStatus.NOT_FOUND, "Invalid Blog Id");
   }
 
-  // Ensure updatedAt is set to the current timestamp
-  updateData.updatedAt = new Date();
-
   const result = await BlogPostModel.findByIdAndUpdate(
     blogId,
     { $set: updateData },

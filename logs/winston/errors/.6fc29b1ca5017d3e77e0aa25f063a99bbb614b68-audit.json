@@ -44,6 +44,11 @@
             "date": 1757368669549,
             "name": "E:\\PROJECTS\\Woptio\\toolinger\\backend\\logs\\winston\\errors\\Toolinger-2025-09-09-03-error.log",
             "hash": "0806e6b076cf9af3688954a4c156e254e7922abbcce856cb7f23a251e878b4f2"
+        },
+        {
+            "date": 1757368827930,
+            "name": "E:\\PROJECTS\\Woptio\\toolinger\\backend\\logs\\winston\\errors\\Toolinger-2025-09-09-04-error.log",
+            "hash": "21588cffe353c862316869b07dcd96212ca343ba53afe25aab908bbecac726c2"
         }
     ],
     "hashType": "sha256"
