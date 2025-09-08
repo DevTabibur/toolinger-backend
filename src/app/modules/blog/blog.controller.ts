@@ -5,7 +5,28 @@ import { sendSuccessResponse } from "../../../shared/sendSuccessResponse";
 import httpStatus from "http-status";
 
 const createBlogPost = catchAsync(async (req: Request, res: Response) => {
-  const result = await BlogService.createBlogPost(req.body);
+  const files = req.files as
+    | { [fieldname: string]: Express.Multer.File[] }
+    | Express.Multer.File[]
+    | undefined;
+  let blogFeaturedImage;
+  if (Array.isArray(files)) {
+    blogFeaturedImage = files;
+  } else if (
+    files &&
+    typeof files === "object" &&
+    "blogFeaturedImage" in files
+  ) {
+    blogFeaturedImage = (
+      files as { [fieldname: string]: Express.Multer.File[] }
+    ).blogFeaturedImage;
+  }
+
+  const result = await BlogService.createBlogPost(
+    req.body,
+    blogFeaturedImage ?? [],
+  );
+
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
     message: "Blog Created Successfully",

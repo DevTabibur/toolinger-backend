@@ -4,14 +4,33 @@ import { IBlogPost } from "./blog.interface";
 import BlogPostModel from "./blog.model";
 import httpStatus from "http-status";
 
-const createBlogPost = async (blogData: IBlogPost): Promise<IBlogPost> => {
-  // Set publishedAt to the current date
-  blogData.publishedAt = new Date();
+const createBlogPost = async (
+  blogData: IBlogPost,
+  blogFeaturedImage: Express.Multer.File[],
+): Promise<IBlogPost> => {
+  const blog: IBlogPost = {
+    title: blogData?.title,
+    slug: blogData?.slug,
+    content: blogData?.content,
+    status: blogData?.status,
+    excerpt: blogData?.excerpt,
+    author: blogData?.author,
+    category: blogData?.category,
+    tags: blogData?.tags,
+    blogFeaturedImage:
+      blogFeaturedImage[0]?.filename?.replace(
+        /\.(jpg|jpeg|png|pneg)$/i,
+        ".webp",
+      ) || "",
+    isAllowComments: blogData?.isAllowComments,
+    isFeaturedPost: blogData?.isFeaturedPost,
+    seoTitle: blogData?.seoTitle,
+    seoDescription: blogData?.seoDescription,
+    seoKeywords: blogData?.seoKeywords,
+    seoImage: blogData?.seoImage,
+  };
 
-  const result = await BlogPostModel.create(blogData);
-  if (!result) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Blog Creation Failed");
-  }
+  const result = await BlogPostModel.create(blog);
   return result;
 };
 

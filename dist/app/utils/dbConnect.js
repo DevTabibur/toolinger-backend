@@ -15,8 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("../../config"));
 const logger_1 = require("../../shared/logger");
-const URI = config_1.default.database_string ||
-    `mongodb+srv://tobiburrohman2:8glzMKr2FeRk19ED@cluster0.styb5.mongodb.net/toolinger?retryWrites=true&w=majority&appName=Cluster0`;
+const URI = config_1.default.database_string;
 const dbConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!URI) {
@@ -24,7 +23,6 @@ const dbConnect = () => __awaiter(void 0, void 0, void 0, function* () {
             logger_1.errorLogger.error("❌ Database connection string is not found");
             throw new Error("Database connection string is missing");
         }
-        console.log("URI", URI);
         yield mongoose_1.default.connect(URI, {
             serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds if MongoDB is unreachable
             socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity

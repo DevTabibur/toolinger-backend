@@ -23,12 +23,6 @@ app.use(
           "https://www.toolinger.com",
           "http://localhost:3000",
           "http://localhost:3001",
-          "http://localhost:5173",
-          "http://localhost:4173",
-          "http://127.0.0.1:3000",
-          "http://127.0.0.1:3001",
-          "http://127.0.0.1:5173",
-          "http://127.0.0.1:4173",
         ],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -48,7 +42,7 @@ app.use(
 //   }),
 // ) // for cookie (refresh token)
 
-app.use(express.json({ limit: "50mb" })); // to handle too many request entity
+app.use(express.json({ limit: "500mb" })); // to handle too many request entity
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static("./upload")); // Serve uploaded files

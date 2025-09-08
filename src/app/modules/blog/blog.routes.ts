@@ -1,15 +1,12 @@
 import { Router } from "express";
 import { BlogController } from "./blog.controller";
 import uploadMiddleware from "../../middlewares/fileUploadAndConvertToWebP";
+import authGuard from "../../middlewares/authGuard";
 
 const router = Router();
 
 // ** Create a new blog post
-router.post(
-  "/",
-  // uploadMiddleware,
-  BlogController.createBlogPost,
-);
+router.post("/", authGuard(), uploadMiddleware, BlogController.createBlogPost);
 
 // ** Get a blog post by slug
 router.get("/slug/:slug", BlogController.getBlogBySlug);
