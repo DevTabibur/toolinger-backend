@@ -1,0 +1,9 @@
+Wed Sep 10 2025 16:38:31 [Toolinger] info: 🛢 Database is connected successfully
+Wed Sep 10 2025 16:38:31 [Toolinger] info: 🌐 Server started on port 5000
+Wed Sep 10 2025 16:38:36 [Toolinger] info: 🛢 Database is connected successfully
+Wed Sep 10 2025 16:38:36 [Toolinger] info: 🌐 Server started on port 5000
+Wed Sep 10 2025 16:38:41 [Toolinger] info: 🛢 Database is connected successfully
+Wed Sep 10 2025 16:38:41 [Toolinger] info: 🌐 Server started on port 5000
+Wed Sep 10 2025 16:46:56 [Toolinger] info: 🛑 SIGINT received. Closing MongoDB connection...
+Wed Sep 10 2025 16:47:1 [Toolinger] info: 🛢 Database is connected successfully
+Wed Sep 10 2025 16:47:1 [Toolinger] info: 🌐 Server started on port 5000

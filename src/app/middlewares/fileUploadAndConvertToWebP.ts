@@ -77,14 +77,17 @@ const storage = multer.diskStorage({
 });
 
 const uploadMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  const maxSize = 10 * 1024 * 1024; // 10MB
+  const maxSize = 100 * 1024 * 1024; // 100MB
 
   const upload = multer({
     storage,
     limits: {
       fileSize: maxSize,
     },
-  }).fields([{ name: "blogFeaturedImage", maxCount: 1 }]);
+  }).fields([
+    { name: "blogFeaturedImage", maxCount: 1 },
+    { name: "ogImage", maxCount: 1 },
+  ]);
 
   upload(req, res, async (error) => {
     if (error instanceof multer.MulterError) {
@@ -133,6 +136,35 @@ const uploadMiddleware = (req: Request, res: Response, next: NextFunction) => {
         // Remove original blogCover
         setTimeout(() => {
           deleteFileWithRetry(blogFeaturedImagePath, 3, 3000);
+        }, 5000);
+      }
+    }
+
+    // ! ogImage  to WebP
+    if (uploadedFiles?.ogImage) {
+      const ogImage = uploadedFiles?.ogImage[0];
+      const ogImagePath = ogImage.path;
+      const ogImageExtension = path.extname(ogImagePath).toLowerCase();
+      const restImage4WebPPath = path.join(
+        path.dirname(ogImagePath),
+        `${path.basename(ogImagePath, ogImageExtension)}.webp`,
+      );
+
+      // Check if the blogCover is already in WebP format
+      if (ogImageExtension === ".webp") {
+        // Skip conversion, use the original WebP image
+        fs.rename(ogImagePath, restImage4WebPPath, (error) => {
+          if (error) {
+            console.error("Failed to rename the file:", error);
+          }
+        });
+      } else {
+        // Convert restImage1 to WebP
+        await sharp(ogImagePath).toFormat("webp").toFile(restImage4WebPPath);
+
+        // Remove original blogCover
+        setTimeout(() => {
+          deleteFileWithRetry(ogImagePath, 3, 3000);
         }, 5000);
       }
     }

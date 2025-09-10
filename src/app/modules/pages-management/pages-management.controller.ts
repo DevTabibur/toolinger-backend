@@ -11,9 +11,24 @@ import { PAGE_MANAGEMENT_FILTER_FIELDS } from "./pages-management.constant";
 // Create a new dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = catchAsync(
   async (req: Request, res: Response) => {
+    const files = req.files as
+      | { [fieldname: string]: Express.Multer.File[] }
+      | Express.Multer.File[]
+      | undefined;
+
+    let ogImage;
+    if (Array.isArray(files)) {
+      ogImage = files;
+    } else if (files && typeof files === "object" && "ogImage" in files) {
+      ogImage = (files as { [fieldname: string]: Express.Multer.File[] })
+        .ogImage;
+    }
+    console.log("ogImage", ogImage);
+
     const result =
       await DynamicPagesArticleAndSeoService.createDynamicPagesArticleAndSeo(
         req.body,
+        ogImage ?? [],
       );
     sendSuccessResponse(res, {
       statusCode: httpStatus.CREATED,

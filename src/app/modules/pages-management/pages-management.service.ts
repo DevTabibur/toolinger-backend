@@ -15,12 +15,51 @@ import paginationHelper from "../../helpers/paginationHelper";
 
 // Create a new dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = async (
-  payload: IPageManagement,
-): Promise<IPageManagement> => {
-  const { slug, PageArticle, PageSEO } = payload;
-  console.log("slug", slug);
-  console.log("PageArticle", PageArticle);
-  console.log("PageSEO", PageSEO);
+  payload: any,
+  ogImage: Express.Multer.File[],
+): Promise<any> => {
+  const { slug } = payload;
+
+  let PageSEO;
+  let PageArticle;
+
+  // seo
+  if (payload.metaTitle && payload.metaDescription) {
+    PageSEO = {
+      // =================================basic seo
+      metaTitle: payload.metaTitle,
+      metaDescription: payload.metaDescription,
+      keywords: payload.keywords,
+      noindex: payload.noindex,
+      canonicalUrl: payload.canonicalUrl,
+      ogTitle: payload.ogTitle,
+      ogDescription: payload.ogDescription,
+
+      //=======================================social media
+      ogImageUrl:
+        ogImage[0]?.filename?.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp") || "",
+      ogType: payload.ogType,
+      ogSiteName: payload.ogSiteName,
+      ogLocale: payload.ogLocale,
+      twitterCard: payload.twitterCard,
+      twitterSite: payload.twitterSite,
+      twitterCreator: payload.twitterCreator,
+      twitterImageUrl: payload.twitterImageUrl,
+      // ===================================================Technical
+      changefreq: payload.changefreq,
+      priority: payload.priority,
+
+      //===========================================Schema
+      schemas: payload.schemas,
+    };
+  }
+
+  // article
+  if (payload.content) {
+    PageArticle = {
+      content: payload.content,
+    };
+  }
 
   if (!slug) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Slug is required.");
@@ -39,7 +78,7 @@ const createDynamicPagesArticleAndSeo = async (
     ) {
       throw new ApiError(
         httpStatus.BAD_REQUEST,
-        "PageArticle already exists for this slug. Please update it instead of creating.",
+        "PageArticle already exists for this Page.",
       );
     }
 
@@ -68,7 +107,7 @@ const createDynamicPagesArticleAndSeo = async (
     ) {
       throw new ApiError(
         httpStatus.BAD_REQUEST,
-        "PageSEO already exists for this slug. Please update it instead of creating.",
+        "PageSEO already exists for this Page.",
       );
     }
 
@@ -100,7 +139,7 @@ const createDynamicPagesArticleAndSeo = async (
       ) {
         throw new ApiError(
           httpStatus.BAD_REQUEST,
-          "Both PageArticle and PageSEO already exist for this slug. Please update instead of creating.",
+          "Both PageArticle and PageSEO already exist for this Page.",
         );
       }
       // If only one exists, update the missing one

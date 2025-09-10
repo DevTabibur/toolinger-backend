@@ -3,6 +3,7 @@ import { DynamicPagesArticleAndSeoController } from "./pages-management.controll
 import { DynamicPagesArticleAndSeoValidation } from "./pages-management.validation";
 import zodValidateRequest from "../../middlewares/zodValidateRequest";
 import authGuard from "../../middlewares/authGuard";
+import uploadMiddleware from "../../middlewares/fileUploadAndConvertToWebP";
 
 const router = express.Router();
 
@@ -26,6 +27,7 @@ router.post(
   "/",
   // zodValidateRequest(DynamicPagesArticleAndSeoValidation.createDynamicPagesArticleAndSeoSchema),
   authGuard(),
+  uploadMiddleware,
   DynamicPagesArticleAndSeoController.createDynamicPagesArticleAndSeo,
 );
 
