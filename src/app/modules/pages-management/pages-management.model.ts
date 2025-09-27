@@ -1,6 +1,16 @@
 import { model, Schema } from "mongoose";
 import { IPageManagement } from "./pages-management.interface";
 
+// Helper function to allow empty string for enums
+function enumOrEmpty(enumValues: string[]) {
+  return {
+    type: String,
+    enum: [...enumValues, ""],
+    default: "",
+    trim: true,
+  };
+}
+
 // Main PageManagement schema
 const PageManagementSchema = new Schema<IPageManagement>(
   {
@@ -19,9 +29,7 @@ const PageManagementSchema = new Schema<IPageManagement>(
       lowercase: true,
     },
     type: {
-      type: String,
-      required: true,
-      enum: [
+      ...enumOrEmpty([
         "static",
         "text",
         "image",
@@ -31,7 +39,8 @@ const PageManagementSchema = new Schema<IPageManagement>(
         "calculators",
         "websiteManagemet",
         "other",
-      ],
+      ]),
+      required: true,
     },
 
     //=========================================Article===============================
@@ -43,7 +52,6 @@ const PageManagementSchema = new Schema<IPageManagement>(
     metaTitle: { type: String, trim: true, maxlength: 70 },
     metaDescription: {
       type: String,
-
       trim: true,
       maxlength: 160,
     },
@@ -58,16 +66,13 @@ const PageManagementSchema = new Schema<IPageManagement>(
     ogType: { type: String, trim: true },
     ogSiteName: { type: String, trim: true },
     ogLocale: {
-      type: String,
-      trim: true,
-      enum: ["en_US", "en_GB", "es", "fr", "de"],
+      ...enumOrEmpty(["en_US", "en_GB", "es", "fr", "de"]),
       default: "en_US",
     },
 
     // ====================================================Twitter Card======================================================
     twitterCard: {
-      type: String,
-      enum: ["summary", "summary_large_image", "app", "player"],
+      ...enumOrEmpty(["summary", "summary_large_image", "app", "player"]),
       default: "summary",
     },
     twitterSite: { type: String, trim: true },
@@ -82,8 +87,7 @@ const PageManagementSchema = new Schema<IPageManagement>(
 
     //=================================================== Sitemap helpers======================================================
     changefreq: {
-      type: String,
-      enum: [
+      ...enumOrEmpty([
         "always",
         "hourly",
         "daily",
@@ -91,7 +95,7 @@ const PageManagementSchema = new Schema<IPageManagement>(
         "monthly",
         "yearly",
         "never",
-      ],
+      ]),
       default: "weekly",
     },
     priority: { type: Number, min: 0.0, max: 1.0, default: 0.5 },

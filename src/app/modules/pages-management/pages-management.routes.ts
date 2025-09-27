@@ -46,7 +46,7 @@ router.patch(
 
 // Delete dynamic pages data by type (SEO or Article) and Id
 router.delete(
-  "/:id/:type(seo|article)",
+  "/:id",
   authGuard(),
   DynamicPagesArticleAndSeoController.deleteDynamicPagesData,
 );

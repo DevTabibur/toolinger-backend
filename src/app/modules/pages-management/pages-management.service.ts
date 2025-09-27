@@ -202,28 +202,12 @@ const updateDynamicPagesArticleAndSeo = async (
 // Delete only the PageSEO or PageArticle data from the model, not the whole document
 const deleteDynamicPagesData = async (
   id: string,
-  type: string,
 ): Promise<IPageManagement | null> => {
   if (!Types.ObjectId.isValid(id)) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Invalid ID");
   }
-  if (!type) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Please provide type");
-  }
 
-  let unsetField: string | null = null;
-
-  if (type === "seo") {
-    unsetField = "PageSEO";
-  } else if (type === "article") {
-    unsetField = "PageArticle";
-  } else {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Invalid type provided");
-  }
-
-  const result = await PageManagementModel.findByIdAndUpdate(id, {
-    $unset: { [unsetField]: "" },
-  });
+  const result = await PageManagementModel.findByIdAndDelete(id);
   return result;
 };
 

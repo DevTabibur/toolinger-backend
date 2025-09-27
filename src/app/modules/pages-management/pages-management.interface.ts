@@ -10,7 +10,8 @@ export interface IPageManagement {
     | "converters"
     | "generators"
     | "calculators"
-    | "websiteManagemet";
+    | "websiteManagemet"
+    | string;
   // Article
   pageContent?: string; // page content
 

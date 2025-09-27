@@ -4,6 +4,7 @@ export const PAGE_MANAGEMENT_FILTER_FIELDS = [
   "type",
   "metaTitle",
   "metaDescription",
+  "noindex",
   "createdAt",
 ];
 export const PAGE_MANAGEMENT_SEO_SEARCH__FIELDS = [

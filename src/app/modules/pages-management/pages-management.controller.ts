@@ -135,9 +135,9 @@ const updateDynamicPagesArticleAndSeo = catchAsync(
 // Delete dynamic page article by ID
 const deleteDynamicPagesData = catchAsync(
   async (req: Request, res: Response) => {
-    const { id, type } = req.params;
+    const { id } = req.params;
     const result =
-      await DynamicPagesArticleAndSeoService.deleteDynamicPagesData(id, type);
+      await DynamicPagesArticleAndSeoService.deleteDynamicPagesData(id);
 
     sendSuccessResponse(res, {
       statusCode: httpStatus.OK,
