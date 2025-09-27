@@ -16,19 +16,35 @@ const createDynamicPagesArticleAndSeo = catchAsync(
       | Express.Multer.File[]
       | undefined;
 
-    let ogImage;
+    let ogImageUrl;
     if (Array.isArray(files)) {
-      ogImage = files;
-    } else if (files && typeof files === "object" && "ogImage" in files) {
-      ogImage = (files as { [fieldname: string]: Express.Multer.File[] })
-        .ogImage;
+      ogImageUrl = files;
+    } else if (files && typeof files === "object" && "ogImageUrl" in files) {
+      ogImageUrl = (files as { [fieldname: string]: Express.Multer.File[] })
+        .ogImageUrl;
     }
-    console.log("ogImage", ogImage);
+
+    let twitterImageUrl;
+    if (Array.isArray(files)) {
+      twitterImageUrl = files;
+    } else if (
+      files &&
+      typeof files === "object" &&
+      "twitterImageUrl" in files
+    ) {
+      twitterImageUrl = (
+        files as { [fieldname: string]: Express.Multer.File[] }
+      ).twitterImageUrl;
+    }
+    // console.log("ogImage", ogImage);
+    // console.log("twitterImageUrl", twitterImageUrl);
+    // console.log("req.body", req.body);
 
     const result =
       await DynamicPagesArticleAndSeoService.createDynamicPagesArticleAndSeo(
         req.body,
-        ogImage ?? [],
+        ogImageUrl ?? [],
+        twitterImageUrl ?? [],
       );
     sendSuccessResponse(res, {
       statusCode: httpStatus.CREATED,

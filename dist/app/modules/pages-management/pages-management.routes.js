@@ -7,6 +7,7 @@ exports.DynamicPagesArticleAndSeoRoute = void 0;
 const express_1 = __importDefault(require("express"));
 const pages_management_controller_1 = require("./pages-management.controller");
 const authGuard_1 = __importDefault(require("../../middlewares/authGuard"));
+const fileUploadAndConvertToWebP_1 = __importDefault(require("../../middlewares/fileUploadAndConvertToWebP"));
 const router = express_1.default.Router();
 // Public routes (no authentication required)
 router.get("/", pages_management_controller_1.DynamicPagesArticleAndSeoController.getAllDynamicPagesArticleAndSeo);
@@ -18,7 +19,7 @@ pages_management_controller_1.DynamicPagesArticleAndSeoController.getDynamicPage
 // Create dynamic pages article with SEO
 router.post("/", 
 // zodValidateRequest(DynamicPagesArticleAndSeoValidation.createDynamicPagesArticleAndSeoSchema),
-(0, authGuard_1.default)(), pages_management_controller_1.DynamicPagesArticleAndSeoController.createDynamicPagesArticleAndSeo);
+(0, authGuard_1.default)(), fileUploadAndConvertToWebP_1.default, pages_management_controller_1.DynamicPagesArticleAndSeoController.createDynamicPagesArticleAndSeo);
 // Get dynamic pages article by ID
 router.get("/:id", (0, authGuard_1.default)(), pages_management_controller_1.DynamicPagesArticleAndSeoController.getDynamicPagesArticleAndSeoById);
 // Update dynamic pages article by ID

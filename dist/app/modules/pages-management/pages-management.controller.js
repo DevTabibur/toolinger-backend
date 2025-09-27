@@ -22,7 +22,17 @@ const shared_constant_1 = require("../../../constants/shared.constant");
 const pages_management_constant_1 = require("./pages-management.constant");
 // Create a new dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield pages_management_service_1.DynamicPagesArticleAndSeoService.createDynamicPagesArticleAndSeo(req.body);
+    const files = req.files;
+    let ogImage;
+    if (Array.isArray(files)) {
+        ogImage = files;
+    }
+    else if (files && typeof files === "object" && "ogImage" in files) {
+        ogImage = files
+            .ogImage;
+    }
+    console.log("ogImage", ogImage);
+    const result = yield pages_management_service_1.DynamicPagesArticleAndSeoService.createDynamicPagesArticleAndSeo(req.body, ogImage !== null && ogImage !== void 0 ? ogImage : []);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.CREATED,
         message: "Dynamic page article with SEO created successfully",

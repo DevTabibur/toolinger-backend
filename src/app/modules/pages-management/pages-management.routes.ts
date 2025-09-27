@@ -18,7 +18,6 @@ router.get("/:type", DynamicPagesArticleAndSeoController.GetAllSEOAndArticle);
 
 router.get(
   "/slug/:slug",
-  // authGuard(),
   DynamicPagesArticleAndSeoController.getDynamicPagesArticleAndSeoBySlug,
 );
 

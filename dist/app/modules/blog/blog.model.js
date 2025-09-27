@@ -18,67 +18,60 @@ const BlogPostSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: String,
+        enum: ["archive", "published", "draft"],
+        default: "published",
+        required: true,
+    },
     excerpt: {
         type: String,
-        // required: true,
-        // maxlength: 160, // Limit to ensure SEO-friendly snippet
+        required: true,
+        maxlength: 160, // Limit to ensure SEO-friendly snippet
     },
     author: {
         type: String,
         required: true,
     },
-    publishedAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    },
-    categories: {
-        type: [String], // Array of strings for categories
+    category: {
+        type: String,
         required: true,
     },
     tags: {
-        type: [String], // Array of strings for tags
-        default: [],
+        type: [String],
+        required: true,
     },
-    image: {
+    blogFeaturedImage: {
         type: String,
-        // required: true,
+        required: true,
+    },
+    isAllowComments: {
+        type: Boolean,
+    },
+    isFeaturedPost: {
+        type: Boolean,
     },
     seoTitle: {
         type: String,
-        // maxlength: 70, // SEO title should be <= 70 characters
+        required: true,
+        maxlength: 70, // SEO title should be <= 70 characters
         default: function () {
-            return this.title; // Default to the blog title if SEO title is not provided
+            return this.title;
         },
     },
     seoDescription: {
         type: String,
-        maxlength: 160, // SEO description should be <= 160 characters
-        // required: true,
+        required: true,
+        maxlength: 160,
     },
     seoKeywords: {
-        type: [String], // Array of strings for SEO keywords
-        default: [],
+        type: [String],
     },
     seoImage: {
         type: String,
-        // required: true,
     },
-    isPublished: {
-        type: Boolean,
-        default: false,
-    },
-    isFeatured: {
-        type: Boolean,
-        default: false,
-    },
-});
-BlogPostSchema.pre("save", function (next) {
-    this.updatedAt = new Date(); // Update the updatedAt field when the post is modified
-    next();
+}, {
+    timestamps: true, // Automatically adds createdAt and updatedAt fields
 });
 // Create the model
 const BlogPostModel = (0, mongoose_1.model)("BlogPost", BlogPostSchema);

@@ -1,14 +1,17 @@
 export const PAGE_MANAGEMENT_FILTER_FIELDS = [
   "slug",
+  "title",
+  "type",
   "metaTitle",
   "metaDescription",
   "createdAt",
 ];
 export const PAGE_MANAGEMENT_SEO_SEARCH__FIELDS = [
   "slug",
+  "title",
+  "type",
   "metaTitle",
   "metaDescription",
-  "createdAt",
 ];
 
 export type IPageManagementFilters = {

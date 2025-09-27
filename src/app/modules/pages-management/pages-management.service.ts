@@ -13,160 +13,96 @@ import { PAGE_MANAGEMENT_SEO_SEARCH__FIELDS } from "./pages-management.constant"
 import PageManagementModel from "./pages-management.model";
 import paginationHelper from "../../helpers/paginationHelper";
 
-// Create a new dynamic page article with SEO
+// Create or update a dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = async (
   payload: any,
-  ogImage: Express.Multer.File[],
+  ogImageUrl: Express.Multer.File[],
+  twitterImageUrl: Express.Multer.File[],
 ): Promise<any> => {
-  const { slug } = payload;
+  const { slug, title, type } = payload;
 
-  let PageSEO;
-  let PageArticle;
-
-  // seo
-  if (payload.metaTitle && payload.metaDescription) {
-    PageSEO = {
-      // =================================basic seo
-      metaTitle: payload.metaTitle,
-      metaDescription: payload.metaDescription,
-      keywords: payload.keywords,
-      noindex: payload.noindex,
-      canonicalUrl: payload.canonicalUrl,
-      ogTitle: payload.ogTitle,
-      ogDescription: payload.ogDescription,
-
-      //=======================================social media
-      ogImageUrl:
-        ogImage[0]?.filename?.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp") || "",
-      ogType: payload.ogType,
-      ogSiteName: payload.ogSiteName,
-      ogLocale: payload.ogLocale,
-      twitterCard: payload.twitterCard,
-      twitterSite: payload.twitterSite,
-      twitterCreator: payload.twitterCreator,
-      twitterImageUrl: payload.twitterImageUrl,
-      // ===================================================Technical
-      changefreq: payload.changefreq,
-      priority: payload.priority,
-
-      //===========================================Schema
-      schemas: payload.schemas,
-    };
+  const missingFields = [];
+  if (!slug) missingFields.push("slug");
+  if (!title) missingFields.push("title");
+  if (!type) missingFields.push("type");
+  if (missingFields.length > 0) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      `Missing required field${missingFields.length > 1 ? "s" : ""}: ${missingFields.join(", ")}.`,
+    );
   }
 
-  // article
-  if (payload.content) {
-    PageArticle = {
-      content: payload.content,
-    };
+  // Check if a page with this slug already exists
+  const existingPage = await PageManagementModel.findOne({ slug, title, type });
+  // console.log("existing page", existingPage)
+
+  if (existingPage) {
+    if (payload.pageContent) {
+      existingPage.pageContent = payload.pageContent;
+    }
+    if (payload.metaTitle) {
+      //===================================Basic SEO
+      existingPage.metaTitle = payload.metaTitle;
+      existingPage.metaDescription = payload.metaDescription;
+      existingPage.keywords = payload.keywords;
+      existingPage.canonicalUrl = payload.canonicalUrl;
+      existingPage.noindex = payload.noindex;
+
+      //=============================Open Graph
+      existingPage.ogTitle = payload.ogTitle;
+      existingPage.ogDescription = payload.ogDescription;
+      existingPage.ogImageUrl =
+        ogImageUrl && ogImageUrl[0]?.filename
+          ? ogImageUrl[0].filename.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp")
+          : "";
+      existingPage.ogType = payload.ogType;
+      existingPage.ogSiteName = payload.ogSiteName;
+      existingPage.ogLocale = payload.ogLocale;
+
+      //=============================Twitter Card
+      existingPage.twitterCard = payload.twitterCard;
+      existingPage.twitterSite = payload.twitterSite;
+      existingPage.twitterCreator = payload.twitterCreator;
+      existingPage.twitterImageUrl =
+        twitterImageUrl && twitterImageUrl[0]?.filename
+          ? twitterImageUrl[0].filename.replace(
+              /\.(jpg|jpeg|png|pneg)$/i,
+              ".webp",
+            )
+          : "";
+
+      //=============================Hreflang / Alternates
+      ((existingPage.alternates = payload.keywords),
+        // =============================Sitemap helpers
+        (existingPage.changefreq = payload.changefreq));
+      existingPage.priority = payload.priority;
+
+      // =============================Schema
+      existingPage.schemas = payload.schemas;
+    }
+    await existingPage.save();
+    return existingPage;
   }
 
-  if (!slug) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Slug is required.");
-  }
+  // If page does not exist, create new
 
-  // Find if a page with this slug already exists
-  const existingPage = await PageManagementModel.findOne({ slug });
-
-  // Logic 1: User wants to create PageArticle
-  if (PageArticle && !PageSEO) {
-    // If a page with this slug exists and already has PageArticle, throw error
-    if (
-      existingPage &&
-      existingPage.PageArticle &&
-      existingPage.PageArticle.content
-    ) {
-      throw new ApiError(
-        httpStatus.BAD_REQUEST,
-        "PageArticle already exists for this Page.",
+  if (!existingPage) {
+    if (ogImageUrl && ogImageUrl[0]?.filename) {
+      payload.ogImageUrl = ogImageUrl[0].filename.replace(
+        /\.(jpg|jpeg|png|pneg)$/i,
+        ".webp",
+      );
+    }
+    if (twitterImageUrl && twitterImageUrl[0]?.filename) {
+      payload.twitterImageUrl = twitterImageUrl[0].filename.replace(
+        /\.(jpg|jpeg|png|pneg)$/i,
+        ".webp",
       );
     }
 
-    // If page exists but no PageArticle, update it with PageArticle
-    if (existingPage) {
-      existingPage.PageArticle = PageArticle;
-      await existingPage.save();
-      return existingPage;
-    }
-
-    // If page does not exist, create new with PageArticle
-    const result = await PageManagementModel.create({
-      slug,
-      PageArticle,
-    });
+    const result = await PageManagementModel.create(payload);
     return result;
   }
-
-  // Logic 2: User wants to create PageSEO
-  if (PageSEO && !PageArticle) {
-    // If a page with this slug exists and already has PageSEO, throw error
-    if (
-      existingPage &&
-      existingPage.PageSEO &&
-      existingPage.PageSEO.metaTitle
-    ) {
-      throw new ApiError(
-        httpStatus.BAD_REQUEST,
-        "PageSEO already exists for this Page.",
-      );
-    }
-
-    // If page exists but no PageSEO, update it with PageSEO
-    if (existingPage) {
-      existingPage.PageSEO = PageSEO;
-      await existingPage.save();
-      return existingPage;
-    }
-
-    // If page does not exist, create new with PageSEO
-    const result = await PageManagementModel.create({
-      slug,
-      PageSEO,
-    });
-    return result;
-  }
-
-  // If both PageArticle and PageSEO are provided, handle both
-  if (PageArticle && PageSEO) {
-    // If a page with this slug exists, check for both
-    if (existingPage) {
-      // If both already exist, throw error
-      if (
-        existingPage.PageArticle &&
-        existingPage.PageArticle.content &&
-        existingPage.PageSEO &&
-        existingPage.PageSEO.metaTitle
-      ) {
-        throw new ApiError(
-          httpStatus.BAD_REQUEST,
-          "Both PageArticle and PageSEO already exist for this Page.",
-        );
-      }
-      // If only one exists, update the missing one
-      if (!existingPage.PageArticle || !existingPage.PageArticle.content) {
-        existingPage.PageArticle = PageArticle;
-      }
-      if (!existingPage.PageSEO || !existingPage.PageSEO.metaTitle) {
-        existingPage.PageSEO = PageSEO;
-      }
-      await existingPage.save();
-      return existingPage;
-    }
-
-    // If page does not exist, create new with both
-    const result = await PageManagementModel.create({
-      slug,
-      PageArticle,
-      PageSEO,
-    });
-    return result;
-  }
-
-  // If neither PageArticle nor PageSEO is provided, throw error
-  throw new ApiError(
-    httpStatus.BAD_REQUEST,
-    "At least one of PageArticle or PageSEO must be provided.",
-  );
 };
 
 // Get all dynamic pages articles with SEO
@@ -237,8 +173,11 @@ const getDynamicPagesArticleAndSeoById = async (
 const getDynamicPagesArticleAndSeoBySlug = async (
   slug: string,
 ): Promise<IPageManagement | null> => {
+  if (!slug) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Slug is required");
+  }
   const result = await PageManagementModel.findOne({
-    slug,
+    slug: `/${slug}`,
   });
   return result;
 };

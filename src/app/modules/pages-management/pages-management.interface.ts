@@ -1,8 +1,22 @@
-// Page SEO fields interface - required for every page
-export interface PageSEO {
+// Page management interface
+export interface IPageManagement {
+  slug: string;
+  title: string;
+  type:
+    | "static"
+    | "text"
+    | "image"
+    | "developers"
+    | "converters"
+    | "generators"
+    | "calculators"
+    | "websiteManagemet";
+  // Article
+  pageContent?: string; // page content
+
   // Basic SEO
-  metaTitle: string; // <title>
-  metaDescription: string; // meta[name="description"]
+  metaTitle?: string; // <title>
+  metaDescription?: string; // meta[name="description"]
   keywords?: string[]; // meta[name="keywords"]
   canonicalUrl?: string; // canonical link
   noindex?: boolean; // robots index/follow toggle (default false)
@@ -11,12 +25,27 @@ export interface PageSEO {
   ogTitle?: string;
   ogDescription?: string;
   ogImageUrl?: string; // 1200×630
-  ogType?: "website" | "article" | "product" | string;
+  ogType?:
+    | "website"
+    | "article"
+    | "book"
+    | "profile"
+    | "music.song"
+    | "music.album"
+    | "music.playlist"
+    | "music.radio_station"
+    | "video.movie"
+    | "video.episode"
+    | "video.tv_show"
+    | "video.other"
+    | "product"
+    | "other"
+    | string;
   ogSiteName?: string;
-  ogLocale?: string; // e.g. "en_US"
+  ogLocale?: "en_US" | "en_GB" | "es" | "fr" | "de" | string; // e.g. "en_US"
 
   // Twitter Card
-  twitterCard?: "summary" | "summary_large_image" | "app" | "player";
+  twitterCard?: "summary" | "summary_large_image" | "app" | "player" | string;
   twitterSite?: string; // @handle
   twitterCreator?: string; // @handle
   twitterImageUrl?: string;
@@ -28,23 +57,16 @@ export interface PageSEO {
   schemas?: Array<Record<string, any>>;
 
   // Sitemap helpers
-  changefreq?: "daily" | "weekly" | "monthly" | "yearly";
+  changefreq?:
+    | "always"
+    | "hourly"
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "yearly"
+    | "never"
+    | string;
   priority?: number; // 0.0 - 1.0
-}
-
-// Article content interface
-// Content is optional, and should be HTML (for Quill output, to be rendered with dangerouslySetInnerHTML)
-export interface PageArticle {
-  content?: string; // HTML string (Quill output), optional
-  image?: string; // Featured image URL
-  imageAlt?: string;
-}
-
-// Page management interface
-export interface IPageManagement {
-  slug: string;
-  PageSEO?: PageSEO; // SEO fields (required)
-  PageArticle?: PageArticle; // Article fields (content optional)
 }
 
 // Filters for querying dynamic pages/articles

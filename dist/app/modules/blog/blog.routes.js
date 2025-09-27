@@ -7,11 +7,10 @@ exports.BlogRoute = void 0;
 const express_1 = require("express");
 const blog_controller_1 = require("./blog.controller");
 const fileUploadAndConvertToWebP_1 = __importDefault(require("../../middlewares/fileUploadAndConvertToWebP"));
+const authGuard_1 = __importDefault(require("../../middlewares/authGuard"));
 const router = (0, express_1.Router)();
 // ** Create a new blog post
-router.post("/", 
-// uploadMiddleware,
-blog_controller_1.BlogController.createBlogPost);
+router.post("/", (0, authGuard_1.default)(), fileUploadAndConvertToWebP_1.default, blog_controller_1.BlogController.createBlogPost);
 // ** Get a blog post by slug
 router.get("/slug/:slug", blog_controller_1.BlogController.getBlogBySlug);
 // ** Get blogs by categories except for a specific blog ID

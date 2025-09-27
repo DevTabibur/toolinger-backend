@@ -17,13 +17,26 @@ const mongoose_1 = require("mongoose");
 const ApiError_1 = __importDefault(require("../../../errors/ApiError"));
 const blog_model_1 = __importDefault(require("./blog.model"));
 const http_status_1 = __importDefault(require("http-status"));
-const createBlogPost = (blogData) => __awaiter(void 0, void 0, void 0, function* () {
-    // Set publishedAt to the current date
-    blogData.publishedAt = new Date();
-    const result = yield blog_model_1.default.create(blogData);
-    if (!result) {
-        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Blog Creation Failed");
-    }
+const createBlogPost = (blogData, blogFeaturedImage) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const blog = {
+        title: blogData === null || blogData === void 0 ? void 0 : blogData.title,
+        slug: blogData === null || blogData === void 0 ? void 0 : blogData.slug,
+        content: blogData === null || blogData === void 0 ? void 0 : blogData.content,
+        status: blogData === null || blogData === void 0 ? void 0 : blogData.status,
+        excerpt: blogData === null || blogData === void 0 ? void 0 : blogData.excerpt,
+        author: blogData === null || blogData === void 0 ? void 0 : blogData.author,
+        category: blogData === null || blogData === void 0 ? void 0 : blogData.category,
+        tags: blogData === null || blogData === void 0 ? void 0 : blogData.tags,
+        blogFeaturedImage: ((_b = (_a = blogFeaturedImage[0]) === null || _a === void 0 ? void 0 : _a.filename) === null || _b === void 0 ? void 0 : _b.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp")) || "",
+        isAllowComments: blogData === null || blogData === void 0 ? void 0 : blogData.isAllowComments,
+        isFeaturedPost: blogData === null || blogData === void 0 ? void 0 : blogData.isFeaturedPost,
+        seoTitle: blogData === null || blogData === void 0 ? void 0 : blogData.seoTitle,
+        seoDescription: blogData === null || blogData === void 0 ? void 0 : blogData.seoDescription,
+        seoKeywords: blogData === null || blogData === void 0 ? void 0 : blogData.seoKeywords,
+        seoImage: blogData === null || blogData === void 0 ? void 0 : blogData.seoImage,
+    };
+    const result = yield blog_model_1.default.create(blog);
     return result;
 });
 const BlogDetails = (blogId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -100,8 +113,6 @@ const updateBlogPost = (blogId, updateData) => __awaiter(void 0, void 0, void 0,
     if (!mongoose_1.Types.ObjectId.isValid(blogId)) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "Invalid Blog Id");
     }
-    // Ensure updatedAt is set to the current timestamp
-    updateData.updatedAt = new Date();
     const result = yield blog_model_1.default.findByIdAndUpdate(blogId, { $set: updateData }, { new: true, runValidators: true });
     if (!result) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "Blog Not Found");

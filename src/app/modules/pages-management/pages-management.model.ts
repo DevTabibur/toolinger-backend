@@ -1,18 +1,49 @@
 import { model, Schema } from "mongoose";
-import {
-  IPageManagement,
-  PageArticle,
-  PageSEO,
-} from "./pages-management.interface";
+import { IPageManagement } from "./pages-management.interface";
 
-// Define the PageSEO sub-schema
-const PageSEOSchema = new Schema<PageSEO>(
+// Main PageManagement schema
+const PageManagementSchema = new Schema<IPageManagement>(
   {
-    //============================================ Basic SEO=============================================================
-    metaTitle: { type: String, required: true, trim: true, maxlength: 70 },
-    metaDescription: {
+    slug: {
       type: String,
       required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      enum: [
+        "static",
+        "text",
+        "image",
+        "developers",
+        "converters",
+        "generators",
+        "calculators",
+        "websiteManagemet",
+        "other",
+      ],
+    },
+
+    //=========================================Article===============================
+    pageContent: {
+      type: String,
+      required: false,
+    },
+    //============================================ Basic SEO=============================================================
+    metaTitle: { type: String, trim: true, maxlength: 70 },
+    metaDescription: {
+      type: String,
+
       trim: true,
       maxlength: 160,
     },
@@ -26,12 +57,18 @@ const PageSEOSchema = new Schema<PageSEO>(
     ogImageUrl: { type: String, trim: true },
     ogType: { type: String, trim: true },
     ogSiteName: { type: String, trim: true },
-    ogLocale: { type: String, trim: true },
+    ogLocale: {
+      type: String,
+      trim: true,
+      enum: ["en_US", "en_GB", "es", "fr", "de"],
+      default: "en_US",
+    },
 
     // ====================================================Twitter Card======================================================
     twitterCard: {
       type: String,
       enum: ["summary", "summary_large_image", "app", "player"],
+      default: "summary",
     },
     twitterSite: { type: String, trim: true },
     twitterCreator: { type: String, trim: true },
@@ -46,36 +83,18 @@ const PageSEOSchema = new Schema<PageSEO>(
     //=================================================== Sitemap helpers======================================================
     changefreq: {
       type: String,
-      enum: ["daily", "weekly", "monthly", "yearly"],
+      enum: [
+        "always",
+        "hourly",
+        "daily",
+        "weekly",
+        "monthly",
+        "yearly",
+        "never",
+      ],
       default: "weekly",
     },
     priority: { type: Number, min: 0.0, max: 1.0, default: 0.5 },
-  },
-  { _id: false },
-);
-
-// Define the PageArticle sub-schema
-const PageArticleSchema = new Schema<PageArticle>(
-  {
-    content: { type: String },
-    image: { type: String, trim: true },
-    imageAlt: { type: String, trim: true },
-  },
-  { _id: false },
-);
-
-// Main PageManagement schema
-const PageManagementSchema = new Schema<IPageManagement>(
-  {
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-    },
-    PageSEO: { type: PageSEOSchema },
-    PageArticle: { type: PageArticleSchema },
   },
   {
     timestamps: true,

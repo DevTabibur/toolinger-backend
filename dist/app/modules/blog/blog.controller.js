@@ -18,7 +18,17 @@ const blog_service_1 = require("./blog.service");
 const sendSuccessResponse_1 = require("../../../shared/sendSuccessResponse");
 const http_status_1 = __importDefault(require("http-status"));
 const createBlogPost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_service_1.BlogService.createBlogPost(req.body);
+    const files = req.files;
+    let blogFeaturedImage;
+    if (Array.isArray(files)) {
+        blogFeaturedImage = files;
+    }
+    else if (files &&
+        typeof files === "object" &&
+        "blogFeaturedImage" in files) {
+        blogFeaturedImage = files.blogFeaturedImage;
+    }
+    const result = yield blog_service_1.BlogService.createBlogPost(req.body, blogFeaturedImage !== null && blogFeaturedImage !== void 0 ? blogFeaturedImage : []);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
         message: "Blog Created Successfully",

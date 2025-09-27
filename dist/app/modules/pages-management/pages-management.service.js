@@ -31,11 +31,44 @@ const pages_management_constant_1 = require("./pages-management.constant");
 const pages_management_model_1 = __importDefault(require("./pages-management.model"));
 const paginationHelper_1 = __importDefault(require("../../helpers/paginationHelper"));
 // Create a new dynamic page article with SEO
-const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const { slug, PageArticle, PageSEO } = payload;
-    console.log("slug", slug);
-    console.log("PageArticle", PageArticle);
-    console.log("PageSEO", PageSEO);
+const createDynamicPagesArticleAndSeo = (payload, ogImage) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
+    const { slug } = payload;
+    let PageSEO;
+    let PageArticle;
+    // seo
+    if (payload.metaTitle && payload.metaDescription) {
+        PageSEO = {
+            // =================================basic seo
+            metaTitle: payload.metaTitle,
+            metaDescription: payload.metaDescription,
+            keywords: payload.keywords,
+            noindex: payload.noindex,
+            canonicalUrl: payload.canonicalUrl,
+            ogTitle: payload.ogTitle,
+            ogDescription: payload.ogDescription,
+            //=======================================social media
+            ogImageUrl: ((_b = (_a = ogImage[0]) === null || _a === void 0 ? void 0 : _a.filename) === null || _b === void 0 ? void 0 : _b.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp")) || "",
+            ogType: payload.ogType,
+            ogSiteName: payload.ogSiteName,
+            ogLocale: payload.ogLocale,
+            twitterCard: payload.twitterCard,
+            twitterSite: payload.twitterSite,
+            twitterCreator: payload.twitterCreator,
+            twitterImageUrl: payload.twitterImageUrl,
+            // ===================================================Technical
+            changefreq: payload.changefreq,
+            priority: payload.priority,
+            //===========================================Schema
+            schemas: payload.schemas,
+        };
+    }
+    // article
+    if (payload.content) {
+        PageArticle = {
+            content: payload.content,
+        };
+    }
     if (!slug) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Slug is required.");
     }
@@ -47,7 +80,7 @@ const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, v
         if (existingPage &&
             existingPage.PageArticle &&
             existingPage.PageArticle.content) {
-            throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageArticle already exists for this slug. Please update it instead of creating.");
+            throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageArticle already exists for this Page.");
         }
         // If page exists but no PageArticle, update it with PageArticle
         if (existingPage) {
@@ -68,7 +101,7 @@ const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, v
         if (existingPage &&
             existingPage.PageSEO &&
             existingPage.PageSEO.metaTitle) {
-            throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageSEO already exists for this slug. Please update it instead of creating.");
+            throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageSEO already exists for this Page.");
         }
         // If page exists but no PageSEO, update it with PageSEO
         if (existingPage) {
@@ -92,7 +125,7 @@ const createDynamicPagesArticleAndSeo = (payload) => __awaiter(void 0, void 0, v
                 existingPage.PageArticle.content &&
                 existingPage.PageSEO &&
                 existingPage.PageSEO.metaTitle) {
-                throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Both PageArticle and PageSEO already exist for this slug. Please update instead of creating.");
+                throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Both PageArticle and PageSEO already exist for this Page.");
             }
             // If only one exists, update the missing one
             if (!existingPage.PageArticle || !existingPage.PageArticle.content) {

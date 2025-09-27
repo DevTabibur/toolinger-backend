@@ -34,12 +34,6 @@ app.use((0, cors_1.default)({
             "https://www.toolinger.com",
             "http://localhost:3000",
             "http://localhost:3001",
-            "http://localhost:5173",
-            "http://localhost:4173",
-            "http://127.0.0.1:3000",
-            "http://127.0.0.1:3001",
-            "http://127.0.0.1:5173",
-            "http://127.0.0.1:4173",
         ],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -56,7 +50,7 @@ app.use((0, cors_1.default)({
 //     allowedHeaders: ['Content-Type', 'Authorization'],
 //   }),
 // ) // for cookie (refresh token)
-app.use(express_1.default.json({ limit: "50mb" })); // to handle too many request entity
+app.use(express_1.default.json({ limit: "500mb" })); // to handle too many request entity
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.static("./upload")); // Serve uploaded files
