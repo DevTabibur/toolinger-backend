@@ -30,123 +30,74 @@ const mongoose_1 = require("mongoose");
 const pages_management_constant_1 = require("./pages-management.constant");
 const pages_management_model_1 = __importDefault(require("./pages-management.model"));
 const paginationHelper_1 = __importDefault(require("../../helpers/paginationHelper"));
-// Create a new dynamic page article with SEO
-const createDynamicPagesArticleAndSeo = (payload, ogImage) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
-    const { slug } = payload;
-    let PageSEO;
-    let PageArticle;
-    // seo
-    if (payload.metaTitle && payload.metaDescription) {
-        PageSEO = {
-            // =================================basic seo
-            metaTitle: payload.metaTitle,
-            metaDescription: payload.metaDescription,
-            keywords: payload.keywords,
-            noindex: payload.noindex,
-            canonicalUrl: payload.canonicalUrl,
-            ogTitle: payload.ogTitle,
-            ogDescription: payload.ogDescription,
-            //=======================================social media
-            ogImageUrl: ((_b = (_a = ogImage[0]) === null || _a === void 0 ? void 0 : _a.filename) === null || _b === void 0 ? void 0 : _b.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp")) || "",
-            ogType: payload.ogType,
-            ogSiteName: payload.ogSiteName,
-            ogLocale: payload.ogLocale,
-            twitterCard: payload.twitterCard,
-            twitterSite: payload.twitterSite,
-            twitterCreator: payload.twitterCreator,
-            twitterImageUrl: payload.twitterImageUrl,
-            // ===================================================Technical
-            changefreq: payload.changefreq,
-            priority: payload.priority,
-            //===========================================Schema
-            schemas: payload.schemas,
-        };
+// Create or update a dynamic page article with SEO
+const createDynamicPagesArticleAndSeo = (payload, ogImageUrl, twitterImageUrl) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d;
+    const { slug, title, type } = payload;
+    const missingFields = [];
+    if (!slug)
+        missingFields.push("slug");
+    if (!title)
+        missingFields.push("title");
+    if (!type)
+        missingFields.push("type");
+    if (missingFields.length > 0) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, `Missing required field${missingFields.length > 1 ? "s" : ""}: ${missingFields.join(", ")}.`);
     }
-    // article
-    if (payload.content) {
-        PageArticle = {
-            content: payload.content,
-        };
-    }
-    if (!slug) {
-        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Slug is required.");
-    }
-    // Find if a page with this slug already exists
-    const existingPage = yield pages_management_model_1.default.findOne({ slug });
-    // Logic 1: User wants to create PageArticle
-    if (PageArticle && !PageSEO) {
-        // If a page with this slug exists and already has PageArticle, throw error
-        if (existingPage &&
-            existingPage.PageArticle &&
-            existingPage.PageArticle.content) {
-            throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageArticle already exists for this Page.");
+    // Check if a page with this slug already exists
+    const existingPage = yield pages_management_model_1.default.findOne({ slug, title, type });
+    // console.log("existing page", existingPage)
+    if (existingPage) {
+        if (payload.pageContent) {
+            existingPage.pageContent = payload.pageContent;
         }
-        // If page exists but no PageArticle, update it with PageArticle
-        if (existingPage) {
-            existingPage.PageArticle = PageArticle;
-            yield existingPage.save();
-            return existingPage;
+        if (payload.metaTitle) {
+            //===================================Basic SEO
+            existingPage.metaTitle = payload.metaTitle;
+            existingPage.metaDescription = payload.metaDescription;
+            existingPage.keywords = payload.keywords;
+            existingPage.canonicalUrl = payload.canonicalUrl;
+            existingPage.noindex = payload.noindex;
+            //=============================Open Graph
+            existingPage.ogTitle = payload.ogTitle;
+            existingPage.ogDescription = payload.ogDescription;
+            existingPage.ogImageUrl =
+                ogImageUrl && ((_a = ogImageUrl[0]) === null || _a === void 0 ? void 0 : _a.filename)
+                    ? ogImageUrl[0].filename.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp")
+                    : "";
+            existingPage.ogType = payload.ogType;
+            existingPage.ogSiteName = payload.ogSiteName;
+            existingPage.ogLocale = payload.ogLocale;
+            //=============================Twitter Card
+            existingPage.twitterCard = payload.twitterCard;
+            existingPage.twitterSite = payload.twitterSite;
+            existingPage.twitterCreator = payload.twitterCreator;
+            existingPage.twitterImageUrl =
+                twitterImageUrl && ((_b = twitterImageUrl[0]) === null || _b === void 0 ? void 0 : _b.filename)
+                    ? twitterImageUrl[0].filename.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp")
+                    : "";
+            //=============================Hreflang / Alternates
+            ((existingPage.alternates = payload.keywords),
+                // =============================Sitemap helpers
+                (existingPage.changefreq = payload.changefreq));
+            existingPage.priority = payload.priority;
+            // =============================Schema
+            existingPage.schemas = payload.schemas;
         }
-        // If page does not exist, create new with PageArticle
-        const result = yield pages_management_model_1.default.create({
-            slug,
-            PageArticle,
-        });
+        yield existingPage.save();
+        return existingPage;
+    }
+    // If page does not exist, create new
+    if (!existingPage) {
+        if (ogImageUrl && ((_c = ogImageUrl[0]) === null || _c === void 0 ? void 0 : _c.filename)) {
+            payload.ogImageUrl = ogImageUrl[0].filename.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp");
+        }
+        if (twitterImageUrl && ((_d = twitterImageUrl[0]) === null || _d === void 0 ? void 0 : _d.filename)) {
+            payload.twitterImageUrl = twitterImageUrl[0].filename.replace(/\.(jpg|jpeg|png|pneg)$/i, ".webp");
+        }
+        const result = yield pages_management_model_1.default.create(payload);
         return result;
     }
-    // Logic 2: User wants to create PageSEO
-    if (PageSEO && !PageArticle) {
-        // If a page with this slug exists and already has PageSEO, throw error
-        if (existingPage &&
-            existingPage.PageSEO &&
-            existingPage.PageSEO.metaTitle) {
-            throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "PageSEO already exists for this Page.");
-        }
-        // If page exists but no PageSEO, update it with PageSEO
-        if (existingPage) {
-            existingPage.PageSEO = PageSEO;
-            yield existingPage.save();
-            return existingPage;
-        }
-        // If page does not exist, create new with PageSEO
-        const result = yield pages_management_model_1.default.create({
-            slug,
-            PageSEO,
-        });
-        return result;
-    }
-    // If both PageArticle and PageSEO are provided, handle both
-    if (PageArticle && PageSEO) {
-        // If a page with this slug exists, check for both
-        if (existingPage) {
-            // If both already exist, throw error
-            if (existingPage.PageArticle &&
-                existingPage.PageArticle.content &&
-                existingPage.PageSEO &&
-                existingPage.PageSEO.metaTitle) {
-                throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Both PageArticle and PageSEO already exist for this Page.");
-            }
-            // If only one exists, update the missing one
-            if (!existingPage.PageArticle || !existingPage.PageArticle.content) {
-                existingPage.PageArticle = PageArticle;
-            }
-            if (!existingPage.PageSEO || !existingPage.PageSEO.metaTitle) {
-                existingPage.PageSEO = PageSEO;
-            }
-            yield existingPage.save();
-            return existingPage;
-        }
-        // If page does not exist, create new with both
-        const result = yield pages_management_model_1.default.create({
-            slug,
-            PageArticle,
-            PageSEO,
-        });
-        return result;
-    }
-    // If neither PageArticle nor PageSEO is provided, throw error
-    throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "At least one of PageArticle or PageSEO must be provided.");
 });
 // Get all dynamic pages articles with SEO
 const getAllDynamicPagesArticleAndSeo = (filters, paginationOption) => __awaiter(void 0, void 0, void 0, function* () {
@@ -195,8 +146,11 @@ const getDynamicPagesArticleAndSeoById = (id) => __awaiter(void 0, void 0, void 
 });
 // Get dynamic page article by slug
 const getDynamicPagesArticleAndSeoBySlug = (slug) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!slug) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Slug is required");
+    }
     const result = yield pages_management_model_1.default.findOne({
-        slug,
+        slug: `/${slug}`,
     });
     return result;
 });
@@ -213,26 +167,11 @@ const updateDynamicPagesArticleAndSeo = (id, payload) => __awaiter(void 0, void 
     return result;
 });
 // Delete only the PageSEO or PageArticle data from the model, not the whole document
-const deleteDynamicPagesData = (id, type) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteDynamicPagesData = (id) => __awaiter(void 0, void 0, void 0, function* () {
     if (!mongoose_1.Types.ObjectId.isValid(id)) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Invalid ID");
     }
-    if (!type) {
-        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Please provide type");
-    }
-    let unsetField = null;
-    if (type === "seo") {
-        unsetField = "PageSEO";
-    }
-    else if (type === "article") {
-        unsetField = "PageArticle";
-    }
-    else {
-        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "Invalid type provided");
-    }
-    const result = yield pages_management_model_1.default.findByIdAndUpdate(id, {
-        $unset: { [unsetField]: "" },
-    });
+    const result = yield pages_management_model_1.default.findByIdAndDelete(id);
     return result;
 });
 const GetAllSEOAndArticle = (type) => __awaiter(void 0, void 0, void 0, function* () {

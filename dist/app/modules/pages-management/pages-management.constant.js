@@ -3,15 +3,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SUCCESS_MESSAGES = exports.ERROR_MESSAGES = exports.DEFAULT_SEO_VALUES = exports.READING_TIME_WORDS_PER_MINUTE = exports.URL_REGEX = exports.SLUG_REGEX = exports.MAX_EXTERNAL_LINKS = exports.MAX_INTERNAL_LINKS = exports.MAX_BENEFITS = exports.MAX_FEATURES = exports.MAX_RELATED_TOOLS = exports.MAX_SEO_KEYWORDS = exports.MAX_TAGS = exports.MAX_CATEGORIES = exports.USAGE_INSTRUCTIONS_MIN_LENGTH = exports.CONTENT_MIN_LENGTH = exports.EXCERPT_MAX_LENGTH = exports.META_DESCRIPTION_MAX_LENGTH = exports.META_TITLE_MAX_LENGTH = exports.SEO_DESCRIPTION_MAX_LENGTH = exports.SEO_TITLE_MAX_LENGTH = exports.MAX_BULK_OPERATIONS = exports.DEFAULT_PAGINATION = exports.SEO_SCORE_WEIGHTS = exports.ANALYTICS_FIELDS = exports.SOCIAL_PLATFORMS = exports.ROBOTS_DIRECTIVE_OPTIONS = exports.CHANGE_FREQ_OPTIONS = exports.TOOL_CATEGORY_OPTIONS = exports.PAGE_TYPE_OPTIONS = exports.DYNAMIC_PAGES_ARTICLE_AND_SEO_SORTABLE_FIELDS = exports.DYNAMIC_PAGES_ARTICLE_AND_SEO_FILTERABLE_FIELDS = exports.DYNAMIC_PAGES_ARTICLE_AND_SEO_SEARCH_FIELDS = exports.PAGE_MANAGEMENT_SEO_SEARCH__FIELDS = exports.PAGE_MANAGEMENT_FILTER_FIELDS = void 0;
 exports.PAGE_MANAGEMENT_FILTER_FIELDS = [
     "slug",
+    "title",
+    "type",
     "metaTitle",
     "metaDescription",
+    "noindex",
     "createdAt",
 ];
 exports.PAGE_MANAGEMENT_SEO_SEARCH__FIELDS = [
     "slug",
+    "title",
+    "type",
     "metaTitle",
     "metaDescription",
-    "createdAt",
 ];
 exports.DYNAMIC_PAGES_ARTICLE_AND_SEO_SEARCH_FIELDS = [
     "title",

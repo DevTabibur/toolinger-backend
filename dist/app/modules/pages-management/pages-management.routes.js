@@ -13,9 +13,7 @@ const router = express_1.default.Router();
 router.get("/", pages_management_controller_1.DynamicPagesArticleAndSeoController.getAllDynamicPagesArticleAndSeo);
 // /seo or /article to fetch that realted data only.
 router.get("/:type", pages_management_controller_1.DynamicPagesArticleAndSeoController.GetAllSEOAndArticle);
-router.get("/slug/:slug", 
-// authGuard(),
-pages_management_controller_1.DynamicPagesArticleAndSeoController.getDynamicPagesArticleAndSeoBySlug);
+router.get("/slug/:slug", pages_management_controller_1.DynamicPagesArticleAndSeoController.getDynamicPagesArticleAndSeoBySlug);
 // Create dynamic pages article with SEO
 router.post("/", 
 // zodValidateRequest(DynamicPagesArticleAndSeoValidation.createDynamicPagesArticleAndSeoSchema),
@@ -25,5 +23,5 @@ router.get("/:id", (0, authGuard_1.default)(), pages_management_controller_1.Dyn
 // Update dynamic pages article by ID
 router.patch("/:id", (0, authGuard_1.default)(), pages_management_controller_1.DynamicPagesArticleAndSeoController.updateDynamicPagesArticleAndSeo);
 // Delete dynamic pages data by type (SEO or Article) and Id
-router.delete("/:id/:type(seo|article)", (0, authGuard_1.default)(), pages_management_controller_1.DynamicPagesArticleAndSeoController.deleteDynamicPagesData);
+router.delete("/:id", (0, authGuard_1.default)(), pages_management_controller_1.DynamicPagesArticleAndSeoController.deleteDynamicPagesData);
 exports.DynamicPagesArticleAndSeoRoute = router;

@@ -23,16 +23,27 @@ const pages_management_constant_1 = require("./pages-management.constant");
 // Create a new dynamic page article with SEO
 const createDynamicPagesArticleAndSeo = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const files = req.files;
-    let ogImage;
+    let ogImageUrl;
     if (Array.isArray(files)) {
-        ogImage = files;
+        ogImageUrl = files;
     }
-    else if (files && typeof files === "object" && "ogImage" in files) {
-        ogImage = files
-            .ogImage;
+    else if (files && typeof files === "object" && "ogImageUrl" in files) {
+        ogImageUrl = files
+            .ogImageUrl;
     }
-    console.log("ogImage", ogImage);
-    const result = yield pages_management_service_1.DynamicPagesArticleAndSeoService.createDynamicPagesArticleAndSeo(req.body, ogImage !== null && ogImage !== void 0 ? ogImage : []);
+    let twitterImageUrl;
+    if (Array.isArray(files)) {
+        twitterImageUrl = files;
+    }
+    else if (files &&
+        typeof files === "object" &&
+        "twitterImageUrl" in files) {
+        twitterImageUrl = files.twitterImageUrl;
+    }
+    // console.log("ogImage", ogImage);
+    // console.log("twitterImageUrl", twitterImageUrl);
+    // console.log("req.body", req.body);
+    const result = yield pages_management_service_1.DynamicPagesArticleAndSeoService.createDynamicPagesArticleAndSeo(req.body, ogImageUrl !== null && ogImageUrl !== void 0 ? ogImageUrl : [], twitterImageUrl !== null && twitterImageUrl !== void 0 ? twitterImageUrl : []);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.CREATED,
         message: "Dynamic page article with SEO created successfully",
@@ -85,8 +96,8 @@ const updateDynamicPagesArticleAndSeo = (0, catchAsync_1.default)((req, res) => 
 }));
 // Delete dynamic page article by ID
 const deleteDynamicPagesData = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id, type } = req.params;
-    const result = yield pages_management_service_1.DynamicPagesArticleAndSeoService.deleteDynamicPagesData(id, type);
+    const { id } = req.params;
+    const result = yield pages_management_service_1.DynamicPagesArticleAndSeoService.deleteDynamicPagesData(id);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
         message: "Dynamic page SEO deleted successfully",

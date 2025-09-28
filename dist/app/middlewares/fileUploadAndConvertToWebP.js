@@ -76,7 +76,8 @@ const uploadMiddleware = (req, res, next) => {
         },
     }).fields([
         { name: "blogFeaturedImage", maxCount: 1 },
-        { name: "ogImage", maxCount: 1 },
+        { name: "ogImageUrl", maxCount: 1 },
+        { name: "twitterImageUrl", maxCount: 1 },
     ]);
     upload(req, res, (error) => __awaiter(void 0, void 0, void 0, function* () {
         if (error instanceof multer_1.default.MulterError) {
@@ -120,15 +121,15 @@ const uploadMiddleware = (req, res, next) => {
             }
         }
         // ! ogImage  to WebP
-        if (uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.ogImage) {
-            const ogImage = uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.ogImage[0];
-            const ogImagePath = ogImage.path;
-            const ogImageExtension = path_1.default.extname(ogImagePath).toLowerCase();
-            const restImage4WebPPath = path_1.default.join(path_1.default.dirname(ogImagePath), `${path_1.default.basename(ogImagePath, ogImageExtension)}.webp`);
+        if (uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.ogImageUrl) {
+            const ogImageUrl = uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.ogImageUrl[0];
+            const ogImageUrlPath = ogImageUrl.path;
+            const ogImageUrlExtension = path_1.default.extname(ogImageUrlPath).toLowerCase();
+            const restImage4WebPPath = path_1.default.join(path_1.default.dirname(ogImageUrlPath), `${path_1.default.basename(ogImageUrlPath, ogImageUrlExtension)}.webp`);
             // Check if the blogCover is already in WebP format
-            if (ogImageExtension === ".webp") {
+            if (ogImageUrlExtension === ".webp") {
                 // Skip conversion, use the original WebP image
-                fs_1.default.rename(ogImagePath, restImage4WebPPath, (error) => {
+                fs_1.default.rename(ogImageUrlPath, restImage4WebPPath, (error) => {
                     if (error) {
                         console.error("Failed to rename the file:", error);
                     }
@@ -136,10 +137,38 @@ const uploadMiddleware = (req, res, next) => {
             }
             else {
                 // Convert restImage1 to WebP
-                yield (0, sharp_1.default)(ogImagePath).toFormat("webp").toFile(restImage4WebPPath);
+                yield (0, sharp_1.default)(ogImageUrlPath).toFormat("webp").toFile(restImage4WebPPath);
                 // Remove original blogCover
                 setTimeout(() => {
-                    deleteFileWithRetry(ogImagePath, 3, 3000);
+                    deleteFileWithRetry(ogImageUrlPath, 3, 3000);
+                }, 5000);
+            }
+        }
+        // ! twitterImageUrl  to WebP
+        if (uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.twitterImageUrl) {
+            const twitterImageUrl = uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.twitterImageUrl[0];
+            const twitterImageUrlPath = twitterImageUrl.path;
+            const twitterImageUrlExtension = path_1.default
+                .extname(twitterImageUrlPath)
+                .toLowerCase();
+            const restImage4WebPPath = path_1.default.join(path_1.default.dirname(twitterImageUrlPath), `${path_1.default.basename(twitterImageUrlPath, twitterImageUrlExtension)}.webp`);
+            // Check if the blogCover is already in WebP format
+            if (twitterImageUrlExtension === ".webp") {
+                // Skip conversion, use the original WebP image
+                fs_1.default.rename(twitterImageUrlPath, restImage4WebPPath, (error) => {
+                    if (error) {
+                        console.error("Failed to rename the file:", error);
+                    }
+                });
+            }
+            else {
+                // Convert restImage1 to WebP
+                yield (0, sharp_1.default)(twitterImageUrlPath)
+                    .toFormat("webp")
+                    .toFile(restImage4WebPPath);
+                // Remove original blogCover
+                setTimeout(() => {
+                    deleteFileWithRetry(twitterImageUrlPath, 3, 3000);
                 }, 5000);
             }
         }

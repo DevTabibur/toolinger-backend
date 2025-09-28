@@ -1,13 +1,51 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-// Define the PageSEO sub-schema
-const PageSEOSchema = new mongoose_1.Schema({
-    //============================================ Basic SEO=============================================================
-    metaTitle: { type: String, required: true, trim: true, maxlength: 70 },
-    metaDescription: {
+// Helper function to allow empty string for enums
+function enumOrEmpty(enumValues) {
+    return {
+        type: String,
+        enum: [...enumValues, ""],
+        default: "",
+        trim: true,
+    };
+}
+// Main PageManagement schema
+const PageManagementSchema = new mongoose_1.Schema({
+    slug: {
         type: String,
         required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+    },
+    title: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+    },
+    type: Object.assign(Object.assign({}, enumOrEmpty([
+        "static",
+        "text",
+        "image",
+        "developers",
+        "converters",
+        "generators",
+        "calculators",
+        "websiteManagemet",
+        "other",
+    ])), { required: true }),
+    //=========================================Article===============================
+    pageContent: {
+        type: String,
+        required: false,
+    },
+    //============================================ Basic SEO=============================================================
+    metaTitle: { type: String, trim: true, maxlength: 70 },
+    metaDescription: {
+        type: String,
         trim: true,
         maxlength: 160,
     },
@@ -20,12 +58,9 @@ const PageSEOSchema = new mongoose_1.Schema({
     ogImageUrl: { type: String, trim: true },
     ogType: { type: String, trim: true },
     ogSiteName: { type: String, trim: true },
-    ogLocale: { type: String, trim: true },
+    ogLocale: Object.assign(Object.assign({}, enumOrEmpty(["en_US", "en_GB", "es", "fr", "de"])), { default: "en_US" }),
     // ====================================================Twitter Card======================================================
-    twitterCard: {
-        type: String,
-        enum: ["summary", "summary_large_image", "app", "player"],
-    },
+    twitterCard: Object.assign(Object.assign({}, enumOrEmpty(["summary", "summary_large_image", "app", "player"])), { default: "summary" }),
     twitterSite: { type: String, trim: true },
     twitterCreator: { type: String, trim: true },
     twitterImageUrl: { type: String, trim: true },
@@ -34,30 +69,16 @@ const PageSEOSchema = new mongoose_1.Schema({
     // ==================================================JSON-LD schemas=======================================================
     schemas: { type: [mongoose_1.Schema.Types.Mixed], default: [] },
     //=================================================== Sitemap helpers======================================================
-    changefreq: {
-        type: String,
-        enum: ["daily", "weekly", "monthly", "yearly"],
-        default: "weekly",
-    },
+    changefreq: Object.assign(Object.assign({}, enumOrEmpty([
+        "always",
+        "hourly",
+        "daily",
+        "weekly",
+        "monthly",
+        "yearly",
+        "never",
+    ])), { default: "weekly" }),
     priority: { type: Number, min: 0.0, max: 1.0, default: 0.5 },
-}, { _id: false });
-// Define the PageArticle sub-schema
-const PageArticleSchema = new mongoose_1.Schema({
-    content: { type: String },
-    image: { type: String, trim: true },
-    imageAlt: { type: String, trim: true },
-}, { _id: false });
-// Main PageManagement schema
-const PageManagementSchema = new mongoose_1.Schema({
-    slug: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-    },
-    PageSEO: { type: PageSEOSchema },
-    PageArticle: { type: PageArticleSchema },
 }, {
     timestamps: true,
 });
