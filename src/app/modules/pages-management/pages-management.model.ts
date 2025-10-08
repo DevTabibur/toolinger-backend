@@ -23,8 +23,8 @@ const PageManagementSchema = new Schema<IPageManagement>(
     },
     title: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+      // unique: true,
       trim: true,
       lowercase: true,
     },
