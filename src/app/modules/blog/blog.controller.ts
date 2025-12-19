@@ -3,6 +3,10 @@ import catchAsync from "../../../shared/catchAsync";
 import { BlogService } from "./blog.service";
 import { sendSuccessResponse } from "../../../shared/sendSuccessResponse";
 import httpStatus from "http-status";
+import { IPaginationOption } from "../../../interfaces/sharedInterface";
+import pick from "../../../shared/pick";
+import { paginationFields } from "../../../constants/shared.constant";
+import { BLOG_POST_FILTER_FIELDS } from "./blog.constant";
 
 const createBlogPost = catchAsync(async (req: Request, res: Response) => {
   const files = req.files as
@@ -51,7 +55,9 @@ const BlogDetails = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllBlogs = catchAsync(async (req: Request, res: Response) => {
-  const result = await BlogService.getAllBlogs();
+  const filters = pick(req.query, ["searchTerm", ...BLOG_POST_FILTER_FIELDS]);
+  const paginationOption: IPaginationOption = pick(req.query, paginationFields);
+  const result = await BlogService.getAllBlogs(filters, paginationOption);
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
     message: "Blogs Fetched Successfully",

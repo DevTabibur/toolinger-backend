@@ -1,10 +1,16 @@
-import { Types } from "mongoose";
+import { SortOrder, Types } from "mongoose";
 import ApiError from "../../../errors/ApiError";
 import { IBlogPost } from "./blog.interface";
 import BlogPostModel from "./blog.model";
 import httpStatus from "http-status";
 import { generateSlug, generateExcerpt } from "./blog.utils";
 import TrashModel from "../trash/trash.model";
+import { BLOG_POST_SEARCH__FIELDS, BlogPostFilters } from "./blog.constant";
+import {
+  IGenericDataWithMeta,
+  IPaginationOption,
+} from "../../../interfaces/sharedInterface";
+import paginationHelper from "../../helpers/paginationHelper";
 
 const createBlogPost = async (
   blogData: IBlogPost,
@@ -69,10 +75,56 @@ const BlogDetails = async (blogId: string): Promise<IBlogPost> => {
 };
 
 //
-const getAllBlogs = async (): Promise<IBlogPost[]> => {
-  const result = await BlogPostModel.find();
-  // console.log("result", result);
-  return result;
+const getAllBlogs = async (
+  filters: BlogPostFilters,
+  paginationOption: IPaginationOption,
+): Promise<IGenericDataWithMeta<IBlogPost[]>> => {
+  const { searchTerm, ...filtersFields } = filters;
+
+  const andConditions = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      $or: BLOG_POST_SEARCH__FIELDS.map((field) => ({
+        [field]: new RegExp(searchTerm, "i"),
+      })),
+    });
+  }
+
+  if (Object.keys(filtersFields).length) {
+    const fieldConditions = Object.entries(filtersFields).map(
+      ([key, value]) => ({
+        [key]: value,
+      }),
+    );
+    andConditions.push({ $and: fieldConditions });
+  }
+
+  const whereCondition = andConditions.length ? { $and: andConditions } : {};
+
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelper(paginationOption);
+
+  const sortCondition: { [key: string]: SortOrder } = {};
+  if (sortBy && sortOrder) {
+    sortCondition[sortBy] = sortOrder;
+  }
+
+  const result = await BlogPostModel.find(whereCondition)
+    .sort(sortCondition)
+    .skip(skip)
+    .limit(limit as number);
+
+  const total = await BlogPostModel.countDocuments(whereCondition);
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 
 const deleteBlog = async (blogId: string): Promise<IBlogPost> => {
