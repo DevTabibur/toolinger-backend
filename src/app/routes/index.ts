@@ -1,6 +1,6 @@
 import express from "express";
 import { AuthRoute } from "../modules/auth/auth.routes";
-import { BlogRoute } from "../modules/blog/blog.routes";
+import { BlogRoute } from "../modules/blog/blog.route";
 import { ShortenerRoute } from "../modules/shortener/shortener.routes";
 import { ConverterRoute } from "../modules/converter/converter.routes";
 import { CutterRoute } from "../modules/cutter/cutter.routes";
@@ -14,6 +14,7 @@ import { AdvancedToolsRoute } from "../modules/advanced-tools/advanced-tools.rou
 import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
 import { CategoryRoute } from "../modules/category/category.routes";
 import { DynamicPagesArticleAndSeoRoute } from "../modules/pages-management/pages-management.routes";
+import { TrashRoute } from "../modules/trash/trash.route";
 
 const router = express.Router();
 
@@ -29,6 +30,10 @@ const allRoutes = [
   {
     path: "/blog",
     route: BlogRoute,
+  },
+  {
+    path: "/trash",
+    route: TrashRoute,
   },
   {
     path: "/shorten",

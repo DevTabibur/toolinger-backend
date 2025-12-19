@@ -85,7 +85,9 @@ const uploadMiddleware = (req: Request, res: Response, next: NextFunction) => {
       fileSize: maxSize,
     },
   }).fields([
-    { name: "blogFeaturedImage", maxCount: 1 },
+    { name: "blogFeaturedImage", maxCount: 1 }, // for blog
+    { name: "galleryImages", maxCount: 5 }, // for blog
+    { name: "seoImage", maxCount: 1 }, // for blog
     { name: "ogImageUrl", maxCount: 1 },
     { name: "twitterImageUrl", maxCount: 1 },
   ]);
@@ -140,6 +142,68 @@ const uploadMiddleware = (req: Request, res: Response, next: NextFunction) => {
         }, 5000);
       }
     }
+
+    // seoImage to WebP
+    if (uploadedFiles?.seoImage) {
+      const seoImage = uploadedFiles?.seoImage[0];
+      const seoImagePath = seoImage.path;
+      const seoImageExtension = path.extname(seoImagePath).toLowerCase();
+      const restImage4WebPPath = path.join(
+        path.dirname(seoImagePath),
+        `${path.basename(seoImagePath, seoImageExtension)}.webp`,
+      );
+
+      // Check if the blogCover is already in WebP format
+      if (seoImageExtension === ".webp") {
+        // Skip conversion, use the original WebP image
+        fs.rename(seoImagePath, restImage4WebPPath, (error) => {
+          if (error) {
+            console.error("Failed to rename the file:", error);
+          }
+        });
+      } else {
+        // Convert restImage1 to WebP
+        await sharp(seoImagePath).toFormat("webp").toFile(restImage4WebPPath);
+
+        // Remove original blogCover
+        setTimeout(() => {
+          deleteFileWithRetry(seoImagePath, 3, 3000);
+        }, 5000);
+      }
+    }
+
+    // ! galleryImages  to WebP
+    // if (uploadedFiles?.galleryImages) {
+    //   const galleryImages = uploadedFiles?.galleryImages[0];
+    //   const blogFeaturedImagePath = blogFeaturedImage.path;
+    //   const blogFeaturedImageExtension = path
+    //     .extname(blogFeaturedImagePath)
+    //     .toLowerCase();
+    //   const restImage4WebPPath = path.join(
+    //     path.dirname(blogFeaturedImagePath),
+    //     `${path.basename(blogFeaturedImagePath, blogFeaturedImageExtension)}.webp`,
+    //   );
+
+    //   // Check if the blogCover is already in WebP format
+    //   if (blogFeaturedImageExtension === ".webp") {
+    //     // Skip conversion, use the original WebP image
+    //     fs.rename(blogFeaturedImagePath, restImage4WebPPath, (error) => {
+    //       if (error) {
+    //         console.error("Failed to rename the file:", error);
+    //       }
+    //     });
+    //   } else {
+    //     // Convert restImage1 to WebP
+    //     await sharp(blogFeaturedImagePath)
+    //       .toFormat("webp")
+    //       .toFile(restImage4WebPPath);
+
+    //     // Remove original blogCover
+    //     setTimeout(() => {
+    //       deleteFileWithRetry(blogFeaturedImagePath, 3, 3000);
+    //     }, 5000);
+    //   }
+    // }
 
     // ! ogImage  to WebP
     if (uploadedFiles?.ogImageUrl) {

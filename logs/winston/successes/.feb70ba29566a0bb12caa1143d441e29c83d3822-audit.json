@@ -1,0 +1,130 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\.feb70ba29566a0bb12caa1143d441e29c83d3822-audit.json",
+    "files": [
+        {
+            "date": 1764997907686,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-11-success.log",
+            "hash": "0a358bdf509c9154e5badd35f3603d9f89883379d44887c81ea10b5df280b18b"
+        },
+        {
+            "date": 1765001083054,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-12-success.log",
+            "hash": "684f40173a216bb2a8c894268238bbb93abe3bf7e1bc0265e50c836e1f2a564a"
+        },
+        {
+            "date": 1765014438207,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-15-success.log",
+            "hash": "ce30fbc1eacb1b8182851bfbd8b508a558510d25901cc1cea6e674abf16a9d60"
+        },
+        {
+            "date": 1765022932828,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-18-success.log",
+            "hash": "d205fe17760b7da126a8020eb52d62b1d29a5644bba791e4676355a9f1c63c55"
+        },
+        {
+            "date": 1765034985270,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-21-success.log",
+            "hash": "5b0648737daac53e01b029b595cc2390ac222ce928c249b129a6d645ad42f4c3"
+        },
+        {
+            "date": 1765038217293,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-22-success.log",
+            "hash": "89316851effbd196fcf3e144ef96ef11caf45c93b4a398e76db222eef96ed6e0"
+        },
+        {
+            "date": 1765043019994,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-06-12-23-success.log",
+            "hash": "b967ad8341d1b24758dab15636f1c97b47e893bb8ac07752ddb2902f2eef6850"
+        },
+        {
+            "date": 1765080528186,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-07-12-10-success.log",
+            "hash": "98b39840d65e461b1f72fc7ff8fe475afa896272de291510769887d653e0517e"
+        },
+        {
+            "date": 1765089279302,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-07-12-12-success.log",
+            "hash": "c52dab46ddfb3c167639ad22710d0743b0781e4c6080000bb6a4e3449922acd0"
+        },
+        {
+            "date": 1766020368846,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-07-success.log",
+            "hash": "0c6db99788b466a8652c879fcc3a08c92ad520276885a1d28b9d52fd5f8129d0"
+        },
+        {
+            "date": 1766038782633,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-12-success.log",
+            "hash": "d0ce915186297ce878543cd2ada786a96048f57d59be7602f8d4578b9a5486d0"
+        },
+        {
+            "date": 1766041386564,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-13-success.log",
+            "hash": "4308077be97313c29684f581bc5017821cd25db18b95cc6c683dd5f714231251"
+        },
+        {
+            "date": 1766050545119,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-15-success.log",
+            "hash": "13c1eb121cdac9095533b5fb26db276f371d0562317ec93514f078bcee3859ff"
+        },
+        {
+            "date": 1766052002843,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-16-success.log",
+            "hash": "c21752128673d6bee59e6b7db2b31233928eb22e62b6bb988fe44278dd7d21a5"
+        },
+        {
+            "date": 1766064003689,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-19-success.log",
+            "hash": "4388037222746e89669e4072194b009b70ed61e35c0718e7111010fe59618d79"
+        },
+        {
+            "date": 1766069731460,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-20-success.log",
+            "hash": "1fea3b2277333a0658cd69802044bc71a1cfd423a66b1cc504513094fc299fa2"
+        },
+        {
+            "date": 1766070003143,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-21-success.log",
+            "hash": "da2a8975cda1991b5ef3c789955826766d117b794c21741547aa5fe8158eb5fb"
+        },
+        {
+            "date": 1766104507201,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-06-success.log",
+            "hash": "8df859cbc75319eec64d03cdab17c757e50453d1821fdf1e2b8e18d2fe750dcd"
+        },
+        {
+            "date": 1766106584625,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-07-success.log",
+            "hash": "92fb394c61bacfe6d3ced7ed6f75f209d87bdee2c3d299c16939d88e7cb2447f"
+        },
+        {
+            "date": 1766109601928,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-08-success.log",
+            "hash": "97bec347aa18221d5d6287acee8d68789606e6762f47025113c7e7bbcb175c60"
+        },
+        {
+            "date": 1766113534016,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-09-success.log",
+            "hash": "0101f8f2877cf9c02835c26903d1adbcb3bb0268aeb5c21cd28aa4f1110aa1eb"
+        },
+        {
+            "date": 1766119043970,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-10-success.log",
+            "hash": "e0efba3bc3dcdcc91fcaf97eb62724bc31799f0ab4273026a50f76a1be31bc1c"
+        },
+        {
+            "date": 1766120445874,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-11-success.log",
+            "hash": "d1a497205280ac406850ce0634c8878eb4b7b027742476b6e6ef34e6b54e6255"
+        },
+        {
+            "date": 1766125386280,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-19-12-12-success.log",
+            "hash": "9d88e6f92f3b6d612d93b4262ee8ef5f0ab179c2f58f2dce5a12bcfb47a1bc4f"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,19 +1,72 @@
-export interface IBlogPost {
-  title: string; // Blog post title
-  slug: string; // SEO-friendly URL
-  content: string;
-  status: "archive" | "published" | "draft"; // Blog content
-  excerpt: string; // Short summary for SEO
-  author: string; // Author name
-  category: string; // Category
-  tags: string[]; // Tags for SEO
-  blogFeaturedImage: string; // Featured image URL
-  isAllowComments?: boolean;
-  isFeaturedPost?: boolean;
+import { Types } from "mongoose";
+import { AuthorRole, BlogStatus } from "./blog.constant";
 
-  //===============================
-  seoTitle: string; // Custom SEO title
-  seoDescription: string; // Custom SEO description
-  seoKeywords?: string[]; // Keywords for SEO
-  seoImage?: string; // Image for SEO (e.g., Open Graph)
+export interface IBlogSEO {
+  title: string;
+  description: string;
+  keywords?: string[];
+  seoImage?: string;
+  canonicalUrl?: string;
+  noIndex?: boolean;
+  noFollow?: boolean;
+}
+
+export interface IBlogAnalytics {
+  views: number;
+  uniqueViews: number;
+  readTime: number; // minutes
+  shares: number;
+  lastViewedAt?: Date;
+}
+
+export interface IBlogAuthor {
+  id: Types.ObjectId;
+  // name: string;
+  // email?: string;
+  // role: AuthorRole;
+  profileUrl?: string; // guest author page
+}
+
+export interface IBlogPost {
+  // Core
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  status: BlogStatus;
+
+  // Author
+  author: IBlogAuthor;
+
+  // Taxonomy
+  categories: Types.ObjectId[];
+  tags: Types.ObjectId[];
+
+  // Media
+  blogFeaturedImage?: string;
+  // galleryImages?: string[];
+
+  // Flags
+  allowComments?: boolean;
+  isFeatured?: boolean;
+  isSponsored?: boolean; // guest post monetization
+  sponsorName?: string;
+  sponsorUrl?: string;
+
+  // SEO
+  seo: IBlogSEO;
+
+  // Analytics
+  analytics: IBlogAnalytics;
+
+  // Publishing
+  publishedAt?: Date;
+  scheduledAt?: Date;
+
+  // Trash system
+  trashedAt?: Date | null;
+
+  // System
+  // createdAt?: Date;
+  // updatedAt?: Date;
 }

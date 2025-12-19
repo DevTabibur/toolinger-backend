@@ -3,32 +3,55 @@ import ApiError from "../../../errors/ApiError";
 import { IBlogPost } from "./blog.interface";
 import BlogPostModel from "./blog.model";
 import httpStatus from "http-status";
+import { generateSlug, generateExcerpt } from "./blog.utils";
+import TrashModel from "../trash/trash.model";
 
 const createBlogPost = async (
   blogData: IBlogPost,
   blogFeaturedImage: Express.Multer.File[],
+  seoImage: Express.Multer.File[],
 ): Promise<IBlogPost> => {
+  // console.log("blogData", blogData);
+  const slug = generateSlug(blogData?.title);
+  const excerpt = blogData?.excerpt || generateExcerpt(blogData?.content);
   const blog: IBlogPost = {
     title: blogData?.title,
-    slug: blogData?.slug,
+    slug: slug,
     content: blogData?.content,
     status: blogData?.status,
-    excerpt: blogData?.excerpt,
+    excerpt: excerpt,
     author: blogData?.author,
-    category: blogData?.category,
+    categories: blogData?.categories,
     tags: blogData?.tags,
     blogFeaturedImage:
       blogFeaturedImage[0]?.filename?.replace(
         /\.(jpg|jpeg|png|pneg)$/i,
         ".webp",
       ) || "",
-    isAllowComments: blogData?.isAllowComments,
-    isFeaturedPost: blogData?.isFeaturedPost,
-    seoTitle: blogData?.seoTitle,
-    seoDescription: blogData?.seoDescription,
-    seoKeywords: blogData?.seoKeywords,
-    seoImage: blogData?.seoImage,
+    allowComments: blogData?.allowComments,
+    isFeatured: blogData?.isFeatured,
+    isSponsored: blogData?.isSponsored,
+    sponsorName: blogData?.sponsorName,
+    sponsorUrl: blogData?.sponsorUrl,
+    // seo
+    seo: {
+      title: blogData?.seo?.title,
+      description: blogData?.seo?.description,
+      keywords: blogData?.seo?.keywords,
+      seoImage:
+        seoImage[0]?.filename?.replace(/(jpg|jpeg|png|pneg)$/i, ".webp") || "",
+    },
+    // Analytics
+    analytics: {
+      views: blogData?.analytics?.views,
+      uniqueViews: blogData?.analytics?.uniqueViews,
+      readTime: blogData?.analytics?.readTime,
+      shares: blogData?.analytics?.shares,
+      lastViewedAt: blogData?.analytics?.lastViewedAt,
+    },
   };
+
+  // console.log("blog ==>", blog);
 
   const result = await BlogPostModel.create(blog);
   return result;
@@ -45,9 +68,10 @@ const BlogDetails = async (blogId: string): Promise<IBlogPost> => {
   return result;
 };
 
+//
 const getAllBlogs = async (): Promise<IBlogPost[]> => {
   const result = await BlogPostModel.find();
-  console.log("result", result);
+  // console.log("result", result);
   return result;
 };
 
@@ -55,11 +79,41 @@ const deleteBlog = async (blogId: string): Promise<IBlogPost> => {
   if (!Types.ObjectId.isValid(blogId)) {
     throw new ApiError(httpStatus.NOT_FOUND, "Invalid Blog Id");
   }
-  const result = await BlogPostModel.findByIdAndDelete(blogId);
-  if (!result) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Blog Not Found");
+  const session = await BlogPostModel.startSession();
+  session.startTransaction();
+  try {
+    // delete blog post
+    const result =
+      await BlogPostModel.findByIdAndDelete(blogId).session(session);
+
+    if (!result) {
+      throw new ApiError(httpStatus.NOT_FOUND, "Blog not found");
+    }
+
+    // Create trash record
+    const trashRecord = new TrashModel({
+      model: "BlogPost",
+      data: result,
+      deletedAt: new Date(),
+      expireAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days expiration
+    });
+
+    // Save the trash record (this is done in parallel)
+    const trashSavePromise = trashRecord.save();
+
+    // Commit the transaction
+    await Promise.all([trashSavePromise]);
+
+    // Commit the session
+    await session.commitTransaction();
+    session.endSession();
+
+    return result;
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
   }
-  return result;
 };
 
 const updateBlogSEO = async (
