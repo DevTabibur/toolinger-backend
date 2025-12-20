@@ -67,6 +67,7 @@ const getAllBlogs = catchAsync(async (req: Request, res: Response) => {
 
 const deleteBlog = catchAsync(async (req: Request, res: Response) => {
   const { blogId } = req.params;
+  console.log(blogId);
   const result = await BlogService.deleteBlog(blogId);
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,

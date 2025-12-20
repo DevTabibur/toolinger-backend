@@ -15,6 +15,7 @@ import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
 import { CategoryRoute } from "../modules/category/category.routes";
 import { DynamicPagesArticleAndSeoRoute } from "../modules/pages-management/pages-management.routes";
 import { TrashRoute } from "../modules/trash/trash.route";
+import { CommentRoute } from "../modules/blog/comment/comment.route";
 
 const router = express.Router();
 
@@ -32,9 +33,14 @@ const allRoutes = [
     route: BlogRoute,
   },
   {
+    path: "/blog-comment",
+    route: CommentRoute,
+  },
+  {
     path: "/trash",
     route: TrashRoute,
   },
+
   {
     path: "/shorten",
     route: ShortenerRoute,
