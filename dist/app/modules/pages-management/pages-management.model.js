@@ -21,8 +21,8 @@ const PageManagementSchema = new mongoose_1.Schema({
     },
     title: {
         type: String,
-        required: true,
-        unique: true,
+        // required: true,
+        // unique: true,
         trim: true,
         lowercase: true,
     },

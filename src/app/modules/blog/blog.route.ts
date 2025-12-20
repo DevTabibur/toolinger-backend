@@ -62,10 +62,6 @@ router.get("/:blogId/seo-analytics", BlogController.getBlogSEOAnalytics);
 // router.get("/guest/authors/:slug")   // toolinger.com/guest/john-doe
 
 // Blog comment API
-// router.post("/blogs/:blogId/comments")
-// router.get(" /blogs/:blogId/comments")
-// router.patch("/comments/:id/status")
-// router.delete("/comments/:id")
 
 // Blog Share / Analytics
 //Share Tracking

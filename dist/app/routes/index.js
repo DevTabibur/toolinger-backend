@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const auth_routes_1 = require("../modules/auth/auth.routes");
-const blog_routes_1 = require("../modules/blog/blog.routes");
+const blog_route_1 = require("../modules/blog/blog.route");
 const shortener_routes_1 = require("../modules/shortener/shortener.routes");
 const converter_routes_1 = require("../modules/converter/converter.routes");
 const cutter_routes_1 = require("../modules/cutter/cutter.routes");
@@ -19,6 +19,8 @@ const advanced_tools_routes_1 = require("../modules/advanced-tools/advanced-tool
 const more_tools_routes_1 = require("../modules/calculators-tools/more-tools.routes");
 const category_routes_1 = require("../modules/category/category.routes");
 const pages_management_routes_1 = require("../modules/pages-management/pages-management.routes");
+const trash_route_1 = require("../modules/trash/trash.route");
+const comment_route_1 = require("../modules/blog/comment/comment.route");
 const router = express_1.default.Router();
 const allRoutes = [
     {
@@ -31,7 +33,15 @@ const allRoutes = [
     },
     {
         path: "/blog",
-        route: blog_routes_1.BlogRoute,
+        route: blog_route_1.BlogRoute,
+    },
+    {
+        path: "/blog-comment",
+        route: comment_route_1.CommentRoute,
+    },
+    {
+        path: "/trash",
+        route: trash_route_1.TrashRoute,
     },
     {
         path: "/shorten",

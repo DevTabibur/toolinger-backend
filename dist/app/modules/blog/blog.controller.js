@@ -17,18 +17,24 @@ const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
 const blog_service_1 = require("./blog.service");
 const sendSuccessResponse_1 = require("../../../shared/sendSuccessResponse");
 const http_status_1 = __importDefault(require("http-status"));
+const pick_1 = __importDefault(require("../../../shared/pick"));
+const shared_constant_1 = require("../../../constants/shared.constant");
+const blog_constant_1 = require("./blog.constant");
 const createBlogPost = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const files = req.files;
     let blogFeaturedImage;
+    let seoImage;
     if (Array.isArray(files)) {
         blogFeaturedImage = files;
+        seoImage = files;
     }
-    else if (files &&
-        typeof files === "object" &&
-        "blogFeaturedImage" in files) {
+    else if ((files && typeof files === "object" && "blogFeaturedImage" in files) ||
+        (files && typeof files === "object" && "seoImage" in files)) {
         blogFeaturedImage = files.blogFeaturedImage;
+        seoImage = files
+            .seoImage;
     }
-    const result = yield blog_service_1.BlogService.createBlogPost(req.body, blogFeaturedImage !== null && blogFeaturedImage !== void 0 ? blogFeaturedImage : []);
+    const result = yield blog_service_1.BlogService.createBlogPost(req.body, blogFeaturedImage !== null && blogFeaturedImage !== void 0 ? blogFeaturedImage : [], seoImage !== null && seoImage !== void 0 ? seoImage : []);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
         message: "Blog Created Successfully",
@@ -45,7 +51,9 @@ const BlogDetails = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, vo
     });
 }));
 const getAllBlogs = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield blog_service_1.BlogService.getAllBlogs();
+    const filters = (0, pick_1.default)(req.query, ["searchTerm", ...blog_constant_1.BLOG_POST_FILTER_FIELDS]);
+    const paginationOption = (0, pick_1.default)(req.query, shared_constant_1.paginationFields);
+    const result = yield blog_service_1.BlogService.getAllBlogs(filters, paginationOption);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
         message: "Blogs Fetched Successfully",
@@ -54,6 +62,7 @@ const getAllBlogs = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, vo
 }));
 const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { blogId } = req.params;
+    console.log(blogId);
     const result = yield blog_service_1.BlogService.deleteBlog(blogId);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
