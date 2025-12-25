@@ -1,28 +1,29 @@
-import { IUser } from '../user/user.interface'
+import { IUser } from "../user/user.interface";
 
 export type IRefreshTokenResponse = {
-  accessToken: string
-}
+  accessToken: string;
+};
 
 export interface IUserResponse {
-  accessToken?: string
+  accessToken?: string;
   // refreshToken?: string
-  data?: Partial<IUser>
+  data?: Partial<IUser>;
 }
 
 export interface ILoginUser {
-  email: string
-  password: string
+  email: string;
+  password: string;
+  rememberMe?: boolean;
 }
 
 export type IChangePassword = {
-  email: string
-  oldPassword: string
-  newPassword: string
-  confirmNewPassword: string
-}
+  email: string;
+  oldPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+};
 
 // For jwt payload-------------
 export interface IJwtPayload {
-  _id: string
+  _id: string;
 }

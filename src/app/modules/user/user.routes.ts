@@ -3,10 +3,7 @@ import { UserController } from "./user.controller";
 const router = Router();
 
 // ** get all car owner profile
-router.get("/all/car-owner", UserController.getAllCarOwner);
-
-// get all mechanic list
-router.get("/all/mechanic", UserController.getAllMechanic);
+router.get("/", UserController.getAllUser);
 
 // update profile
 router.patch("/:userId", UserController.updateProfile);

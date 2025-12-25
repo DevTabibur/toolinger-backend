@@ -19,8 +19,8 @@ router.post("/logout", authGuard(), AuthController.logOutUser);
 // get-me
 router.get("/get-me", authGuard(), AuthController.getMe);
 
-// //!  forgot password
-// router.post('/forgot-password', AuthController.forgotPassword)
+//!  forgot password
+router.post("/forgot-password", AuthController.forgotPassword);
 
 // //! reset password
 // router.post('/reset-password', AuthController.resetPassword)

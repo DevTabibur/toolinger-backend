@@ -6,4 +6,5 @@ export interface IUser {
   lastName: string;
   role?: string;
   avatar?: string;
+  rememberMe?: boolean;
 }

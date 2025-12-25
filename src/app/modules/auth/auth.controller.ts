@@ -27,7 +27,6 @@ const registerNewUser = catchAsync(async (req: Request, res: Response) => {
 
 //!================================================>>>
 const loginExistingUser = catchAsync(async (req: Request, res: Response) => {
-  console.log("loginExistingUser", req.body);
   const { accessToken, ...rest } = await AuthService.loginExistingUser(
     req.body,
   );
@@ -84,6 +83,7 @@ const ChangePassword = catchAsync(async (req: Request, res: Response) => {
 //!===========================================================>>>
 const logOutUser = catchAsync(async (req: Request, res: Response) => {
   const token = req.user;
+  console.log("token", token);
 
   const result = await AuthService.logOutUser(token);
   sendSuccessResponse(res, {
@@ -106,18 +106,18 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
 
 ///** DO NOT DELETE IT */
 
-//   //!==========================================================>>>
-//   const forgotPassword = catchAsync(async (req: Request, res: Response) => {
-//     const { email } = req.body
-//     const result = await AuthService.forgotPassword(email)
+//!==========================================================>>>
+const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const result = await AuthService.forgotPassword(email);
 
-//     sendSuccessResponse(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       data: result,
-//       message: 'Check your email!',
-//     })
-//   })
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+    message: "Check your email!",
+  });
+});
 
 //   //!===================================================================>>>
 //   const resetPassword = catchAsync(async (req: Request, res: Response) => {
@@ -139,4 +139,5 @@ export const AuthController = {
   loginExistingUser,
   logOutUser,
   getMe,
+  forgotPassword,
 };

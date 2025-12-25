@@ -37,7 +37,7 @@ const userSchema = new Schema<IUser>(
     },
     lastName: {
       type: String,
-      required: true,
+      required: false,
     },
     role: {
       type: String,
@@ -49,6 +49,10 @@ const userSchema = new Schema<IUser>(
     },
     avatar: {
       type: String,
+    },
+    rememberMe: {
+      type: Boolean,
+      default: false,
     },
   },
   {

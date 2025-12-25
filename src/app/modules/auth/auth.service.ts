@@ -1,13 +1,12 @@
-import { Types } from "mongoose";
 import ApiError from "../../../errors/ApiError";
 import httpStatus from "http-status";
 import UserModel from "../user/user.model";
 import { jwtHelpers } from "../../helpers/jwtHelpers";
 import config from "../../../config";
-import { JwtPayload, Secret } from "jsonwebtoken";
+import { Secret } from "jsonwebtoken";
 import { IUser } from "../user/user.interface";
-import { IChangePassword, ILoginUser, IUserResponse } from "./auth.interface";
-import { comparePassword } from "../../helpers/comparePassword";
+import { ILoginUser, IUserResponse } from "./auth.interface";
+import { sendEmail } from "../../helpers/sendEmail";
 
 const registerNewUser = async (userData: IUser): Promise<IUserResponse> => {
   const { email } = userData;
@@ -40,7 +39,8 @@ const registerNewUser = async (userData: IUser): Promise<IUserResponse> => {
 const loginExistingUser = async (
   loginData: ILoginUser,
 ): Promise<IUserResponse> => {
-  const { email, password } = loginData;
+  // console.log("login data", loginData)
+  const { email, password, rememberMe } = loginData;
   const isUserExist = await UserModel.findOne({ email });
   if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, "User is not found");
@@ -96,6 +96,7 @@ const ChangePassword = async (
 
 const logOutUser = async (token: any) => {
   const { userId } = token;
+  console.log("userId", userId);
   if (!userId) {
     throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
   }
@@ -119,40 +120,41 @@ const getMe = async (token: any) => {
 
 //** DO NOT DELETE IT */
 //   //****************************************************************** */
-//   const forgotPassword = async (email: string) => {
-//     // ! 1. check if user is existed on our db or not check it with email
-//     const userExists = await UserModel.findOne(
-//       { email },
-//       { name: 1, role: 1, email: 1 },
-//     )
-//     if (!userExists) {
-//       throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!")
-//     }
+const forgotPassword = async (email: string) => {
+  // ! 1. check if user is existed on our db or not check it with email
+  const userExists = await UserModel.findOne(
+    { email },
+    { name: 1, role: 1, email: 1 },
+  );
+  if (!userExists) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+  }
 
-//     const passwordResetToken = jwtHelpers.createResetToken(
-//       { id: userExists.id },
-//       config.jwt.accessToken as string,
-//       '5m',
-//     )
+  const passwordResetToken = jwtHelpers.createResetToken(
+    { id: userExists.id },
+    config.jwt.accessToken as string,
+    "5m",
+  );
 
-//     const resetLink: string =
-//       config.resetLink + `email=${userExists?.email}&token=${passwordResetToken}`
+  const resetLink: string =
+    config.reset_link +
+    `email=${userExists?.email}&token=${passwordResetToken}`;
 
-//     await sendEmail(
-//       userExists?.email,
-//       'Reset Password Link',
-//       'This link will expire within 5 minutes',
-//       `<div>
-//          <p>Hi, Your Reset Password Link: <a href="${resetLink}">Click Here</a></p>
-//          <p style="color: red;">This link will expire within 5 minutes</p>
-//          <p>Thank You</p>
-//       </div>
-//       `,
-//     )
-//     return {
-//       message: 'Check your email!',
-//     }
-//   }
+  await sendEmail(
+    userExists?.email,
+    "Reset Password Link",
+    "This link will expire within 5 minutes",
+    `<div>
+         <p>Hi, Your Reset Password Link: <a href="${resetLink}">Click Here</a></p>
+         <p style="color: red;">This link will expire within 5 minutes</p>
+         <p>Thank You</p>
+      </div>
+      `,
+  );
+  return {
+    message: "Check your email!",
+  };
+};
 
 //   //****************************************************************** */
 
@@ -196,5 +198,6 @@ export const AuthService = {
   registerNewUser,
   loginExistingUser,
   logOutUser,
+  forgotPassword,
   getMe,
 };

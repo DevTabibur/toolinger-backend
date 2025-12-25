@@ -6,29 +6,15 @@ import httpStatus from "http-status";
 import pick from "../../../shared/pick";
 import { IPaginationOption } from "../../../interfaces/sharedInterface";
 import { paginationFields } from "../../../constants/shared.constant";
-import {
-  CAR_OWNER_FILTER_FIELDS,
-  MECHANIC_FILTER_FIELDS,
-} from "./user.constant";
+import { USER_FILTER_FIELDS } from "./user.constant";
 
-const getAllCarOwner = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, ["searchTerm", ...CAR_OWNER_FILTER_FIELDS]);
+const getAllUser = catchAsync(async (req: Request, res: Response) => {
+  const filters = pick(req.query, ["searchTerm", ...USER_FILTER_FIELDS]);
   const paginationOption: IPaginationOption = pick(req.query, paginationFields);
-  const result = await UserServices.getAllCarOwner(filters, paginationOption);
+  const result = await UserServices.getAllUser(filters, paginationOption);
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
-    message: "Car Owner list fetched successfully",
-    data: result,
-  });
-});
-
-const getAllMechanic = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, ["searchTerm", ...MECHANIC_FILTER_FIELDS]);
-  const paginationOption: IPaginationOption = pick(req.query, paginationFields);
-  const result = await UserServices.getAllMechanic(filters, paginationOption);
-  sendSuccessResponse(res, {
-    statusCode: httpStatus.OK,
-    message: "Mechanic list fetched successfully",
+    message: "User list fetched successfully",
     data: result,
   });
 });
@@ -56,7 +42,6 @@ const getSingleUserById = catchAsync(async (req: Request, res: Response) => {
 
 export const UserController = {
   updateProfile,
-  getAllCarOwner,
-  getAllMechanic,
+  getAllUser,
   getSingleUserById,
 };

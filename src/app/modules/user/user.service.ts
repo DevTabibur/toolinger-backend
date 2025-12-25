@@ -7,81 +7,23 @@ import {
   IPaginationOption,
 } from "../../../interfaces/sharedInterface";
 import paginationHelper from "../../helpers/paginationHelper";
-import {
-  CAR_OWNER_SEARCH__FIELDS,
-  ICarOwnerFilters,
-  IMechanicFilters,
-  MECHANIC_FILTER_FIELDS,
-} from "./user.constant";
+
 import UserModel from "./user.model";
+import { IUserFilters, USER_SEARCH_FIELDS } from "./user.constant";
 
-const getAllCarOwner = async (
-  filters: ICarOwnerFilters,
+const getAllUser = async (
+  filters: IUserFilters,
   paginationOption: IPaginationOption,
 ): Promise<IGenericDataWithMeta<IUser[]>> => {
   const { searchTerm, ...filtersFields } = filters;
 
   const andConditions: FilterQuery<IUser>[] = [
-    { role: "car_owner" }, // Ensure only car owners are retrieved
+    // { role: "car_owner" }, // Ensure only car owners are retrieved
   ];
 
   if (searchTerm) {
     andConditions.push({
-      $or: CAR_OWNER_SEARCH__FIELDS.map((field) => ({
-        [field]: new RegExp(searchTerm, "i"),
-      })),
-    });
-  }
-
-  if (Object.keys(filtersFields).length) {
-    const fieldConditions = Object.entries(filtersFields).map(
-      ([key, value]) => ({
-        [key]: value,
-      }),
-    );
-    andConditions.push({ $and: fieldConditions });
-  }
-
-  const whereCondition = andConditions.length ? { $and: andConditions } : {};
-
-  const { page, limit, skip, sortBy, sortOrder } =
-    paginationHelper(paginationOption);
-
-  const sortCondition: { [key: string]: SortOrder } = {};
-  if (sortBy && sortOrder) {
-    sortCondition[sortBy] = sortOrder;
-  }
-
-  const result = await UserModel.find(whereCondition)
-    .sort(sortCondition)
-    .skip(skip)
-    .limit(limit as number);
-
-  const total = await UserModel.countDocuments(whereCondition);
-
-  return {
-    meta: {
-      page,
-      limit,
-      total,
-    },
-    data: result,
-  };
-};
-
-const getAllMechanic = async (
-  filters: IMechanicFilters,
-  paginationOption: IPaginationOption,
-): Promise<IGenericDataWithMeta<IUser[]>> => {
-  const { searchTerm, ...filtersFields } = filters;
-
-  const andConditions: FilterQuery<IUser>[] = [
-    { role: "mechanic" }, // Ensure only car owners are retrieved
-  ];
-
-  if (searchTerm) {
-    andConditions.push({
-      $or: MECHANIC_FILTER_FIELDS.map((field) => ({
+      $or: USER_SEARCH_FIELDS.map((field) => ({
         [field]: new RegExp(searchTerm, "i"),
       })),
     });
@@ -203,8 +145,7 @@ const getSingleUserById = async (userId: string): Promise<IUser> => {
 };
 
 export const UserServices = {
-  getAllMechanic,
   updateProfile,
-  getAllCarOwner,
+  getAllUser,
   getSingleUserById,
 };
