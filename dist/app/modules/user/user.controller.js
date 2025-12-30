@@ -21,7 +21,7 @@ const pick_1 = __importDefault(require("../../../shared/pick"));
 const shared_constant_1 = require("../../../constants/shared.constant");
 const user_constant_1 = require("./user.constant");
 const getAllUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filters = (0, pick_1.default)(req.query, ["searchTerm", ...user_constant_1.USER_FILTER_FIELDS]);
+    const filters = (0, pick_1.default)(req.query, ["searchTerm", ...user_constant_1.USER_SEARCH_FIELDS]);
     const paginationOption = (0, pick_1.default)(req.query, shared_constant_1.paginationFields);
     const result = yield user_service_1.UserServices.getAllUser(filters, paginationOption);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {

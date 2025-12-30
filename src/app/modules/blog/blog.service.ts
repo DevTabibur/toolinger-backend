@@ -27,7 +27,8 @@ const createBlogPost = async (
     status: blogData?.status,
     excerpt: excerpt,
     author: blogData?.author,
-    categories: blogData?.categories,
+    primaryCategory: blogData?.primaryCategory,
+    secondaryCategories: blogData?.secondaryCategories,
     tags: blogData?.tags,
     blogFeaturedImage:
       blogFeaturedImage[0]?.filename?.replace(

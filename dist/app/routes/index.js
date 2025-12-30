@@ -17,10 +17,11 @@ const website_management_routes_1 = require("../modules/website-management/websi
 const domain_tools_routes_1 = require("../modules/domain-tools/domain-tools.routes");
 const advanced_tools_routes_1 = require("../modules/advanced-tools/advanced-tools.routes");
 const more_tools_routes_1 = require("../modules/calculators-tools/more-tools.routes");
-const category_routes_1 = require("../modules/category/category.routes");
+const category_routes_1 = require("../modules/blog/category/category.routes");
 const pages_management_routes_1 = require("../modules/pages-management/pages-management.routes");
 const trash_route_1 = require("../modules/trash/trash.route");
 const comment_route_1 = require("../modules/blog/comment/comment.route");
+const tag_route_1 = require("../modules/blog/tag/tag.route");
 const router = express_1.default.Router();
 const allRoutes = [
     {
@@ -30,6 +31,10 @@ const allRoutes = [
     {
         path: "/blog-category",
         route: category_routes_1.CategoryRoute,
+    },
+    {
+        path: "/blog-tag",
+        route: tag_route_1.TagRoute,
     },
     {
         path: "/blog",
