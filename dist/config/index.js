@@ -28,6 +28,8 @@ exports.default = {
     jwt: {
         accessToken: process.env.ACCESS_TOKEN,
         accessToken_expires_in: process.env.ACCESS_TOKEN_EXPIRES_IN,
+        refreshToken: process.env.REFRESH_TOKEN,
+        refreshToken_expires_in: process.env.REFRESH_TOKEN_EXPIRES_IN,
     },
     // stripe: {
     //   stripe_secret_key: process.env.STRIPE_SECRET_KEY,
@@ -35,4 +37,7 @@ exports.default = {
     // sms_api_key: process.env.SMS_API_KEY,
     // sms_api_sender_id: process.env.SMS_SENDER_ID,
     // sms_api_url: process.env.SMS_API_URL,
+    reset_link: process.env.RESET_PASS_UI_LINK,
+    email: process.env.EMAIL,
+    app_pass: process.env.APP_PASS,
 };

@@ -40,7 +40,7 @@ const userSchema = new mongoose_1.Schema({
     },
     lastName: {
         type: String,
-        required: true,
+        required: false,
     },
     role: {
         type: String,
@@ -52,6 +52,10 @@ const userSchema = new mongoose_1.Schema({
     },
     avatar: {
         type: String,
+    },
+    rememberMe: {
+        type: Boolean,
+        default: false,
     },
 }, {
     timestamps: true,

@@ -98,3 +98,10 @@ export const CATEGORY_SEO_DEFAULTS = {
   DESCRIPTION_MAX_LENGTH: 160,
   TITLE_MAX_LENGTH: 70,
 } as const;
+
+export const CATEGORY_SEARCH_FIELDS = ["name", "slug"]; // "_id" diye regExp chalano jai na
+export const CATEGORY_FILTER_FIELDS = ["status"];
+
+export type ICategoryFilters = {
+  searchTerm?: string;
+};

@@ -20,23 +20,13 @@ const http_status_1 = __importDefault(require("http-status"));
 const pick_1 = __importDefault(require("../../../shared/pick"));
 const shared_constant_1 = require("../../../constants/shared.constant");
 const user_constant_1 = require("./user.constant");
-const getAllCarOwner = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filters = (0, pick_1.default)(req.query, ["searchTerm", ...user_constant_1.CAR_OWNER_FILTER_FIELDS]);
+const getAllUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const filters = (0, pick_1.default)(req.query, ["searchTerm", ...user_constant_1.USER_FILTER_FIELDS]);
     const paginationOption = (0, pick_1.default)(req.query, shared_constant_1.paginationFields);
-    const result = yield user_service_1.UserServices.getAllCarOwner(filters, paginationOption);
+    const result = yield user_service_1.UserServices.getAllUser(filters, paginationOption);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
-        message: "Car Owner list fetched successfully",
-        data: result,
-    });
-}));
-const getAllMechanic = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filters = (0, pick_1.default)(req.query, ["searchTerm", ...user_constant_1.MECHANIC_FILTER_FIELDS]);
-    const paginationOption = (0, pick_1.default)(req.query, shared_constant_1.paginationFields);
-    const result = yield user_service_1.UserServices.getAllMechanic(filters, paginationOption);
-    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
-        statusCode: http_status_1.default.OK,
-        message: "Mechanic list fetched successfully",
+        message: "User list fetched successfully",
         data: result,
     });
 }));
@@ -61,7 +51,6 @@ const getSingleUserById = (0, catchAsync_1.default)((req, res) => __awaiter(void
 }));
 exports.UserController = {
     updateProfile,
-    getAllCarOwner,
-    getAllMechanic,
+    getAllUser,
     getSingleUserById,
 };

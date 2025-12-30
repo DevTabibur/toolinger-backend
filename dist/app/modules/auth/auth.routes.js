@@ -18,8 +18,8 @@ router.post("/change-password", auth_controller_1.AuthController.ChangePassword)
 router.post("/logout", (0, authGuard_1.default)(), auth_controller_1.AuthController.logOutUser);
 // get-me
 router.get("/get-me", (0, authGuard_1.default)(), auth_controller_1.AuthController.getMe);
-// //!  forgot password
-// router.post('/forgot-password', AuthController.forgotPassword)
+//!  forgot password
+router.post("/forgot-password", auth_controller_1.AuthController.forgotPassword);
 // //! reset password
 // router.post('/reset-password', AuthController.resetPassword)
 exports.AuthRoute = router;

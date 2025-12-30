@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import mongoose, { model, Schema, Types } from "mongoose";
 import { IBlogPost } from "./blog.interface";
 import { AUTHOR_ROLE, BLOG_STATUS } from "./blog.constant";
 const BlogPostSchema = new Schema<IBlogPost>(
@@ -64,21 +64,34 @@ const BlogPostSchema = new Schema<IBlogPost>(
     //     index: true,
     //   },
     // ],
-    categories: {
-      type: [
-        {
-          type: Types.ObjectId,
-          ref: "Category",
-        },
-      ],
+    // categories: {
+    //   type: [
+    //     {
+    //       type: Types.ObjectId,
+    //       ref: "Category",
+    //     },
+    //   ],
+    //   required: true,
+    //   validate: {
+    //     validator: function (v: Types.ObjectId[]) {
+    //       return Array.isArray(v) && v.length > 0;
+    //     },
+    //     message: "At least one category is required",
+    //   },
+    // },
+
+    primaryCategory: {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
       required: true,
-      validate: {
-        validator: function (v: Types.ObjectId[]) {
-          return Array.isArray(v) && v.length > 0;
-        },
-        message: "At least one category is required",
-      },
     },
+
+    secondaryCategories: [
+      {
+        type: Types.ObjectId,
+        ref: "Category",
+      },
+    ],
 
     tags: {
       type: [
@@ -190,6 +203,17 @@ const BlogPostSchema = new Schema<IBlogPost>(
     timestamps: true, // Automatically adds createdAt and updatedAt fields
   },
 );
+
+BlogPostSchema.pre("validate", async function (next) {
+  if (!this.primaryCategory) {
+    const uncategorized = await mongoose
+      .model("Category")
+      .findOne({ slug: "uncategorized", deletedAt: null });
+
+    this.primaryCategory = uncategorized._id;
+  }
+  next();
+});
 
 // Create the model
 const BlogPostModel = model<IBlogPost>("BlogPost", BlogPostSchema);

@@ -47,7 +47,6 @@ const registerNewUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0
 }));
 //!================================================>>>
 const loginExistingUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("loginExistingUser", req.body);
     const _a = yield auth_service_1.AuthService.loginExistingUser(req.body), { accessToken } = _a, rest = __rest(_a, ["accessToken"]);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
@@ -87,6 +86,7 @@ const ChangePassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
 //!===========================================================>>>
 const logOutUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.user;
+    console.log("token", token);
     const result = yield auth_service_1.AuthService.logOutUser(token);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,
@@ -104,17 +104,17 @@ const getMe = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, 
     });
 }));
 ///** DO NOT DELETE IT */
-//   //!==========================================================>>>
-//   const forgotPassword = catchAsync(async (req: Request, res: Response) => {
-//     const { email } = req.body
-//     const result = await AuthService.forgotPassword(email)
-//     sendSuccessResponse(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       data: result,
-//       message: 'Check your email!',
-//     })
-//   })
+//!==========================================================>>>
+const forgotPassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email } = req.body;
+    const result = yield auth_service_1.AuthService.forgotPassword(email);
+    (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        data: result,
+        message: "Check your email!",
+    });
+}));
 //   //!===================================================================>>>
 //   const resetPassword = catchAsync(async (req: Request, res: Response) => {
 //     // const token = req.headers.authorization
@@ -133,4 +133,5 @@ exports.AuthController = {
     loginExistingUser,
     logOutUser,
     getMe,
+    forgotPassword,
 };

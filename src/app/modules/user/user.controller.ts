@@ -6,10 +6,10 @@ import httpStatus from "http-status";
 import pick from "../../../shared/pick";
 import { IPaginationOption } from "../../../interfaces/sharedInterface";
 import { paginationFields } from "../../../constants/shared.constant";
-import { USER_FILTER_FIELDS } from "./user.constant";
+import { USER_FILTER_FIELDS, USER_SEARCH_FIELDS } from "./user.constant";
 
 const getAllUser = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, ["searchTerm", ...USER_FILTER_FIELDS]);
+  const filters = pick(req.query, ["searchTerm", ...USER_SEARCH_FIELDS]);
   const paginationOption: IPaginationOption = pick(req.query, paginationFields);
   const result = await UserServices.getAllUser(filters, paginationOption);
   sendSuccessResponse(res, {

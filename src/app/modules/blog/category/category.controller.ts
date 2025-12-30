@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
-import catchAsync from "../../../shared/catchAsync";
+import catchAsync from "../../../../shared/catchAsync";
 import { CategoryService } from "./category.service";
-import { sendSuccessResponse } from "../../../shared/sendSuccessResponse";
+import { sendSuccessResponse } from "../../../../shared/sendSuccessResponse";
 import httpStatus from "http-status";
+import pick from "../../../../shared/pick";
+import { CATEGORY_FILTER_FIELDS } from "./category.constant";
+import { IPaginationOption } from "../../../../interfaces/sharedInterface";
+import { paginationFields } from "../../../../constants/shared.constant";
 
 const createCategory = catchAsync(async (req: Request, res: Response) => {
   const result = await CategoryService.createCategory(req.body);
@@ -24,7 +28,12 @@ const getCategoryDetails = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllCategories = catchAsync(async (req: Request, res: Response) => {
-  const result = await CategoryService.getAllCategories();
+  const filters = pick(req.query, ["searchTerm", ...CATEGORY_FILTER_FIELDS]);
+  const paginationOption: IPaginationOption = pick(req.query, paginationFields);
+  const result = await CategoryService.getAllCategories(
+    filters,
+    paginationOption,
+  );
   sendSuccessResponse(res, {
     statusCode: httpStatus.OK,
     message: "Categories Fetched Successfully",

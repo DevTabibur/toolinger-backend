@@ -12,10 +12,11 @@ import { WebsiteManagementRoute } from "../modules/website-management/website-ma
 import { DomainToolsRoute } from "../modules/domain-tools/domain-tools.routes";
 import { AdvancedToolsRoute } from "../modules/advanced-tools/advanced-tools.routes";
 import { MoreToolsRoute } from "../modules/calculators-tools/more-tools.routes";
-import { CategoryRoute } from "../modules/category/category.routes";
+import { CategoryRoute } from "../modules/blog/category/category.routes";
 import { DynamicPagesArticleAndSeoRoute } from "../modules/pages-management/pages-management.routes";
 import { TrashRoute } from "../modules/trash/trash.route";
 import { CommentRoute } from "../modules/blog/comment/comment.route";
+import { TagRoute } from "../modules/blog/tag/tag.route";
 
 const router = express.Router();
 
@@ -27,6 +28,10 @@ const allRoutes = [
   {
     path: "/blog-category",
     route: CategoryRoute,
+  },
+  {
+    path: "/blog-tag",
+    route: TagRoute,
   },
   {
     path: "/blog",

@@ -39,7 +39,9 @@ export interface IBlogPost {
   author: IBlogAuthor;
 
   // Taxonomy
-  categories: Types.ObjectId[];
+  // categories: Types.ObjectId[];
+  primaryCategory: Types.ObjectId;
+  secondaryCategories: Types.ObjectId[];
   tags: Types.ObjectId[];
 
   // Media

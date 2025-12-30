@@ -18,6 +18,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const user_model_1 = __importDefault(require("../user/user.model"));
 const jwtHelpers_1 = require("../../helpers/jwtHelpers");
 const config_1 = __importDefault(require("../../../config"));
+const sendEmail_1 = require("../../helpers/sendEmail");
 const registerNewUser = (userData) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = userData;
     //! Validation for already loggedIn User can not register again
@@ -34,7 +35,8 @@ const registerNewUser = (userData) => __awaiter(void 0, void 0, void 0, function
     };
 });
 const loginExistingUser = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = loginData;
+    // console.log("login data", loginData)
+    const { email, password, rememberMe } = loginData;
     const isUserExist = yield user_model_1.default.findOne({ email });
     if (!isUserExist) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User is not found");
@@ -63,6 +65,7 @@ const ChangePassword = (userId, oldPassword, newPassword) => __awaiter(void 0, v
 });
 const logOutUser = (token) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId } = token;
+    console.log("userId", userId);
     if (!userId) {
         throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "User not found");
     }
@@ -80,37 +83,25 @@ const getMe = (token) => __awaiter(void 0, void 0, void 0, function* () {
 });
 //** DO NOT DELETE IT */
 //   //****************************************************************** */
-//   const forgotPassword = async (email: string) => {
-//     // ! 1. check if user is existed on our db or not check it with email
-//     const userExists = await UserModel.findOne(
-//       { email },
-//       { name: 1, role: 1, email: 1 },
-//     )
-//     if (!userExists) {
-//       throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!")
-//     }
-//     const passwordResetToken = jwtHelpers.createResetToken(
-//       { id: userExists.id },
-//       config.jwt.accessToken as string,
-//       '5m',
-//     )
-//     const resetLink: string =
-//       config.resetLink + `email=${userExists?.email}&token=${passwordResetToken}`
-//     await sendEmail(
-//       userExists?.email,
-//       'Reset Password Link',
-//       'This link will expire within 5 minutes',
-//       `<div>
-//          <p>Hi, Your Reset Password Link: <a href="${resetLink}">Click Here</a></p>
-//          <p style="color: red;">This link will expire within 5 minutes</p>
-//          <p>Thank You</p>
-//       </div>
-//       `,
-//     )
-//     return {
-//       message: 'Check your email!',
-//     }
-//   }
+const forgotPassword = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    // ! 1. check if user is existed on our db or not check it with email
+    const userExists = yield user_model_1.default.findOne({ email }, { name: 1, role: 1, email: 1 });
+    if (!userExists) {
+        throw new ApiError_1.default(http_status_1.default.BAD_REQUEST, "User doesn't exist!");
+    }
+    const passwordResetToken = jwtHelpers_1.jwtHelpers.createResetToken({ id: userExists.id }, config_1.default.jwt.accessToken, "5m");
+    const resetLink = config_1.default.reset_link +
+        `email=${userExists === null || userExists === void 0 ? void 0 : userExists.email}&token=${passwordResetToken}`;
+    yield (0, sendEmail_1.sendEmail)(userExists === null || userExists === void 0 ? void 0 : userExists.email, "Reset Password Link", "This link will expire within 5 minutes", `<div>
+         <p>Hi, Your Reset Password Link: <a href="${resetLink}">Click Here</a></p>
+         <p style="color: red;">This link will expire within 5 minutes</p>
+         <p>Thank You</p>
+      </div>
+      `);
+    return {
+        message: "Check your email!",
+    };
+});
 //   //****************************************************************** */
 //   const resetPassword = async (
 //     payload: {
@@ -147,5 +138,6 @@ exports.AuthService = {
     registerNewUser,
     loginExistingUser,
     logOutUser,
+    forgotPassword,
     getMe,
 };
