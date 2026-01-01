@@ -5,6 +5,8 @@ import setupSocketManager from "./app/utils/socketManager";
 import dbConnect from "./app/utils/dbConnect";
 import { errorLogger, logger } from "./shared/logger";
 import app from "./app";
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = config.port || 5000;
 const server = new Server(app);

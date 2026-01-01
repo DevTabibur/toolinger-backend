@@ -6,11 +6,6 @@
     "auditLog": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\.feb70ba29566a0bb12caa1143d441e29c83d3822-audit.json",
     "files": [
         {
-            "date": 1766064003689,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-19-success.log",
-            "hash": "4388037222746e89669e4072194b009b70ed61e35c0718e7111010fe59618d79"
-        },
-        {
             "date": 1766069731460,
             "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2025-18-12-20-success.log",
             "hash": "1fea3b2277333a0658cd69802044bc71a1cfd423a66b1cc504513094fc299fa2"
@@ -364,6 +359,11 @@
             "date": 1767272467726,
             "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2026-01-01-19-success.log",
             "hash": "fde08ea039bf979a3f827d0d3f0b926d5a78fb863ad2b45964b26ad138ff2010"
+        },
+        {
+            "date": 1767277150720,
+            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\successes\\Toolinger-2026-01-01-20-success.log",
+            "hash": "5ca236a84f297041f6c507ac26d1bae8a81bcb1f9a5ae4d2b256519030ac85f0"
         }
     ],
     "hashType": "sha256"
