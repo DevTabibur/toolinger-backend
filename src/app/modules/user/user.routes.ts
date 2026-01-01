@@ -1,14 +1,30 @@
 import { Router } from "express";
 import { UserController } from "./user.controller";
+import authGuard from "../../middlewares/authGuard";
+import { USER_ROLE_ENUM } from "./user.constant";
 const router = Router();
 
-// ** get all car owner profile
-router.get("/", UserController.getAllUser);
+// ** get all user profile
+router.get("/", authGuard(USER_ROLE_ENUM.ADMIN), UserController.getAllUser);
 
-// update profile
-router.patch("/:userId", UserController.updateProfile);
+// update profile, or any data
+router.patch(
+  "/:userId",
+  authGuard(USER_ROLE_ENUM.ADMIN, USER_ROLE_ENUM.EDITOR, USER_ROLE_ENUM.GUEST),
+  UserController.updateProfile,
+);
 
 // ** get user specific details for user
-router.get("/:userId", UserController.getSingleUserById);
+router.get(
+  "/:userId",
+  authGuard(USER_ROLE_ENUM.ADMIN, USER_ROLE_ENUM.EDITOR, USER_ROLE_ENUM.GUEST),
+  UserController.getSingleUserById,
+);
+
+router.delete(
+  "/:userId",
+  authGuard(USER_ROLE_ENUM.ADMIN),
+  UserController.deleteUser,
+);
 
 export const UserRoute = router;

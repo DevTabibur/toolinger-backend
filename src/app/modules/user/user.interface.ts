@@ -7,4 +7,5 @@ export interface IUser {
   role?: string;
   avatar?: string;
   rememberMe?: boolean;
+  phoneNo?: string;
 }

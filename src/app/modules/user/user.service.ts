@@ -17,9 +17,7 @@ const getAllUser = async (
 ): Promise<IGenericDataWithMeta<IUser[]>> => {
   const { searchTerm, ...filtersFields } = filters;
 
-  const andConditions: FilterQuery<IUser>[] = [
-    // { role: "car_owner" }, // Ensure only car owners are retrieved
-  ];
+  const andConditions = [];
 
   if (searchTerm) {
     andConditions.push({
@@ -144,8 +142,26 @@ const getSingleUserById = async (userId: string): Promise<IUser> => {
   return user as IUser;
 };
 
+const deleteUser = async (userId: string): Promise<IUser> => {
+  if (!Types.ObjectId.isValid(userId)) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User ID is not valid");
+  }
+
+  const user = await UserModel.findByIdAndDelete(userId);
+
+  if (!user) {
+    throw new ApiError(
+      httpStatus.NOT_FOUND,
+      "User not found. Please try another!",
+    );
+  }
+
+  return user as IUser;
+};
+
 export const UserServices = {
   updateProfile,
   getAllUser,
   getSingleUserById,
+  deleteUser,
 };

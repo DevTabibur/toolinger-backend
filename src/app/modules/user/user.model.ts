@@ -3,6 +3,7 @@ import { Model, Schema, model } from "mongoose";
 import { IUser } from "./user.interface";
 import config from "../../../config";
 import bcrypt from "bcryptjs";
+import { USER_STATUS } from "./user.constant";
 
 type UserModel = Model<IUser> & {
   isUserExist(userId: string): Promise<boolean>;
@@ -45,7 +46,8 @@ const userSchema = new Schema<IUser>(
     },
     status: {
       type: String,
-      default: "active",
+      enum: Object.values(USER_STATUS),
+      default: USER_STATUS.ACTIVE,
     },
     avatar: {
       type: String,
@@ -53,6 +55,9 @@ const userSchema = new Schema<IUser>(
     rememberMe: {
       type: Boolean,
       default: false,
+    },
+    phoneNo: {
+      type: String,
     },
   },
   {
