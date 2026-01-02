@@ -37,4 +37,8 @@ export default {
   reset_link: process.env.RESET_PASS_UI_LINK,
   email: process.env.EMAIL,
   app_pass: process.env.APP_PASS,
+  zeptomail: {
+    url: process.env.ZEPTOMAIL_URL,
+    token: process.env.ZEPTOMAIL_TOKEN,
+  },
 };

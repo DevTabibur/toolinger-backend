@@ -80,6 +80,7 @@ const uploadMiddleware = (req, res, next) => {
         { name: "seoImage", maxCount: 1 }, // for blog
         { name: "ogImageUrl", maxCount: 1 },
         { name: "twitterImageUrl", maxCount: 1 },
+        { name: "avatar", maxCount: 1 }, // profile
     ]);
     upload(req, res, (error) => __awaiter(void 0, void 0, void 0, function* () {
         if (error instanceof multer_1.default.MulterError) {
@@ -119,6 +120,30 @@ const uploadMiddleware = (req, res, next) => {
                 // Remove original blogCover
                 setTimeout(() => {
                     deleteFileWithRetry(blogFeaturedImagePath, 3, 3000);
+                }, 5000);
+            }
+        }
+        // avatar
+        if (uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.avatar) {
+            const avatar = uploadedFiles === null || uploadedFiles === void 0 ? void 0 : uploadedFiles.avatar[0];
+            const avatarPath = avatar.path;
+            const avatarExtension = path_1.default.extname(avatarPath).toLowerCase();
+            const restImage4WebPPath = path_1.default.join(path_1.default.dirname(avatarPath), `${path_1.default.basename(avatarPath, avatarExtension)}.webp`);
+            // Check if the blogCover is already in WebP format
+            if (avatarExtension === ".webp") {
+                // Skip conversion, use the original WebP image
+                fs_1.default.rename(avatarPath, restImage4WebPPath, (error) => {
+                    if (error) {
+                        console.error("Failed to rename the file:", error);
+                    }
+                });
+            }
+            else {
+                // Convert restImage1 to WebP
+                yield (0, sharp_1.default)(avatarPath).toFormat("webp").toFile(restImage4WebPPath);
+                // Remove original blogCover
+                setTimeout(() => {
+                    deleteFileWithRetry(avatarPath, 3, 3000);
                 }, 5000);
             }
         }

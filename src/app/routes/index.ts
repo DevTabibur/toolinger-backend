@@ -18,6 +18,7 @@ import { TrashRoute } from "../modules/trash/trash.route";
 import { CommentRoute } from "../modules/blog/comment/comment.route";
 import { TagRoute } from "../modules/blog/tag/tag.route";
 import { SystemSettingsRoute } from "../modules/settings/system-settings/system-settings.routes";
+import { SentMessageRoute } from "../modules/sent-message/sent-message.routes";
 
 const router = express.Router();
 
@@ -70,6 +71,10 @@ const allRoutes = [
   {
     path: "/settings/system/otp",
     route: SystemSettingsRoute,
+  },
+  {
+    path: "/sent-message",
+    route: SentMessageRoute,
   },
   {
     path: "/analytics",

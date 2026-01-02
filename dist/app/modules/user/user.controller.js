@@ -33,6 +33,8 @@ const getAllUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
 const updateProfile = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { userId } = req.params;
     const updateInfo = req.body;
+    console.log("userId, userId", userId);
+    console.log("updateInfo, updateInfo", updateInfo);
     const result = yield user_service_1.UserServices.updateProfile(userId, updateInfo);
     (0, sendSuccessResponse_1.sendSuccessResponse)(res, {
         statusCode: http_status_1.default.OK,

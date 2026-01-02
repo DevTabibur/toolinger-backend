@@ -53,6 +53,8 @@ const socketManager_1 = __importDefault(require("./app/utils/socketManager"));
 const dbConnect_1 = __importDefault(require("./app/utils/dbConnect"));
 const logger_1 = require("./shared/logger");
 const app_1 = __importDefault(require("./app"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const PORT = config_1.default.port || 5000;
 const server = new http_1.Server(app_1.default);
 exports.IO = new socket_io_1.Server(server, {

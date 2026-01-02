@@ -22,6 +22,7 @@ const pages_management_routes_1 = require("../modules/pages-management/pages-man
 const trash_route_1 = require("../modules/trash/trash.route");
 const comment_route_1 = require("../modules/blog/comment/comment.route");
 const tag_route_1 = require("../modules/blog/tag/tag.route");
+const system_settings_routes_1 = require("../modules/settings/system-settings/system-settings.routes");
 const router = express_1.default.Router();
 const allRoutes = [
     {
@@ -69,6 +70,10 @@ const allRoutes = [
         route: user_routes_1.UserRoute,
     },
     {
+        path: "/settings/system/otp",
+        route: system_settings_routes_1.SystemSettingsRoute,
+    },
+    {
         path: "/analytics",
         route: analytics_routes_1.AnalyticsRoute,
     },
@@ -102,6 +107,10 @@ const allRoutes = [
     {
         path: "/pages-article-and-seo",
         route: pages_management_routes_1.DynamicPagesArticleAndSeoRoute,
+    },
+    {
+        path: "/system-settings",
+        route: system_settings_routes_1.SystemSettingsRoute,
     },
 ];
 allRoutes.forEach((route) => router.use(route.path, route.route));
