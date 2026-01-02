@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UserController } from "./user.controller";
 import authGuard from "../../middlewares/authGuard";
 import { USER_ROLE_ENUM } from "./user.constant";
+import uploadMiddleware from "../../middlewares/fileUploadAndConvertToWebP";
 const router = Router();
 
 // ** get all user profile
@@ -11,6 +12,7 @@ router.get("/", authGuard(USER_ROLE_ENUM.ADMIN), UserController.getAllUser);
 router.patch(
   "/:userId",
   authGuard(USER_ROLE_ENUM.ADMIN, USER_ROLE_ENUM.EDITOR, USER_ROLE_ENUM.GUEST),
+  uploadMiddleware,
   UserController.updateProfile,
 );
 

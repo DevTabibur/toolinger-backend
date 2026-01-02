@@ -17,6 +17,7 @@ import { DynamicPagesArticleAndSeoRoute } from "../modules/pages-management/page
 import { TrashRoute } from "../modules/trash/trash.route";
 import { CommentRoute } from "../modules/blog/comment/comment.route";
 import { TagRoute } from "../modules/blog/tag/tag.route";
+import { SystemSettingsRoute } from "../modules/settings/system-settings/system-settings.routes";
 
 const router = express.Router();
 
@@ -67,6 +68,10 @@ const allRoutes = [
     route: UserRoute,
   },
   {
+    path: "/settings/system/otp",
+    route: SystemSettingsRoute,
+  },
+  {
     path: "/analytics",
     route: AnalyticsRoute,
   },
@@ -102,6 +107,10 @@ const allRoutes = [
   {
     path: "/pages-article-and-seo",
     route: DynamicPagesArticleAndSeoRoute,
+  },
+  {
+    path: "/system-settings",
+    route: SystemSettingsRoute,
   },
 ];
 
