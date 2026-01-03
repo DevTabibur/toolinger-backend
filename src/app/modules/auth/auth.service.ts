@@ -7,6 +7,13 @@ import { Secret } from "jsonwebtoken";
 import { IUser } from "../user/user.interface";
 import { ILoginUser, IUserResponse } from "./auth.interface";
 import { sendEmail } from "../../helpers/sendEmail";
+import { sendZeptoMail } from "../../helpers/sendZeptoMail";
+import OTPSettingsModel from "../settings/system-settings/system-settings.model";
+import { OTPGenerator } from "../../utils/otpGenerator";
+import OTPModel from "../otp/otp.model";
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
+import { buildOTPEmailTemplate } from "../../utils/OTPEmailTemplate";
 
 const registerNewUser = async (userData: IUser): Promise<IUserResponse> => {
   const { email } = userData;
@@ -120,40 +127,136 @@ const getMe = async (token: any) => {
 
 //** DO NOT DELETE IT */
 //   //****************************************************************** */
-const forgotPassword = async (email: string) => {
-  // ! 1. check if user is existed on our db or not check it with email
-  const userExists = await UserModel.findOne(
-    { email },
-    { name: 1, role: 1, email: 1 },
-  );
-  if (!userExists) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+// const forgotPassword = async (email: string) => {
+//   // ! 1. check if user is existed on our db or not check it with email
+//   const userExists = await UserModel.findOne(
+//     { email },
+//     { name: 1, role: 1, email: 1 },
+//   );
+//   if (!userExists) {
+//     throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+//   }
+
+//   const passwordResetToken = jwtHelpers.createResetToken(
+//     { id: userExists.id },
+//     config.jwt.accessToken as string,
+//     "5m",
+//   );
+
+//   const resetLink: string =
+//     config.reset_link +
+//     `email=${userExists?.email}&token=${passwordResetToken}`;
+
+//   await sendZeptoMail(
+//     userExists?.email,
+//     "Reset Password Link",
+//     "This link will expire within 5 minutes",
+//     `<div>
+//          <p>Hi, Your Reset Password Link: <a href="${resetLink}">Click Here</a></p>
+//          <p style="color: red;">This link will expire within 5 minutes</p>
+//          <p>Thank You</p>
+//       </div>
+//       `,
+//   );
+//   return {
+//     message: "Check your email!",
+//   };
+// };
+
+export const forgotPassword = async (email: string) => {
+  const session = await mongoose.startSession();
+
+  let createdOTP: any = null;
+  let user: any = null;
+  let otpPlain = "";
+  let expireDate!: Date;
+
+  try {
+    await session.withTransaction(async () => {
+      // 1. Check user
+      user = await UserModel.findOne(
+        { email },
+        { firstName: 1, lastName: 1, email: 1 },
+      ).session(session);
+
+      if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "User doesn't exist!");
+      }
+
+      // 2. Load OTP settings
+      const otpSettings = await OTPSettingsModel.findOne({}).session(session);
+      if (!otpSettings) {
+        throw new ApiError(
+          httpStatus.INTERNAL_SERVER_ERROR,
+          "OTP settings not configured",
+        );
+      }
+
+      if (otpSettings.otpType !== "EMAIL") {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Email OTP is disabled");
+      }
+
+      // 3. Invalidate previous OTPs
+      await OTPModel.deleteMany({ email: user.email }, { session });
+
+      // 4. Generate OTP
+      otpPlain = OTPGenerator(otpSettings.otpDigitLimit);
+      const hashedOTP = await bcrypt.hash(
+        otpPlain,
+        Number(config.bcrypt_salt_round),
+      );
+
+      expireDate = new Date(Date.now() + otpSettings.otpExpireTime * 60 * 1000);
+
+      // 5. Save OTP
+      createdOTP = await OTPModel.create(
+        [
+          {
+            email: user.email,
+            otpCode: hashedOTP,
+            expireTime: expireDate,
+          },
+        ],
+        { session },
+      );
+    });
+
+    // 6. Send Email (outside transaction)
+    const emailHTML = buildOTPEmailTemplate({
+      userName: `${user.firstName} ${user.lastName || ""}`.trim(),
+      otp: otpPlain,
+      expireMinutes: Number((expireDate.getTime() - Date.now()) / 60000),
+    });
+
+    await sendZeptoMail({
+      to: [
+        {
+          email: user.email,
+          name: `${user.firstName} ${user.lastName || ""}`.trim(),
+        },
+      ],
+      subject: "Your Toolinger Verification Code",
+      htmlBody: emailHTML,
+    });
+
+    return {
+      message: "OTP sent to your email",
+    };
+  } catch (error: any) {
+    // Cleanup OTP if email failed
+    if (createdOTP?.[0]?._id) {
+      await OTPModel.findByIdAndDelete(createdOTP[0]._id);
+    }
+
+    throw error instanceof ApiError
+      ? error
+      : new ApiError(
+          httpStatus.INTERNAL_SERVER_ERROR,
+          error.message || "Failed to process forgot password",
+        );
+  } finally {
+    session.endSession();
   }
-
-  const passwordResetToken = jwtHelpers.createResetToken(
-    { id: userExists.id },
-    config.jwt.accessToken as string,
-    "5m",
-  );
-
-  const resetLink: string =
-    config.reset_link +
-    `email=${userExists?.email}&token=${passwordResetToken}`;
-
-  await sendEmail(
-    userExists?.email,
-    "Reset Password Link",
-    "This link will expire within 5 minutes",
-    `<div>
-         <p>Hi, Your Reset Password Link: <a href="${resetLink}">Click Here</a></p>
-         <p style="color: red;">This link will expire within 5 minutes</p>
-         <p>Thank You</p>
-      </div>
-      `,
-  );
-  return {
-    message: "Check your email!",
-  };
 };
 
 //   //****************************************************************** */
