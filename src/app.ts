@@ -16,6 +16,7 @@ const app: Application = express();
 app.use(compression());
 app.use(
   cors({
+    // origin: "*",
     origin: IS_MODE_PROD
       ? ["https://toolinger.com", "https://www.toolinger.com"]
       : [
@@ -41,14 +42,19 @@ app.use(
 //     allowedHeaders: ['Content-Type', 'Authorization'],
 //   }),
 // ) // for cookie (refresh token)
-
+// Handle preflight requests with same CORS config
+app.options("*", cors());
 app.use(express.json({ limit: "500mb" })); // to handle too many request entity
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static("./upload")); // Serve uploaded files
+// app.use(express.static("./upload")); // Serve uploaded files
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views")); // Adjust path as needed
+// app.use(
+//   express.static(path.join(process.cwd(), "upload"))
+// );
 
+app.use("/upload", express.static(path.join(process.cwd(), "upload"))); // http://localhost:5000/upload/20260104587-LogoPNG.webp
 app.get("/", (req: Request, res: Response) => {
   res.render("index.ejs");
 });
@@ -57,24 +63,24 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/v1", routes);
 
 // Route for redirecting short URLs with correct type annotations
-app.get("/:shortUrl", async (req: Request, res: Response): Promise<any> => {
-  const { shortUrl } = req.params;
-  try {
-    const originalUrl = await redirectUrl(shortUrl);
+// app.get("/:shortUrl", async (req: Request, res: Response): Promise<any> => {
+//   const { shortUrl } = req.params;
+//   try {
+//     const originalUrl = await redirectUrl(shortUrl);
 
-    if (!originalUrl) {
-      throw new ApiError(httpStatus.BAD_REQUEST, "URL not found");
-    }
+//     if (!originalUrl) {
+//       throw new ApiError(httpStatus.BAD_REQUEST, "URL not found");
+//     }
 
-    // Perform the redirect to the original URL
-    res.redirect(originalUrl);
-  } catch (error) {
-    // Handle any errors here (optional)
-    return res
-      .status(500)
-      .send("An error occurred while processing the request.");
-  }
-});
+//     // Perform the redirect to the original URL
+//     res.redirect(originalUrl);
+//   } catch (error) {
+//     // Handle any errors here (optional)
+//     return res
+//       .status(500)
+//       .send("An error occurred while processing the request.");
+//   }
+// });
 
 // console.log("env development =>>>", app.get("env"));
 

@@ -22,16 +22,25 @@ const getAllUser = catchAsync(async (req: Request, res: Response) => {
 const updateProfile = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.params;
   const updateInfo = req.body;
+  const files = req.files as any;
+  console.log("userId =>>>", userId);
+  console.log("files =>>>", files);
+  console.log("req.body =>>>", req.body);
 
-  console.log("userId, userId", userId);
-  console.log("updateInfo, updateInfo", updateInfo);
+  const avatarFile = files?.avatar?.[0];
 
-  const result = await UserServices.updateProfile(userId, updateInfo);
-  sendSuccessResponse(res, {
-    statusCode: httpStatus.OK,
-    message: "Profile Created Successfully",
-    data: result,
-  });
+  // const updateInfoData = {
+  //   ...updateInfo,
+  //   avatar: avatarFile ? avatarFile.filename : undefined,
+  // };
+  // console.log("updateInfoData =>>>", updateInfoData);
+
+  // const result = await UserServices.updateProfile(userId, updateInfoData);
+  // sendSuccessResponse(res, {
+  //   statusCode: httpStatus.OK,
+  //   message: "Profile Created Successfully",
+  //   data: result,
+  // });
 });
 
 const getSingleUserById = catchAsync(async (req: Request, res: Response) => {

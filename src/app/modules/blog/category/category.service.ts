@@ -92,6 +92,49 @@ const deleteCategory = async (categoryId: string): Promise<ICategory> => {
   return result;
 };
 
+// delete for trash records
+// const deleteVehicle = async (vehicleId: string): Promise<IVehicle | null> => {
+//   if (!Types.ObjectId.isValid(vehicleId)) {
+//     throw new ApiError(httpStatus.BAD_REQUEST, 'invalid Vehicle id provided')
+//   }
+
+//   const session = await VehicleModel.startSession()
+//   session.startTransaction()
+
+//   try {
+//     // Delete data
+//     const result =
+//       await VehicleModel.findByIdAndDelete(vehicleId).session(session)
+//     if (!result) {
+//       throw new ApiError(httpStatus.NOT_FOUND, 'Vehicle not found')
+//     }
+//     // Create trash record
+//     const trashRecord = new TrashModel({
+//       model: 'Vehicle',
+//       data: result,
+//       deletedAt: new Date(),
+//       expireAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days expiration
+//     })
+
+//     // Save the trash record (this is done in parallel)
+//     const trashSavePromise = trashRecord.save()
+
+//     // Commit the transaction
+//     await Promise.all([trashSavePromise])
+
+//     // Commit the session
+//     await session.commitTransaction()
+//     session.endSession()
+
+//     return result
+//   } catch (error) {
+//     // If any error occurs, abort the transaction
+//     await session.abortTransaction()
+//     session.endSession()
+//     throw error
+//   }
+// }
+
 const getCategoryBySlug = async (slug: string): Promise<ICategory> => {
   const result = await CategoryModel.findOne({ slug });
   if (!result) {

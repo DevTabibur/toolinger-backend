@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
 import authGuard from "../../middlewares/authGuard";
+import { USER_ROLE_ENUM } from "../user/user.constant";
 
 const router = Router();
 
@@ -23,6 +24,6 @@ router.get("/get-me", authGuard(), AuthController.getMe);
 router.post("/forgot-password", AuthController.forgotPassword);
 
 // //! reset password
-// router.post('/reset-password', AuthController.resetPassword)
+router.post("/reset-password", AuthController.resetPassword);
 
 export const AuthRoute = router;
