@@ -83,7 +83,7 @@ const ChangePassword = catchAsync(async (req: Request, res: Response) => {
 //!===========================================================>>>
 const logOutUser = catchAsync(async (req: Request, res: Response) => {
   const token = req.user;
-  console.log("token", token);
+  // console.log("token", token);
 
   const result = await AuthService.logOutUser(token);
   sendSuccessResponse(res, {
@@ -119,20 +119,32 @@ const forgotPassword = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-//   //!===================================================================>>>
-//   const resetPassword = catchAsync(async (req: Request, res: Response) => {
-//     // const token = req.headers.authorization
-//     const token = req.body.token
-//     const data = await AuthService.resetPassword(req.body, token as string)
+// //!====================JWT BASED=====================================>>>
+// const resetPassword = catchAsync(async (req: Request, res: Response) => {
+//   const token = req.headers.authorization
+//   // const token = req.body.token
+//   // console.log("tokne", token)
+//   const data = await AuthService.resetPassword(req.body, token as string)
 
-//     sendSuccessResponse(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       data: data,
-//       message: 'Account recovered',
-//     })
+//   sendSuccessResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     data: data,
+//     message: 'Account recovered',
 //   })
+// })
 
+//!=========================OTP BASED============================>>>
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
+  const data = await AuthService.resetPassword(req.body);
+
+  sendSuccessResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: data,
+    message: "Account recovered",
+  });
+});
 export const AuthController = {
   ChangePassword,
   registerNewUser,
@@ -140,4 +152,5 @@ export const AuthController = {
   logOutUser,
   getMe,
   forgotPassword,
+  resetPassword,
 };

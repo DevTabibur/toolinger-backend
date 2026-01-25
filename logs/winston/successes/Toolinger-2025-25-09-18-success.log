@@ -1,4 +1,0 @@
-Thu Sep 25 2025 18:22:22 [Toolinger] info: ✅ Mongoose connected to the database
-Thu Sep 25 2025 18:44:24 [Toolinger] info: 🛑 SIGINT received. Closing MongoDB connection...
-Thu Sep 25 2025 18:44:30 [Toolinger] info: 🛢 Database is connected successfully
-Thu Sep 25 2025 18:44:30 [Toolinger] info: 🌐 Server started on port 5000

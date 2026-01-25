@@ -154,6 +154,8 @@ const uploadMiddleware = (req: Request, res: Response, next: NextFunction) => {
         `${path.basename(avatarPath, avatarExtension)}.webp`,
       );
 
+      const webpPath = avatarPath.replace(avatarExtension, ".webp");
+
       // Check if the blogCover is already in WebP format
       if (avatarExtension === ".webp") {
         // Skip conversion, use the original WebP image
@@ -171,6 +173,9 @@ const uploadMiddleware = (req: Request, res: Response, next: NextFunction) => {
           deleteFileWithRetry(avatarPath, 3, 3000);
         }, 5000);
       }
+      // 🔥 MOST IMPORTANT PART
+      avatar.filename = path.basename(webpPath);
+      avatar.path = webpPath;
     }
 
     // seoImage to WebP

@@ -103,7 +103,7 @@ const ChangePassword = async (
 
 const logOutUser = async (token: any) => {
   const { userId } = token;
-  console.log("userId", userId);
+  // console.log("userId", userId);
   if (!userId) {
     throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
   }
@@ -259,42 +259,92 @@ export const forgotPassword = async (email: string) => {
   }
 };
 
-//   //****************************************************************** */
+//****************************************************************** */
 
-//   const resetPassword = async (
-//     payload: {
-//       email: string
-//       password: string
-//     },
-//     token: string,
-//   ) => {
-//     const { email, password } = payload
+// const resetPassword = async (
+//   payload: {
+//     email: string
+//     password: string
+//   },
+//   token: string,
+// ) => {
+//   const { email, password } = payload
 
-//     const userExists = await UserModel.findOne({ email })
-//     if (!userExists) {
-//       throw new ApiError(httpStatus.BAD_REQUEST, 'User not found')
-//     }
-
-//     const isVerified = jwtHelpers.verifyToken(
-//       token,
-//       config.jwt.accessToken as string,
-//     )
-
-//     const hashedPassword = await bcrypt.hash(
-//       password,
-//       Number(config.bcrypt_salt_round),
-//     )
-//     await UserModel.updateOne(
-//       { email: email },
-//       {
-//         $set: {
-//           password: hashedPassword,
-//         },
-//       },
-//     )
-
-//     // await userModel.updateOne({ email }, { hashedPassword })
+//   const userExists = await UserModel.findOne({ email })
+//   if (!userExists) {
+//     throw new ApiError(httpStatus.BAD_REQUEST, 'User not found')
 //   }
+
+//   const isVerified = jwtHelpers.verifyToken(
+//     token,
+//     config.jwt.accessToken as string,
+//   )
+
+//   const hashedPassword = await bcrypt.hash(
+//     password,
+//     Number(config.bcrypt_salt_round),
+//   )
+//   await UserModel.updateOne(
+//     { email: email },
+//     {
+//       $set: {
+//         password: hashedPassword,
+//       },
+//     },
+//   )
+
+//   // await userModel.updateOne({ email }, { hashedPassword })
+// }
+
+//===========================OTP BASED
+const resetPassword = async (payload: {
+  email: string;
+  otp: string;
+  password: string;
+}) => {
+  const { email, otp, password } = payload;
+
+  // 1. User check
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+  }
+
+  // 2. OTP record check
+  const otpRecord = await OTPModel.findOne({ email });
+  if (!otpRecord) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "OTP expired or not found");
+  }
+
+  // 3. Expiry check (TTL usually deletes automatically, but double safety)
+  if (otpRecord.expireTime < new Date()) {
+    await OTPModel.deleteOne({ email });
+    throw new ApiError(httpStatus.BAD_REQUEST, "OTP expired");
+  }
+
+  // 4. Compare OTP
+  const isOTPMatched = await bcrypt.compare(otp, otpRecord.otpCode);
+
+  if (!isOTPMatched) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Invalid OTP");
+  }
+
+  // 5. Hash new password
+  const hashedPassword = await bcrypt.hash(
+    password,
+    Number(config.bcrypt_salt_round),
+  );
+
+  // 6. Update password
+  await UserModel.updateOne({ email }, { $set: { password: hashedPassword } });
+
+  // 7. Delete OTP (IMPORTANT)
+  await OTPModel.deleteOne({ email });
+
+  return {
+    message: "Password reset successful",
+  };
+};
 
 export const AuthService = {
   ChangePassword,
@@ -303,4 +353,5 @@ export const AuthService = {
   logOutUser,
   forgotPassword,
   getMe,
+  resetPassword,
 };
