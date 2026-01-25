@@ -8,8 +8,8 @@ import routes from "./app/routes";
 import httpStatus from "http-status";
 import cookieParser from "cookie-parser";
 import ApiError from "./errors/ApiError";
-import ShortenedURLModel from "./app/modules/shortener/shortener.model";
-import { redirectUrl } from "./app/modules/shortener/shortener.utils";
+// import ShortenedURLModel from "./app/modules/shortener/shortener.model";
+// import { redirectUrl } from "./app/modules/shortener/shortener.utils";
 import config, { IS_MODE_PROD } from "./config";
 
 const app: Application = express();

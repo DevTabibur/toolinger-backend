@@ -6,59 +6,9 @@
     "auditLog": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\.c0260a07b4111517de5ba8912fc759c445ecdd23-audit.json",
     "files": [
         {
-            "date": 1768198513643,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-12-01-12-error.log",
-            "hash": "55d116b6bb9da5d1f770216be49a4d4b84bb39727f3db51a99ca691707c5795b"
-        },
-        {
-            "date": 1768208632589,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-12-01-15-error.log",
-            "hash": "c0a99cf219a775441844e2e4ec1dd272dc578173ee4768cc171bd16b20f928e2"
-        },
-        {
-            "date": 1768223400706,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-12-01-19-error.log",
-            "hash": "5c391eacd8a121969f0d6bd14ce038f776cc1d8d5cd2f3cf1354bfceff42bfe4"
-        },
-        {
-            "date": 1768752910769,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-18-01-22-error.log",
-            "hash": "e1c7f9836940754b4212fd5e570a53806ce472f1d6c71247cb50e87a6abed53a"
-        },
-        {
-            "date": 1768803433421,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-19-01-12-error.log",
-            "hash": "bebf8f4f60d27964ad7873860635375b9dfa63716298f73a2c73fdbb2adb2228"
-        },
-        {
-            "date": 1768807882177,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-19-01-13-error.log",
-            "hash": "7ba4aaaaefc7975a11350193c689618ace6fba8461439bf3fc3dc18b72b6d605"
-        },
-        {
-            "date": 1768813944298,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-19-01-15-error.log",
-            "hash": "de1f9d44b0847d6ebbbe730f0fdf2a3c013b9bd16bd0cf24c912033c69c375ff"
-        },
-        {
-            "date": 1768889415043,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-20-01-12-error.log",
-            "hash": "ca04dc9ca7c6bd3d6022daa3679d7e2fe4d82767af9b284cd8fd0a9998610d1e"
-        },
-        {
-            "date": 1768892743327,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-20-01-13-error.log",
-            "hash": "66fbd055d20164d6fad6604bb47662b171febfeb5a214a52f9567f0088fb5cd2"
-        },
-        {
-            "date": 1768906814718,
-            "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-20-01-17-error.log",
-            "hash": "278a4f361d2d3d43f56d254213e81cf4291acdbef98751ce8485e2497a5231eb"
-        },
-        {
-            "date": 1769364426747,
+            "date": 1769365306664,
             "name": "E:\\Projects\\Woptio\\Toolinger\\toolinger-backend\\logs\\winston\\errors\\Toolinger-2026-26-01-00-error.log",
-            "hash": "6761707fe35363915b8a5693ba76c6664a69d8c7e6433ebda96d27a636811cc6"
+            "hash": "76c78f64611363cb767f0c2410ec38a59a9670bb652d711c215b05cfdcb43f22"
         }
     ],
     "hashType": "sha256"
