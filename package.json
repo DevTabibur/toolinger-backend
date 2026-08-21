@@ -6,6 +6,7 @@
 	"scripts": {
 		"start": "node dist/server.js",
 		"dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+		"seed:admin": "ts-node --transpile-only src/app/seeders/admin.seed.ts",
 		"build": "tsc",
 		"lint": "eslint",
 		"lint:fix": "eslint --fix",

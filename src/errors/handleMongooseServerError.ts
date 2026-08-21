@@ -1,27 +1,29 @@
-import httpStatus from 'http-status'
-import { MongoServerError } from 'mongodb'
+import httpStatus from "http-status";
+import { MongoServerError } from "mongodb";
 import {
   IGenericErrorMessage,
   IGenericErrorResponse,
-} from '../interfaces/errorInterface'
+} from "../interfaces/errorInterface";
 
 const handleMongoServerError = (
   error: MongoServerError,
 ): IGenericErrorResponse => {
-  const firstKey = Object.keys(error.keyPattern)[0]
+  //! keyPattern only exists on duplicate-key errors (code 11000); other
+  //! MongoServerErrors (invalid namespace, auth, etc.) have no keyPattern.
+  const firstKey = error.keyPattern ? Object.keys(error.keyPattern)[0] : "";
   const errors: IGenericErrorMessage[] = [
     {
       path: firstKey,
       message: error.message,
     },
-  ]
-  const statusCode = httpStatus.INTERNAL_SERVER_ERROR
+  ];
+  const statusCode = httpStatus.INTERNAL_SERVER_ERROR;
   return {
-    status: 'false',
+    status: "false",
     statusCode,
     message: error.message,
     errorMessages: errors,
-  }
-}
+  };
+};
 
-export default handleMongoServerError
+export default handleMongoServerError;
