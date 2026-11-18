@@ -14,48 +14,48 @@ import paginationHelper from "../../helpers/paginationHelper";
 
 const createBlogPost = async (
   blogData: IBlogPost,
-  blogFeaturedImage: Express.Multer.File[],
-  seoImage: Express.Multer.File[],
+  // blogFeaturedImage: Express.Multer.File[],
+  // seoImage: Express.Multer.File[],
 ): Promise<IBlogPost> => {
   // console.log("blogData", blogData);
   const slug = generateSlug(blogData?.title);
   const excerpt = blogData?.excerpt || generateExcerpt(blogData?.content);
   const blog: IBlogPost = {
     title: blogData?.title,
-    slug: slug,
+    slug: blogData?.slug || slug,
     content: blogData?.content,
     status: blogData?.status,
-    excerpt: excerpt,
-    author: blogData?.author,
+    excerpt: blogData?.excerpt || excerpt,
+    // author: blogData?.author,
     primaryCategory: blogData?.primaryCategory,
-    secondaryCategories: blogData?.secondaryCategories,
+    // secondaryCategories: blogData?.secondaryCategories,
     tags: blogData?.tags,
-    blogFeaturedImage:
-      blogFeaturedImage[0]?.filename?.replace(
-        /\.(jpg|jpeg|png|pneg)$/i,
-        ".webp",
-      ) || "",
-    allowComments: blogData?.allowComments,
-    isFeatured: blogData?.isFeatured,
-    isSponsored: blogData?.isSponsored,
-    sponsorName: blogData?.sponsorName,
-    sponsorUrl: blogData?.sponsorUrl,
+    // blogFeaturedImage:
+    //   blogFeaturedImage[0]?.filename?.replace(
+    //     /\.(jpg|jpeg|png|pneg)$/i,
+    //     ".webp",
+    //   ) || "",
+    // allowComments: blogData?.allowComments,
+    // isFeatured: blogData?.isFeatured,
+    // isSponsored: blogData?.isSponsored,
+    // sponsorName: blogData?.sponsorName,
+    // sponsorUrl: blogData?.sponsorUrl,
     // seo
     seo: {
       title: blogData?.seo?.title,
       description: blogData?.seo?.description,
-      keywords: blogData?.seo?.keywords,
-      seoImage:
-        seoImage[0]?.filename?.replace(/(jpg|jpeg|png|pneg)$/i, ".webp") || "",
+      // keywords: blogData?.seo?.keywords,
+      // seoImage:
+      //   seoImage[0]?.filename?.replace(/(jpg|jpeg|png|pneg)$/i, ".webp") || "",
     },
     // Analytics
-    analytics: {
-      views: blogData?.analytics?.views,
-      uniqueViews: blogData?.analytics?.uniqueViews,
-      readTime: blogData?.analytics?.readTime,
-      shares: blogData?.analytics?.shares,
-      lastViewedAt: blogData?.analytics?.lastViewedAt,
-    },
+    // analytics: {
+    //   views: blogData?.analytics?.views,
+    //   uniqueViews: blogData?.analytics?.uniqueViews,
+    //   readTime: blogData?.analytics?.readTime,
+    //   shares: blogData?.analytics?.shares,
+    //   lastViewedAt: blogData?.analytics?.lastViewedAt,
+    // },
   };
 
   // console.log("blog ==>", blog);

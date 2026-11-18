@@ -65,6 +65,7 @@ const getAllCategories = async (
   }
 
   const result = await CategoryModel.find(whereCondition)
+    .populate("parentId", " name")
     .sort(sortCondition)
     .skip(skip)
     .limit(limit as number);

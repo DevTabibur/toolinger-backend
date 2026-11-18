@@ -10,7 +10,7 @@ const router = Router();
 router.post(
   "/",
   authGuard(USER_ROLE_ENUM.ADMIN, USER_ROLE_ENUM.EDITOR, USER_ROLE_ENUM.GUEST),
-  uploadMiddleware,
+  // uploadMiddleware,
   BlogController.createBlogPost,
 );
 

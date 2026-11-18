@@ -4,13 +4,15 @@ import { AnalyticsService } from "./analytics.service";
 import { sendSuccessResponse } from "../../../shared/sendSuccessResponse";
 import httpStatus from "http-status";
 
-const getAnalytics = catchAsync(async (req: Request, res: Response) => {
-  const result = await AnalyticsService.getAnalytics();
-  sendSuccessResponse(res, {
-    statusCode: httpStatus.OK,
-    message: "Analytics fetched successfully",
-    data: result,
-  });
-});
+const getDashboardAnalytics = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await AnalyticsService.getDashboardAnalytics();
+    sendSuccessResponse(res, {
+      statusCode: httpStatus.OK,
+      message: "Dashboard analytics fetched successfully",
+      data: result,
+    });
+  },
+);
 
-export const AnalyticsController = { getAnalytics };
+export const AnalyticsController = { getDashboardAnalytics };

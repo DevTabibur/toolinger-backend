@@ -32,28 +32,28 @@ const BlogPostSchema = new Schema<IBlogPost>(
       maxlength: 160, // Limit to ensure SEO-friendly snippet
     },
     // Author
-    author: {
-      id: {
-        type: Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      // name: {
-      //   type: String,
-      // },
-      // email: {
-      //   type: String,
-      // },
-      // role: {
-      //   type: String,
-      //   enum: AUTHOR_ROLE,
-      //   default: "guest",
-      //   required: true,
-      // },
-      profileUrl: {
-        type: String,
-      },
-    },
+    // author: {
+    //   id: {
+    //     type: Types.ObjectId,
+    //     ref: "User",
+    //     required: true,
+    //   },
+    //   // name: {
+    //   //   type: String,
+    //   // },
+    //   // email: {
+    //   //   type: String,
+    //   // },
+    //   // role: {
+    //   //   type: String,
+    //   //   enum: AUTHOR_ROLE,
+    //   //   default: "guest",
+    //   //   required: true,
+    //   // },
+    //   profileUrl: {
+    //     type: String,
+    //   },
+    // },
 
     // Taxonomy
     // categories: [
@@ -86,17 +86,19 @@ const BlogPostSchema = new Schema<IBlogPost>(
       required: true,
     },
 
-    secondaryCategories: [
-      {
-        type: Types.ObjectId,
-        ref: "Category",
-      },
-    ],
+    // secondaryCategories: [
+    //   {
+    //     type: Types.ObjectId,
+    //     ref: "Category",
+    //   },
+    // ],
 
     tags: {
       type: [
         {
-          type: Types.ObjectId,
+          // type: Types.ObjectId,
+          type: String,
+
           ref: "Tag",
         },
       ],
@@ -110,30 +112,30 @@ const BlogPostSchema = new Schema<IBlogPost>(
     },
 
     // Media
-    blogFeaturedImage: {
-      type: String,
-      required: true,
-    },
+    // blogFeaturedImage: {
+    //   type: String,
+    //   required: true,
+    // },
 
     //Flags
-    allowComments: {
-      type: Boolean,
-      default: true,
-    },
-    isFeatured: {
-      type: Boolean,
-      default: false,
-    },
-    isSponsored: {
-      type: Boolean,
-      default: false,
-    },
-    sponsorName: {
-      type: String,
-    },
-    sponsorUrl: {
-      type: String,
-    },
+    // allowComments: {
+    //   type: Boolean,
+    //   default: true,
+    // },
+    // isFeatured: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // isSponsored: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+    // sponsorName: {
+    //   type: String,
+    // },
+    // sponsorUrl: {
+    //   type: String,
+    // },
 
     // seo
     seo: {
@@ -150,70 +152,70 @@ const BlogPostSchema = new Schema<IBlogPost>(
         // required: true,
         maxlength: 160,
       },
-      keywords: {
-        type: [String],
-      },
-      seoImage: {
-        type: String,
-      },
-      canonicalUrl: String,
-      noIndex: { type: Boolean, default: false },
-      noFollow: { type: Boolean, default: false },
+      // keywords: {
+      //   type: [String],
+      // },
+      // seoImage: {
+      //   type: String,
+      // },
+      // canonicalUrl: String,
+      // noIndex: { type: Boolean, default: false },
+      // noFollow: { type: Boolean, default: false },
     },
 
     // Analytics
-    analytics: {
-      views: {
-        type: Number,
-        default: 0,
-      },
-      uniqueViews: {
-        type: Number,
-        default: 0,
-      },
-      readTime: {
-        type: Number,
-        default: 0,
-      },
-      shares: {
-        type: Number,
-        default: 0,
-      },
-      lastViewedAt: {
-        type: Date,
-      },
-    },
+    // analytics: {
+    //   views: {
+    //     type: Number,
+    //     default: 0,
+    //   },
+    //   uniqueViews: {
+    //     type: Number,
+    //     default: 0,
+    //   },
+    //   readTime: {
+    //     type: Number,
+    //     default: 0,
+    //   },
+    //   shares: {
+    //     type: Number,
+    //     default: 0,
+    //   },
+    //   lastViewedAt: {
+    //     type: Date,
+    //   },
+    // },
 
     // Publishing
-    publishedAt: {
-      type: Date,
-    },
-    scheduledAt: {
-      type: Date,
-    },
+    // publishedAt: {
+    //   type: Date,
+    // },
+    // scheduledAt: {
+    //   type: Date,
+    // },
 
     // Trash system
-    trashedAt: {
-      type: Date,
-      default: null,
-      index: true,
-    },
+    // trashedAt: {
+    //   type: Date,
+    //   default: null,
+    //   index: true,
+    // },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
   },
 );
 
-BlogPostSchema.pre("validate", async function (next) {
-  if (!this.primaryCategory) {
-    const uncategorized = await mongoose
-      .model("Category")
-      .findOne({ slug: "uncategorized", deletedAt: null });
+// BlogPostSchema.pre("validate", async function (next) {
+//   if (!this.primaryCategory) {
+//     const uncategorized = await mongoose
+//       .model("Category")
+//       .findOne({ slug: "uncategorized", deletedAt: null });
 
-    this.primaryCategory = uncategorized._id;
-  }
-  next();
-});
+//     this.primaryCategory = uncategorized._id;
+//   }
+//   next();
+// });
 
 // Create the model
 const BlogPostModel = model<IBlogPost>("BlogPost", BlogPostSchema);

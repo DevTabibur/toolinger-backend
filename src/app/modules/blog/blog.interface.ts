@@ -4,11 +4,11 @@ import { AuthorRole, BlogStatus } from "./blog.constant";
 export interface IBlogSEO {
   title: string;
   description: string;
-  keywords?: string[];
-  seoImage?: string;
-  canonicalUrl?: string;
-  noIndex?: boolean;
-  noFollow?: boolean;
+  // keywords?: string[];
+  // seoImage?: string;
+  // canonicalUrl?: string;
+  // noIndex?: boolean;
+  // noFollow?: boolean;
 }
 
 export interface IBlogAnalytics {
@@ -36,12 +36,12 @@ export interface IBlogPost {
   status: BlogStatus;
 
   // Author
-  author: IBlogAuthor;
+  // author: IBlogAuthor;
 
   // Taxonomy
   // categories: Types.ObjectId[];
   primaryCategory: Types.ObjectId;
-  secondaryCategories: Types.ObjectId[];
+  // secondaryCategories: Types.ObjectId[];
   tags: Types.ObjectId[];
 
   // Media
@@ -49,17 +49,17 @@ export interface IBlogPost {
   // galleryImages?: string[];
 
   // Flags
-  allowComments?: boolean;
-  isFeatured?: boolean;
-  isSponsored?: boolean; // guest post monetization
-  sponsorName?: string;
-  sponsorUrl?: string;
+  // allowComments?: boolean;
+  // isFeatured?: boolean;
+  // isSponsored?: boolean; // guest post monetization
+  // sponsorName?: string;
+  // sponsorUrl?: string;
 
   // SEO
   seo: IBlogSEO;
 
   // Analytics
-  analytics: IBlogAnalytics;
+  // analytics: IBlogAnalytics;
 
   // Publishing
   publishedAt?: Date;

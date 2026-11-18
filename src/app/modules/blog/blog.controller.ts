@@ -9,32 +9,33 @@ import { paginationFields } from "../../../constants/shared.constant";
 import { BLOG_POST_FILTER_FIELDS } from "./blog.constant";
 
 const createBlogPost = catchAsync(async (req: Request, res: Response) => {
-  const files = req.files as
-    | { [fieldname: string]: Express.Multer.File[] }
-    | Express.Multer.File[]
-    | undefined;
+  // console.log("create post.", req.body);
+  // const files = req.files as
+  //   | { [fieldname: string]: Express.Multer.File[] }
+  //   | Express.Multer.File[]
+  //   | undefined;
 
-  let blogFeaturedImage;
-  let seoImage;
+  // let blogFeaturedImage;
+  // let seoImage;
 
-  if (Array.isArray(files)) {
-    blogFeaturedImage = files;
-    seoImage = files;
-  } else if (
-    (files && typeof files === "object" && "blogFeaturedImage" in files) ||
-    (files && typeof files === "object" && "seoImage" in files)
-  ) {
-    blogFeaturedImage = (
-      files as { [fieldname: string]: Express.Multer.File[] }
-    ).blogFeaturedImage;
-    seoImage = (files as { [fieldname: string]: Express.Multer.File[] })
-      .seoImage;
-  }
+  // if (Array.isArray(files)) {
+  //   blogFeaturedImage = files;
+  //   seoImage = files;
+  // } else if (
+  //   (files && typeof files === "object" && "blogFeaturedImage" in files) ||
+  //   (files && typeof files === "object" && "seoImage" in files)
+  // ) {
+  //   blogFeaturedImage = (
+  //     files as { [fieldname: string]: Express.Multer.File[] }
+  //   ).blogFeaturedImage;
+  //   seoImage = (files as { [fieldname: string]: Express.Multer.File[] })
+  //     .seoImage;
+  // }
 
   const result = await BlogService.createBlogPost(
     req.body,
-    blogFeaturedImage ?? [],
-    seoImage ?? [],
+    // blogFeaturedImage ?? [],
+    // seoImage ?? [],
   );
 
   sendSuccessResponse(res, {
